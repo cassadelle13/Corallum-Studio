@@ -19,6 +19,12 @@ import { VariablesView } from './components/VariablesView';
 import { TutorialsView } from './components/TutorialsView';
 import { RunsView } from './components/RunsView';
 import { SchedulesView } from './components/SchedulesView';
+import { UserView } from './components/UserView';
+import { SettingsView } from './components/SettingsView';
+import { WorkersView } from './components/WorkersView';
+import { FoldersView } from './components/FoldersView';
+import { LogsView } from './components/LogsView';
+import { AssetsView } from './components/AssetsView';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -163,13 +169,28 @@ function App() {
           <SchedulesView searchQuery={searchQuery} />
         )}
 
-        {activeTab !== 'home' && activeTab !== 'runs' && activeTab !== 'variables' && activeTab !== 'resources' && activeTab !== 'tutorials' && activeTab !== 'schedules' && (
-          <div className="placeholder-view">
-            <Settings size={48} className="text-text-dim mb-4" />
-            <h2>{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} View</h2>
-            <p>This section is being prepared for Corallum Studio.</p>
-            <button className="btn-action mt-4" onClick={() => setActiveTab('home')}>Return Home</button>
-          </div>
+        {activeTab === 'assets' && (
+          <AssetsView searchQuery={searchQuery} />
+        )}
+
+        {activeTab === 'user' && (
+          <UserView searchQuery={searchQuery} />
+        )}
+
+        {activeTab === 'settings' && (
+          <SettingsView searchQuery={searchQuery} />
+        )}
+
+        {activeTab === 'workers' && (
+          <WorkersView searchQuery={searchQuery} />
+        )}
+
+        {activeTab === 'folders' && (
+          <FoldersView searchQuery={searchQuery} />
+        )}
+
+        {activeTab === 'logs' && (
+          <LogsView searchQuery={searchQuery} />
         )}
       </div>
 
