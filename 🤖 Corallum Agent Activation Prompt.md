@@ -14,6 +14,4 @@ Copy and paste this prompt into Cursor Composer (Ctrl + I) to activate "Autonomo
 5. **Validation**: After making changes, ensure that TypeScript types are correct and there are no broken imports.
 
 **Current Task:**
-[INSERT YOUR REQUEST HERE, e.g., 'Analyze the attached Windmill screenshot and implement the Resources tab functionality']
-
-Go ahead and start by analyzing the codebase."
+Проанализируй скриншот вкладки Resourses windmill и реализуй в нашем коде в такой же вкладке Resourses
