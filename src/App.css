@@ -731,7 +731,7 @@ body {
 /* ============= EXECUTION LOGS PANEL ============= */
 .execution-logs-button-collapsed {
   position: fixed !important;
-  left: 50% !important;
+  left: calc(50% + 100px) !important;
   bottom: 20px !important;
   transform: translateX(calc(-50% - 32px)) !important;
   width: 44px;
@@ -758,7 +758,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent-primary);
   box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
-  transform: scale(1.05);
+  transform: translateX(calc(-50% - 32px)) scale(1.05) !important;
 }
 
 .logs-button-text {
@@ -775,7 +775,7 @@ body {
 /* ============= MINIMAP TOGGLE BUTTON ============= */
 .minimap-toggle-button {
   position: fixed !important;
-  left: 50% !important;
+  left: calc(50% + 100px) !important;
   bottom: 20px !important;
   transform: translateX(calc(-50% + 32px)) !important;
   width: 44px;
@@ -799,7 +799,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent-primary);
   box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
-  transform: translateX(calc(-50% + 32px)) scale(1.05);
+  transform: translateX(calc(-50% + 32px)) scale(1.05) !important;
   color: var(--accent-primary);
 }
 
@@ -810,7 +810,7 @@ body {
 /* ============= HAMBURGER TOGGLE BUTTON ============= */
 .hamburger-toggle-button {
   position: fixed !important;
-  left: 50% !important;
+  left: calc(50% + 100px) !important;
   bottom: 20px !important;
   transform: translateX(calc(-50% - 96px)) !important;
   width: 44px;
@@ -834,7 +834,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent-primary);
   box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
-  transform: translateX(calc(-50% - 96px)) scale(1.05);
+  transform: translateX(calc(-50% - 96px)) scale(1.05) !important;
   color: var(--accent-primary);
 }
 

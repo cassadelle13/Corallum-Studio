@@ -108,13 +108,43 @@ export const useFlowStore = create<FlowState>((set, get) => ({
   },
 
   onEdgesChange: (changes) => {
-    set({
-      edges: applyEdgeChanges(changes, get().edges),
+    const newEdges = applyEdgeChanges(changes, get().edges);
+    set({ edges: newEdges });
+    
+    // Обновляем флаги подключения узлов после изменения рёбер
+    const nodes = get().nodes.map(node => {
+      const hasInput = newEdges.some(edge => edge.target === node.id);
+      const hasOutput = newEdges.some(edge => edge.source === node.id);
+      return {
+        ...node,
+        data: {
+          ...node.data,
+          isConnected: hasInput || hasOutput,
+          hasOutput: hasOutput
+        }
+      };
     });
+    set({ nodes });
   },
 
   onConnect: (connection) => {
-    set({ edges: addEdge(connection, get().edges) });
+    const newEdges = addEdge(connection, get().edges);
+    set({ edges: newEdges });
+    
+    // Обновляем флаги подключения узлов
+    const nodes = get().nodes.map(node => {
+      const hasInput = newEdges.some(edge => edge.target === node.id);
+      const hasOutput = newEdges.some(edge => edge.source === node.id);
+      return {
+        ...node,
+        data: {
+          ...node.data,
+          isConnected: hasInput || hasOutput,
+          hasOutput: hasOutput
+        }
+      };
+    });
+    set({ nodes });
   },
 
   setNodes: (nodes) => set({ nodes }),
@@ -125,11 +155,14 @@ export const useFlowStore = create<FlowState>((set, get) => ({
       id: `${type}-${Date.now()}`,
       type: 'default',
       data: { 
+        type: type, // Сохраняем тип узла
         label: `New ${type}`, 
         code: boilerplate || '', 
         language: type === 'database' ? 'sql' : 'python',
         inputs: [],
-        outputs: [{ id: 'output', label: 'Output', type: 'any' }]
+        outputs: [{ id: 'output', label: 'Output', type: 'any' }],
+        isConnected: false,
+        hasOutput: false
       },
       position: { x: Math.random() * 400, y: Math.random() * 400 },
     };

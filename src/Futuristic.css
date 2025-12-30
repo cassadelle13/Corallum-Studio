@@ -65,20 +65,198 @@ body {
 .futuristic-node {
   background: rgba(45, 51, 67, 0.6) !important;
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  border: 2px solid var(--node-border-color, rgba(99, 102, 241, 0.3)) !important;
   border-radius: 12px !important;
   padding: 0 !important;
   color: white !important;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 15px var(--node-glow-color, rgba(99, 102, 241, 0.2)),
+              0 0 30px var(--node-glow-color, rgba(99, 102, 241, 0.1));
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  overflow: visible;
   width: 220px;
+  position: relative;
 }
 
 .futuristic-node:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 25px var(--node-glow-color, rgba(99, 102, 241, 0.4)),
+              0 0 50px var(--node-glow-color, rgba(99, 102, 241, 0.2));
+  border-color: var(--node-border-color, var(--accent-primary)) !important;
+}
+
+/* Категории узлов - неоновые обводки */
+.node-category-trigger {
+  --node-border-color: #10b981;
+  --node-glow-color: rgba(16, 185, 129, 0.4);
+  --node-bg-color: rgba(16, 185, 129, 0.1);
+}
+
+.node-category-operator {
+  --node-border-color: #6366f1;
+  --node-glow-color: rgba(99, 102, 241, 0.4);
+  --node-bg-color: rgba(99, 102, 241, 0.1);
+}
+
+.node-category-integration {
+  --node-border-color: #3b82f6;
+  --node-glow-color: rgba(59, 130, 246, 0.4);
+  --node-bg-color: rgba(59, 130, 246, 0.1);
+}
+
+.node-category-resource {
+  --node-border-color: #64748b;
+  --node-glow-color: rgba(100, 116, 139, 0.3);
+  --node-bg-color: rgba(100, 116, 139, 0.1);
+}
+
+/* Подключенные узлы - усиленная неоновая обводка */
+.node-connected {
+  box-shadow: 0 0 20px var(--node-glow-color, rgba(99, 102, 241, 0.5)),
+              0 0 40px var(--node-glow-color, rgba(99, 102, 241, 0.3)),
+              inset 0 0 20px var(--node-bg-color, rgba(99, 102, 241, 0.1)) !important;
+  border-width: 2.5px !important;
+}
+
+/* Ромбовидные узлы (Branch/IF) */
+.node-diamond {
+  width: 120px !important;
+  height: 120px !important;
+  min-width: 120px !important;
+  min-height: 120px !important;
+  border-radius: 0 !important;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 51, 67, 0.8) !important;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.node-diamond-content {
+  transform: rotate(-45deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.node-diamond-icon {
+  color: var(--node-border-color, var(--accent-primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.node-diamond-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Круглые узлы (Resources) */
+.node-circle {
+  width: 100px !important;
+  height: 100px !important;
+  min-width: 100px !important;
+  min-height: 100px !important;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 51, 67, 0.8) !important;
+}
+
+.node-circle-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.node-circle-icon {
+  color: var(--node-border-color, #64748b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.node-circle-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Галочка успешного подключения */
+.node-success-check {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  background: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6),
+              0 0 20px rgba(16, 185, 129, 0.4);
+  z-index: 10;
+  animation: checkPulse 2s ease-in-out infinite;
+}
+
+.node-success-check svg {
+  color: white;
+  stroke-width: 3;
+}
+
+@keyframes checkPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+/* Иконка триггера (молния) */
+.node-trigger-icon {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 20px;
+  height: 20px;
+  background: #ef4444;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.node-trigger-icon svg {
+  color: white;
+  stroke-width: 3;
 }
 
 .node-header {
@@ -90,6 +268,21 @@ body {
   gap: 10px;
   font-weight: 600;
   font-size: 13px;
+  position: relative;
+}
+
+.node-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--node-border-color, var(--accent-primary));
+}
+
+.node-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .node-body {
