@@ -15,6 +15,7 @@ import { GlobalSidebar } from './components/GlobalSidebar';
 import { HomeView } from './components/HomeView';
 import { ResourcesView } from './components/ResourcesView';
 import { VariablesView } from './components/VariablesView';
+import { TutorialsView } from './components/TutorialsView';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -150,7 +151,11 @@ function App() {
           <ResourcesView searchQuery={searchQuery} />
         )}
 
-        {activeTab !== 'home' && activeTab !== 'runs' && activeTab !== 'variables' && activeTab !== 'resources' && (
+        {activeTab === 'tutorials' && (
+          <TutorialsView searchQuery={searchQuery} />
+        )}
+
+        {activeTab !== 'home' && activeTab !== 'runs' && activeTab !== 'variables' && activeTab !== 'resources' && activeTab !== 'tutorials' && (
           <div className="placeholder-view">
             <Settings size={48} className="text-text-dim mb-4" />
             <h2>{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} View</h2>
