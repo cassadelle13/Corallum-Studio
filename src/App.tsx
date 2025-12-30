@@ -16,6 +16,7 @@ import { HomeView } from './components/HomeView';
 import { ResourcesView } from './components/ResourcesView';
 import { VariablesView } from './components/VariablesView';
 import { TutorialsView } from './components/TutorialsView';
+import { RunsView } from './components/RunsView';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -135,12 +136,7 @@ function App() {
         )}
 
         {activeTab === 'runs' && (
-          <div className="placeholder-view">
-            <PlayCircle size={48} className="text-accent-primary mb-4" />
-            <h2>Execution History</h2>
-            <p>View and debug your previous workflow runs.</p>
-            <button className="btn-action mt-4" onClick={() => setActiveTab('home')}>Back to Home</button>
-          </div>
+          <RunsView searchQuery={searchQuery} />
         )}
 
         {activeTab === 'variables' && (

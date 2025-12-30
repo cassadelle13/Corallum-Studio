@@ -7,6 +7,7 @@ interface FlowState {
   edges: Edge[];
   selectedNode: Node | null;
   executionLogs: ExecutionLog[];
+  runs: Run[];
   onNodesChange: (changes: NodeChange[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
   onConnect: (connection: Connection) => void;
@@ -18,6 +19,8 @@ interface FlowState {
   setSelectedNode: (node: Node | null) => void;
   addExecutionLog: (log: ExecutionLog) => void;
   clearExecutionLogs: () => void;
+  addRun: (run: Run) => void;
+  getRuns: () => Run[];
 }
 
 interface ExecutionLog {
@@ -26,6 +29,17 @@ interface ExecutionLog {
   status: 'running' | 'success' | 'error' | 'pending';
   message: string;
   timestamp: number;
+}
+
+export interface Run {
+  id: string;
+  started: number;
+  duration: number;
+  path: string;
+  triggeredBy: string;
+  tag?: string;
+  status: 'running' | 'success' | 'error' | 'pending';
+  kind: 'run' | 'dep';
 }
 
 const initialNodes: Node[] = [
@@ -37,11 +51,55 @@ const initialNodes: Node[] = [
   },
 ];
 
+// Generate some sample runs for demo
+const generateSampleRuns = (): Run[] => {
+  const now = Date.now();
+  return [
+    {
+      id: 'run-1',
+      started: now - 4 * 60 * 1000,
+      duration: 1200,
+      path: 'u/admin/test_flow',
+      triggeredBy: 'admin',
+      status: 'success',
+      kind: 'run'
+    },
+    {
+      id: 'run-2',
+      started: now - 3 * 60 * 1000,
+      duration: 850,
+      path: 'u/admin/data_process',
+      triggeredBy: 'admin',
+      status: 'success',
+      kind: 'run'
+    },
+    {
+      id: 'run-3',
+      started: now - 2 * 60 * 1000,
+      duration: 2100,
+      path: 'u/admin/error_handler',
+      triggeredBy: 'admin',
+      status: 'error',
+      kind: 'run'
+    },
+    {
+      id: 'run-4',
+      started: now - 1 * 60 * 1000,
+      duration: 500,
+      path: 'u/admin/quick_task',
+      triggeredBy: 'admin',
+      status: 'running',
+      kind: 'run'
+    }
+  ];
+};
+
 export const useFlowStore = create<FlowState>((set, get) => ({
   nodes: initialNodes,
   edges: [],
   selectedNode: null,
   executionLogs: [],
+  runs: generateSampleRuns(),
 
   onNodesChange: (changes) => {
     set({
@@ -101,5 +159,13 @@ export const useFlowStore = create<FlowState>((set, get) => ({
 
   clearExecutionLogs: () => {
     set({ executionLogs: [] });
+  },
+
+  addRun: (run) => {
+    set({ runs: [...get().runs, run] });
+  },
+
+  getRuns: () => {
+    return get().runs;
   },
 }));
