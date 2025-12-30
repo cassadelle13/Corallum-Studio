@@ -2599,6 +2599,7 @@ body {
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .schedules-header {
@@ -2606,6 +2607,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
 }
 
 .schedules-title-section {
@@ -2745,19 +2748,18 @@ body {
 /* ============= NEW SCHEDULE MENU POPUP ============= */
 .new-schedule-wrapper {
   position: relative;
+  display: inline-block;
 }
 
 .new-schedule-menu {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 8px);
+  position: fixed;
   min-width: 220px;
   background: rgba(15, 18, 25, 0.95);
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: 10000;
   padding: 8px;
   display: flex;
   flex-direction: column;

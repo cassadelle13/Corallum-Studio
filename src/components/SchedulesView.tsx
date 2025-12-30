@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Plus, 
   Search, 
@@ -24,6 +24,8 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
   const [statusFilter, setStatusFilter] = useState<'all' | 'enabled' | 'disabled'>('all');
   const [onlyF, setOnlyF] = useState(false);
   const [showNewScheduleMenu, setShowNewScheduleMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const query = externalSearch || localSearch;
 
   const triggerMenuItems = [
@@ -42,6 +44,15 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
     alert('New schedule functionality coming soon!');
   };
 
+  // Position menu relative to button
+  useEffect(() => {
+    if (showNewScheduleMenu && buttonRef.current && menuRef.current) {
+      const buttonRect = buttonRef.current.getBoundingClientRect();
+      menuRef.current.style.top = `${buttonRect.bottom + 8}px`;
+      menuRef.current.style.right = `${window.innerWidth - buttonRect.right}px`;
+    }
+  }, [showNewScheduleMenu]);
+
   return (
     <div className="schedules-view">
       <div className="schedules-header">
@@ -53,6 +64,7 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
         </div>
         
         <div 
+          ref={buttonRef}
           className="new-schedule-wrapper"
           onMouseEnter={() => setShowNewScheduleMenu(true)}
           onMouseLeave={() => setShowNewScheduleMenu(false)}
@@ -62,7 +74,12 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
             <span>New schedule</span>
           </button>
           {showNewScheduleMenu && (
-            <div className="new-schedule-menu glass-panel">
+            <div 
+              ref={menuRef}
+              className="new-schedule-menu glass-panel"
+              onMouseEnter={() => setShowNewScheduleMenu(true)}
+              onMouseLeave={() => setShowNewScheduleMenu(false)}
+            >
               {triggerMenuItems.map((item) => {
                 const ItemIcon = item.icon;
                 return (
