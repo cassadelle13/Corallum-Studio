@@ -99,7 +99,8 @@ LIMIT 100;`
   };
 
   return (
-    <div className="node-editor">
+    <div className="right-panel active">
+      <div className="node-editor">
       <div className="node-editor-header">
         <div className="header-title">
           <Settings size={18} />
@@ -291,6 +292,7 @@ LIMIT 100;`
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };
