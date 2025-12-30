@@ -63,15 +63,16 @@ body {
 
 /* ============= MODERN NODES ============= */
 .futuristic-node {
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(8px);
+  background: rgba(45, 51, 67, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   border: 1.5px solid var(--node-border-color, rgba(99, 102, 241, 0.4)) !important;
   border-radius: 8px !important;
   padding: 0 !important;
-  color: #1e293b !important;
+  color: white !important;
   box-shadow: 0 0 8px var(--node-glow-color, rgba(99, 102, 241, 0.1)),
               0 0 16px var(--node-glow-color, rgba(99, 102, 241, 0.05)),
-              0 2px 4px rgba(0, 0, 0, 0.1);
+              0 2px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   width: 200px;
@@ -145,19 +146,29 @@ body {
 }
 
 /* Ромбовидные узлы (Branch/IF) */
-.node-diamond {
+.futuristic-node.node-diamond {
   width: 100px !important;
   height: 100px !important;
   min-width: 100px !important;
   min-height: 100px !important;
+  max-width: 100px !important;
+  max-height: 100px !important;
   border-radius: 0 !important;
-  transform: rotate(45deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.95) !important;
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  transform: rotate(45deg) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(45, 51, 67, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) !important;
   border: 1.5px solid var(--node-border-color, rgba(99, 102, 241, 0.4)) !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+.futuristic-node.node-diamond::before {
+  display: none !important;
 }
 
 .node-diamond-content {
@@ -183,7 +194,7 @@ body {
 .node-diamond-label {
   font-size: 10px;
   font-weight: 600;
-  color: #1e293b;
+  color: white;
   text-align: center;
   max-width: 70px;
   overflow: hidden;
@@ -192,17 +203,27 @@ body {
 }
 
 /* Круглые узлы (Resources) */
-.node-circle {
+.futuristic-node.node-circle {
   width: 80px !important;
   height: 80px !important;
   min-width: 80px !important;
   min-height: 80px !important;
+  max-width: 80px !important;
+  max-height: 80px !important;
   border-radius: 50% !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.95) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(45, 51, 67, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   border: 1.5px solid var(--node-border-color, rgba(100, 116, 139, 0.4)) !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+.futuristic-node.node-circle::before {
+  border-radius: 50% !important;
 }
 
 .node-circle-content {
@@ -227,7 +248,7 @@ body {
 .node-circle-label {
   font-size: 9px;
   font-weight: 600;
-  color: #1e293b;
+  color: white;
   text-align: center;
   max-width: 60px;
   overflow: hidden;
@@ -292,15 +313,15 @@ body {
 
 .node-header {
   padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.02);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: 600;
   font-size: 12px;
   position: relative;
-  color: #1e293b;
+  color: white;
 }
 
 .node-icon-wrapper {
@@ -321,18 +342,18 @@ body {
 .node-body {
   padding: 10px 12px;
   font-size: 11px;
-  color: #64748b;
-  background: rgba(0, 0, 0, 0.01);
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .node-code-preview {
   font-family: 'Fira Code', monospace;
   font-size: 10px;
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.3);
   padding: 6px 8px;
   border-radius: 4px;
-  color: #475569;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ============= NEON EDGES ============= */

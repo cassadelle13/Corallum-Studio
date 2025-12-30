@@ -56,8 +56,9 @@ const categoryColors: Record<string, { border: string; glow: string; bg: string;
 
 // Определение формы узла
 const getNodeShape = (type: string): 'rectangle' | 'diamond' | 'circle' => {
-  if (type === 'branch') return 'diamond';
-  if (['model', 'memory', 'embedding'].includes(type)) return 'circle';
+  const normalizedType = type.toLowerCase();
+  if (normalizedType === 'branch' || normalizedType.includes('branch')) return 'diamond';
+  if (['model', 'memory', 'embedding', 'chatmodel', 'chat model'].includes(normalizedType)) return 'circle';
   return 'rectangle';
 };
 
