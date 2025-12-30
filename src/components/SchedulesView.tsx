@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
-import { Plus, Search, Info, Calendar, ArrowRightLeft } from 'lucide-react';
+import { 
+  Plus, 
+  Search, 
+  Info, 
+  Calendar, 
+  ArrowRightLeft,
+  Link,
+  Zap,
+  Database,
+  Radio,
+  Wifi,
+  Mail,
+  Cloud
+} from 'lucide-react';
 
 interface SchedulesViewProps {
   searchQuery?: string;
@@ -10,7 +23,20 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
   const [pathFilter, setPathFilter] = useState<'schedule' | 'script-flow'>('schedule');
   const [statusFilter, setStatusFilter] = useState<'all' | 'enabled' | 'disabled'>('all');
   const [onlyF, setOnlyF] = useState(false);
+  const [showNewScheduleMenu, setShowNewScheduleMenu] = useState(false);
   const query = externalSearch || localSearch;
+
+  const triggerMenuItems = [
+    { id: 'http', icon: Link, label: 'HTTP' },
+    { id: 'websockets', icon: Zap, label: 'WebSockets' },
+    { id: 'postgres', icon: Database, label: 'Postgres' },
+    { id: 'kafka', icon: Radio, label: 'Kafka (EE)' },
+    { id: 'nats', icon: Radio, label: 'NATS (EE)' },
+    { id: 'aws-sqs', icon: Cloud, label: 'AWS SQS (EE)' },
+    { id: 'gcp-pubsub', icon: Cloud, label: 'GCP Pub/Sub (EE)' },
+    { id: 'mqtt', icon: Wifi, label: 'MQTT' },
+    { id: 'email', icon: Mail, label: 'Email' },
+  ];
 
   const handleNewSchedule = () => {
     alert('New schedule functionality coming soon!');
@@ -26,10 +52,36 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
           </button>
         </div>
         
-        <button className="btn-action primary" onClick={handleNewSchedule}>
-          <Plus size={16} />
-          <span>New schedule</span>
-        </button>
+        <div 
+          className="new-schedule-wrapper"
+          onMouseEnter={() => setShowNewScheduleMenu(true)}
+          onMouseLeave={() => setShowNewScheduleMenu(false)}
+        >
+          <button className="btn-action primary">
+            <Plus size={16} />
+            <span>New schedule</span>
+          </button>
+          {showNewScheduleMenu && (
+            <div className="new-schedule-menu glass-panel">
+              {triggerMenuItems.map((item) => {
+                const ItemIcon = item.icon;
+                return (
+                  <button
+                    key={item.id}
+                    className="new-schedule-menu-item"
+                    onClick={() => {
+                      alert(`Create ${item.label} schedule`);
+                      setShowNewScheduleMenu(false);
+                    }}
+                  >
+                    <ItemIcon size={16} />
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="schedules-filters">

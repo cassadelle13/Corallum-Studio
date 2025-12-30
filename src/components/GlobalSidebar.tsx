@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Home, 
   PlayCircle, 
@@ -14,14 +14,7 @@ import {
   List,
   Search,
   MessageSquare,
-  Plus,
-  Link,
-  Zap,
-  Database,
-  Radio,
-  Wifi,
-  Mail,
-  Cloud
+  Plus
 } from 'lucide-react';
 
 interface GlobalSidebarProps {
@@ -32,8 +25,6 @@ interface GlobalSidebarProps {
 }
 
 export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActiveTab, onSearch, isCollapsed }) => {
-  const [showTriggerMenu, setShowTriggerMenu] = useState(false);
-
   const mainNav = [
     { id: 'home', icon: Home, label: 'Home' },
     { id: 'runs', icon: PlayCircle, label: 'Runs' },
@@ -45,18 +36,6 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
 
   const triggersNav = [
     { id: 'schedules', icon: Calendar, label: 'Schedules' },
-  ];
-
-  const triggerMenuItems = [
-    { id: 'http', icon: Link, label: 'HTTP' },
-    { id: 'websockets', icon: Zap, label: 'WebSockets' },
-    { id: 'postgres', icon: Database, label: 'Postgres' },
-    { id: 'kafka', icon: Radio, label: 'Kafka (EE)' },
-    { id: 'nats', icon: Radio, label: 'NATS (EE)' },
-    { id: 'aws-sqs', icon: Cloud, label: 'AWS SQS (EE)' },
-    { id: 'gcp-pubsub', icon: Cloud, label: 'GCP Pub/Sub (EE)' },
-    { id: 'mqtt', icon: Wifi, label: 'MQTT' },
-    { id: 'email', icon: Mail, label: 'Email' },
   ];
 
   const bottomNav = [
@@ -118,35 +97,9 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
               <span>{item.label}</span>
             </button>
           ))}
-          <div 
-            className="add-trigger-wrapper"
-            onMouseEnter={() => setShowTriggerMenu(true)}
-            onMouseLeave={() => setShowTriggerMenu(false)}
-          >
-            <button className="nav-item add-trigger">
-              <Plus size={18} />
-            </button>
-            {showTriggerMenu && (
-              <div className="trigger-menu glass-panel">
-                {triggerMenuItems.map((item) => {
-                  const ItemIcon = item.icon;
-                  return (
-                    <button
-                      key={item.id}
-                      className="trigger-menu-item"
-                      onClick={() => {
-                        alert(`Create ${item.label} trigger`);
-                        setShowTriggerMenu(false);
-                      }}
-                    >
-                      <ItemIcon size={16} />
-                      <span>{item.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+          <button className="nav-item add-trigger">
+            <Plus size={18} />
+          </button>
         </div>
       </nav>
 
