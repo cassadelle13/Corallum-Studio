@@ -1,0 +1,315 @@
+
+:root {
+  --bg-dark: #0a0b10;
+  --bg-panel: rgba(20, 22, 32, 0.7);
+  --accent-primary: #6366f1;
+  --accent-secondary: #a855f7;
+  --neon-blue: #00f2ff;
+  --neon-purple: #bc13fe;
+  --neon-pink: #ff00e5;
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(15, 18, 25, 0.8);
+  --text-main: #e2e8f0;
+  --text-dim: #94a3b8;
+  --node-bg: rgba(30, 41, 59, 0.7);
+}
+
+/* ============= GLOBAL STYLES ============= */
+body {
+  background-color: var(--bg-dark) !important;
+  background: radial-gradient(circle at 50% 50%, #1a1d27 0%, #0a0b10 100%) !important;
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+
+.app-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+/* ============= GLASSMORPHISM ============= */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+}
+
+.glass-panel-strong {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.global-sidebar {
+  background: rgba(10, 11, 16, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  border-right: 1px solid var(--glass-border) !important;
+  z-index: 10;
+}
+
+.main-content {
+  background: transparent !important;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ============= MODERN NODES ============= */
+.futuristic-node {
+  background: rgba(45, 51, 67, 0.6) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  color: white !important;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  width: 220px;
+}
+
+.futuristic-node:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  border-color: var(--accent-primary) !important;
+}
+
+.node-header {
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.node-body {
+  padding: 15px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.node-code-preview {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px;
+  border-radius: 6px;
+  color: #818cf8;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ============= NEON EDGES ============= */
+.react-flow__edge-path {
+  stroke: var(--accent-primary) !important;
+  stroke-width: 3 !important;
+  filter: drop-shadow(0 0 5px var(--accent-primary)) !important;
+  stroke-dasharray: 10;
+  animation: dash 20s linear infinite;
+}
+
+@keyframes dash {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--neon-blue) !important;
+  filter: drop-shadow(0 0 8px var(--neon-blue)) !important;
+}
+
+.handle-neon {
+  width: 8px !important;
+  height: 8px !important;
+  background: var(--accent-primary) !important;
+  border: 2px solid var(--bg-dark) !important;
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* ============= CUSTOM SCROLLBARS ============= */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* ============= ANIMATIONS ============= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home-view, .app, .global-sidebar, .list-item {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* ============= BUTTONS & HOVER ============= */
+.btn-action, .nav-item, .sidebar-item, .list-item {
+  transition: all 0.2s ease !important;
+}
+
+.btn-action:hover {
+  background: var(--accent-primary) !important;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+  transform: translateY(-1px);
+}
+
+.nav-item.active {
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, transparent 100%) !important;
+  border-left: 3px solid var(--accent-primary) !important;
+}
+
+/* ============= LOGO STYLING ============= */
+.brand-logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-right: 10px;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+}
+
+.toolbar-logo-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-right: 8px;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+/* ============= SEARCH INPUTS ============= */
+.sidebar-search-input, .search-bar input {
+  background: transparent !important;
+  border: none !important;
+  color: white !important;
+  outline: none !important;
+}
+
+.sidebar-search-trigger .search-item {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 4px 12px;
+}
+
+.sidebar-search-input {
+  font-size: 13px;
+  width: 100%;
+  margin-left: 8px;
+}
+
+.sidebar-search-input::placeholder {
+  color: var(--text-dim);
+}
+
+/* ============= HOME VIEW LIST ITEMS ============= */
+.list-item {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(5px);
+}
+
+.list-item:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+  transform: translateX(5px);
+}
+
+/* ============= TOOLBAR & LOGS ============= */
+.toolbar {
+  background: rgba(10, 11, 16, 0.6) !important;
+  backdrop-filter: blur(15px) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+}
+
+.execution-logs {
+  background: rgba(10, 11, 16, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+  border-top: 1px solid var(--glass-border) !important;
+}
+
+.test-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  max-height: 500px;
+  z-index: 1000;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ============= MINIMAP STYLING ============= */
+.react-flow__minimap {
+  background: rgba(15, 15, 20, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.react-flow__minimap-canvas {
+  filter: blur(0.5px);
+}
+
+/* ============= COLLAPSED SIDEBAR ============= */
+.global-sidebar.collapsed {
+  width: 64px !important;
+  overflow: hidden;
+}
+
+.global-sidebar.collapsed .sidebar-brand span,
+.global-sidebar.collapsed .sidebar-search-trigger,
+.global-sidebar.collapsed .nav-item span,
+.global-sidebar.collapsed .section-label,
+.global-sidebar.collapsed .sidebar-footer-nav span {
+  display: none !important;
+}
+
+.global-sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.global-sidebar.collapsed .sidebar-brand {
+  padding: 16px 0;
+  justify-content: center;
+}
+
+.global-sidebar.collapsed .brand-logo-img {
+  margin-right: 0;
+}
