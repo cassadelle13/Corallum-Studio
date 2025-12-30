@@ -129,13 +129,18 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
     const updateLogsMenuPosition = () => {
       if (showLogsMenu && logsButtonRef.current && logsMenuRef.current) {
         const buttonRect = logsButtonRef.current.getBoundingClientRect();
-        logsMenuRef.current.style.top = `${buttonRect.top}px`;
+        const menuRect = logsMenuRef.current.getBoundingClientRect();
+        const menuHeight = menuRect.height;
+        logsMenuRef.current.style.top = `${buttonRect.bottom - menuHeight}px`;
         logsMenuRef.current.style.left = `${buttonRect.right + 4}px`;
       }
     };
 
     if (showLogsMenu) {
-      updateLogsMenuPosition();
+      // Use requestAnimationFrame to ensure menu is rendered before measuring
+      requestAnimationFrame(() => {
+        updateLogsMenuPosition();
+      });
       window.addEventListener('scroll', updateLogsMenuPosition, true);
       window.addEventListener('resize', updateLogsMenuPosition);
       return () => {
@@ -149,13 +154,18 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
     const updateTriggerMenuPosition = () => {
       if (showTriggerMenu && triggerButtonRef.current && triggerMenuRef.current) {
         const buttonRect = triggerButtonRef.current.getBoundingClientRect();
-        triggerMenuRef.current.style.top = `${buttonRect.top}px`;
+        const menuRect = triggerMenuRef.current.getBoundingClientRect();
+        const menuHeight = menuRect.height;
+        triggerMenuRef.current.style.top = `${buttonRect.bottom - menuHeight}px`;
         triggerMenuRef.current.style.left = `${buttonRect.right + 4}px`;
       }
     };
 
     if (showTriggerMenu) {
-      updateTriggerMenuPosition();
+      // Use requestAnimationFrame to ensure menu is rendered before measuring
+      requestAnimationFrame(() => {
+        updateTriggerMenuPosition();
+      });
       window.addEventListener('scroll', updateTriggerMenuPosition, true);
       window.addEventListener('resize', updateTriggerMenuPosition);
       return () => {
@@ -169,13 +179,18 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
     const updateUserMenuPosition = () => {
       if (showUserMenu && userButtonRef.current && userMenuRef.current) {
         const buttonRect = userButtonRef.current.getBoundingClientRect();
-        userMenuRef.current.style.top = `${buttonRect.top}px`;
+        const menuRect = userMenuRef.current.getBoundingClientRect();
+        const menuHeight = menuRect.height;
+        userMenuRef.current.style.top = `${buttonRect.bottom - menuHeight}px`;
         userMenuRef.current.style.left = `${buttonRect.right + 4}px`;
       }
     };
 
     if (showUserMenu) {
-      updateUserMenuPosition();
+      // Use requestAnimationFrame to ensure menu is rendered before measuring
+      requestAnimationFrame(() => {
+        updateUserMenuPosition();
+      });
       window.addEventListener('scroll', updateUserMenuPosition, true);
       window.addEventListener('resize', updateUserMenuPosition);
       return () => {
