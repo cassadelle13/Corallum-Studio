@@ -20,32 +20,37 @@ const getCategoryFromType = (type: string): string => {
   return 'default';
 };
 
-// Цвета для категорий (неоновые обводки)
-const categoryColors: Record<string, { border: string; glow: string; bg: string }> = {
+// Цвета для категорий (неоновые обводки с градиентами)
+const categoryColors: Record<string, { border: string; glow: string; bg: string; gradient: string }> = {
   trigger: {
-    border: '#10b981', // зеленый
-    glow: 'rgba(16, 185, 129, 0.4)',
-    bg: 'rgba(16, 185, 129, 0.1)'
+    border: '#f97316', // оранжевый
+    glow: 'rgba(249, 115, 22, 0.15)',
+    bg: 'rgba(249, 115, 22, 0.05)',
+    gradient: 'linear-gradient(135deg, rgba(249, 115, 22, 0.3) 0%, rgba(251, 146, 60, 0.2) 100%)'
   },
   operator: {
     border: '#6366f1', // индиго
-    glow: 'rgba(99, 102, 241, 0.4)',
-    bg: 'rgba(99, 102, 241, 0.1)'
+    glow: 'rgba(99, 102, 241, 0.15)',
+    bg: 'rgba(99, 102, 241, 0.05)',
+    gradient: 'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%)'
   },
   integration: {
     border: '#3b82f6', // синий
-    glow: 'rgba(59, 130, 246, 0.4)',
-    bg: 'rgba(59, 130, 246, 0.1)'
+    glow: 'rgba(59, 130, 246, 0.15)',
+    bg: 'rgba(59, 130, 246, 0.05)',
+    gradient: 'linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(96, 165, 250, 0.2) 100%)'
   },
   resource: {
     border: '#64748b', // серый
-    glow: 'rgba(100, 116, 139, 0.3)',
-    bg: 'rgba(100, 116, 139, 0.1)'
+    glow: 'rgba(100, 116, 139, 0.12)',
+    bg: 'rgba(100, 116, 139, 0.05)',
+    gradient: 'linear-gradient(135deg, rgba(100, 116, 139, 0.2) 0%, rgba(148, 163, 184, 0.15) 100%)'
   },
   default: {
     border: '#6366f1',
-    glow: 'rgba(99, 102, 241, 0.4)',
-    bg: 'rgba(99, 102, 241, 0.1)'
+    glow: 'rgba(99, 102, 241, 0.15)',
+    bg: 'rgba(99, 102, 241, 0.05)',
+    gradient: 'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%)'
   }
 };
 
@@ -101,6 +106,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
     '--node-border-color': colors.border,
     '--node-glow-color': colors.glow,
     '--node-bg-color': colors.bg,
+    '--node-gradient': colors.gradient,
   } as React.CSSProperties;
 
   // Для ромбовидных узлов (branch) используем специальную разметку

@@ -63,73 +63,101 @@ body {
 
 /* ============= MODERN NODES ============= */
 .futuristic-node {
-  background: rgba(45, 51, 67, 0.6) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(8px);
-  border: 2px solid var(--node-border-color, rgba(99, 102, 241, 0.3)) !important;
-  border-radius: 12px !important;
+  border: 1.5px solid var(--node-border-color, rgba(99, 102, 241, 0.4)) !important;
+  border-radius: 8px !important;
   padding: 0 !important;
-  color: white !important;
-  box-shadow: 0 0 15px var(--node-glow-color, rgba(99, 102, 241, 0.2)),
-              0 0 30px var(--node-glow-color, rgba(99, 102, 241, 0.1));
+  color: #1e293b !important;
+  box-shadow: 0 0 8px var(--node-glow-color, rgba(99, 102, 241, 0.1)),
+              0 0 16px var(--node-glow-color, rgba(99, 102, 241, 0.05)),
+              0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: visible;
-  width: 220px;
+  overflow: hidden;
+  width: 200px;
+  min-width: 200px;
   position: relative;
 }
 
+/* Градиентная обводка через псевдоэлемент */
+.futuristic-node::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 9px;
+  background: var(--node-gradient, linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(139, 92, 246, 0.15) 100%));
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(4px);
+}
+
 .futuristic-node:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 0 25px var(--node-glow-color, rgba(99, 102, 241, 0.4)),
-              0 0 50px var(--node-glow-color, rgba(99, 102, 241, 0.2));
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 0 12px var(--node-glow-color, rgba(99, 102, 241, 0.15)),
+              0 0 24px var(--node-glow-color, rgba(99, 102, 241, 0.08)),
+              0 4px 8px rgba(0, 0, 0, 0.15);
   border-color: var(--node-border-color, var(--accent-primary)) !important;
 }
 
-/* Категории узлов - неоновые обводки */
+.futuristic-node:hover::before {
+  opacity: 0.8;
+}
+
+/* Категории узлов - неоновые обводки с градиентами */
 .node-category-trigger {
-  --node-border-color: #10b981;
-  --node-glow-color: rgba(16, 185, 129, 0.4);
-  --node-bg-color: rgba(16, 185, 129, 0.1);
+  --node-border-color: #f97316;
+  --node-glow-color: rgba(249, 115, 22, 0.15);
+  --node-bg-color: rgba(249, 115, 22, 0.05);
+  --node-gradient: linear-gradient(135deg, rgba(249, 115, 22, 0.3) 0%, rgba(251, 146, 60, 0.2) 100%);
 }
 
 .node-category-operator {
   --node-border-color: #6366f1;
-  --node-glow-color: rgba(99, 102, 241, 0.4);
-  --node-bg-color: rgba(99, 102, 241, 0.1);
+  --node-glow-color: rgba(99, 102, 241, 0.15);
+  --node-bg-color: rgba(99, 102, 241, 0.05);
+  --node-gradient: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%);
 }
 
 .node-category-integration {
   --node-border-color: #3b82f6;
-  --node-glow-color: rgba(59, 130, 246, 0.4);
-  --node-bg-color: rgba(59, 130, 246, 0.1);
+  --node-glow-color: rgba(59, 130, 246, 0.15);
+  --node-bg-color: rgba(59, 130, 246, 0.05);
+  --node-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(96, 165, 250, 0.2) 100%);
 }
 
 .node-category-resource {
   --node-border-color: #64748b;
-  --node-glow-color: rgba(100, 116, 139, 0.3);
-  --node-bg-color: rgba(100, 116, 139, 0.1);
+  --node-glow-color: rgba(100, 116, 139, 0.12);
+  --node-bg-color: rgba(100, 116, 139, 0.05);
+  --node-gradient: linear-gradient(135deg, rgba(100, 116, 139, 0.2) 0%, rgba(148, 163, 184, 0.15) 100%);
 }
 
 /* Подключенные узлы - усиленная неоновая обводка */
 .node-connected {
-  box-shadow: 0 0 20px var(--node-glow-color, rgba(99, 102, 241, 0.5)),
-              0 0 40px var(--node-glow-color, rgba(99, 102, 241, 0.3)),
-              inset 0 0 20px var(--node-bg-color, rgba(99, 102, 241, 0.1)) !important;
-  border-width: 2.5px !important;
+  box-shadow: 0 0 12px var(--node-glow-color, rgba(99, 102, 241, 0.2)),
+              0 0 24px var(--node-glow-color, rgba(99, 102, 241, 0.1)),
+              0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  border-width: 2px !important;
+}
+
+.node-connected::before {
+  opacity: 0.8 !important;
 }
 
 /* Ромбовидные узлы (Branch/IF) */
 .node-diamond {
-  width: 120px !important;
-  height: 120px !important;
-  min-width: 120px !important;
-  min-height: 120px !important;
+  width: 100px !important;
+  height: 100px !important;
+  min-width: 100px !important;
+  min-height: 100px !important;
   border-radius: 0 !important;
   transform: rotate(45deg);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(45, 51, 67, 0.8) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  border: 1.5px solid var(--node-border-color, rgba(99, 102, 241, 0.4)) !important;
 }
 
 .node-diamond-content {
@@ -149,14 +177,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .node-diamond-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  color: white;
+  color: #1e293b;
   text-align: center;
-  max-width: 80px;
+  max-width: 70px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -164,15 +193,16 @@ body {
 
 /* Круглые узлы (Resources) */
 .node-circle {
-  width: 100px !important;
-  height: 100px !important;
-  min-width: 100px !important;
-  min-height: 100px !important;
+  width: 80px !important;
+  height: 80px !important;
+  min-width: 80px !important;
+  min-height: 80px !important;
   border-radius: 50% !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(45, 51, 67, 0.8) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1.5px solid var(--node-border-color, rgba(100, 116, 139, 0.4)) !important;
 }
 
 .node-circle-content {
@@ -191,14 +221,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .node-circle-label {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
-  color: white;
+  color: #1e293b;
   text-align: center;
-  max-width: 70px;
+  max-width: 60px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -260,15 +291,16 @@ body {
 }
 
 .node-header {
-  padding: 10px 15px;
-  background: rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid var(--glass-border);
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 12px;
   position: relative;
+  color: #1e293b;
 }
 
 .node-icon-wrapper {
@@ -276,6 +308,7 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--node-border-color, var(--accent-primary));
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .node-label {
@@ -286,19 +319,20 @@ body {
 }
 
 .node-body {
-  padding: 15px;
-  font-size: 12px;
-  color: var(--text-dim);
+  padding: 10px 12px;
+  font-size: 11px;
+  color: #64748b;
+  background: rgba(0, 0, 0, 0.01);
 }
 
 .node-code-preview {
   font-family: 'Fira Code', monospace;
   font-size: 10px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 8px;
-  border-radius: 6px;
-  color: #818cf8;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.03);
+  padding: 6px 8px;
+  border-radius: 4px;
+  color: #475569;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* ============= NEON EDGES ============= */
