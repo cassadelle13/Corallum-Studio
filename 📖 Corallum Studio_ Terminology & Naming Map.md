@@ -1,4 +1,4 @@
-# 📖 Corallum Studio: Terminology & Naming Map
+# Terminology & Naming Map
 
 Use these exact terms when talking to Cursor AI to ensure it finds the right components immediately.
 
