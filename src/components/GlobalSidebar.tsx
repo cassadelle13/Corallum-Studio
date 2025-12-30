@@ -29,7 +29,9 @@ import {
   Moon,
   Sun,
   LogOut,
-  TrendingUp
+  TrendingUp,
+  UserCircle,
+  Building
 } from 'lucide-react';
 
 interface GlobalSidebarProps {
@@ -37,9 +39,10 @@ interface GlobalSidebarProps {
   setActiveTab: (tab: string) => void;
   onSearch: (query: string) => void;
   isCollapsed?: boolean;
+  onOpenUserSettings?: () => void;
 }
 
-export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActiveTab, onSearch, isCollapsed }) => {
+export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActiveTab, onSearch, isCollapsed, onOpenUserSettings }) => {
   const [showLogsMenu, setShowLogsMenu] = useState(false);
   const logsButtonRef = useRef<HTMLButtonElement>(null);
   const logsMenuRef = useRef<HTMLDivElement>(null);
@@ -52,6 +55,10 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
   const userButtonRef = useRef<HTMLButtonElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
+  
+  const [showSettingsMenu, setShowSettingsMenu] = useState(false);
+  const settingsButtonRef = useRef<HTMLButtonElement>(null);
+  const settingsMenuRef = useRef<HTMLDivElement>(null);
 
   const mainNav = [
     { id: 'home', icon: Home, label: 'Home' },
@@ -91,6 +98,11 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
     { id: 'email', icon: Mail, label: 'Email' },
   ];
 
+  const settingsMenuItems = [
+    { id: 'account', icon: UserCircle, label: 'Account' },
+    { id: 'workspace', icon: Building, label: 'Workspace' },
+  ];
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -117,13 +129,21 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
       ) {
         setShowUserMenu(false);
       }
+      if (
+        settingsMenuRef.current &&
+        !settingsMenuRef.current.contains(event.target as Node) &&
+        settingsButtonRef.current &&
+        !settingsButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowSettingsMenu(false);
+      }
     };
 
-    if (showLogsMenu || showTriggerMenu || showUserMenu) {
+    if (showLogsMenu || showTriggerMenu || showUserMenu || showSettingsMenu) {
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
-  }, [showLogsMenu, showTriggerMenu, showUserMenu]);
+  }, [showLogsMenu, showTriggerMenu, showUserMenu, showSettingsMenu]);
 
   useEffect(() => {
     const updateLogsMenuPosition = () => {
@@ -200,6 +220,30 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
     }
   }, [showUserMenu]);
 
+  useEffect(() => {
+    const updateSettingsMenuPosition = () => {
+      if (showSettingsMenu && settingsButtonRef.current && settingsMenuRef.current) {
+        const buttonRect = settingsButtonRef.current.getBoundingClientRect();
+        const menuRect = settingsMenuRef.current.getBoundingClientRect();
+        const menuHeight = menuRect.height;
+        settingsMenuRef.current.style.top = `${buttonRect.bottom - menuHeight}px`;
+        settingsMenuRef.current.style.left = `${buttonRect.right + 4}px`;
+      }
+    };
+
+    if (showSettingsMenu) {
+      requestAnimationFrame(() => {
+        updateSettingsMenuPosition();
+      });
+      window.addEventListener('scroll', updateSettingsMenuPosition, true);
+      window.addEventListener('resize', updateSettingsMenuPosition);
+      return () => {
+        window.removeEventListener('scroll', updateSettingsMenuPosition, true);
+        window.removeEventListener('resize', updateSettingsMenuPosition);
+      };
+    }
+  }, [showSettingsMenu]);
+
   const handleLogsClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setShowLogsMenu(!showLogsMenu);
@@ -223,6 +267,23 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
   const handleUserClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setShowUserMenu(!showUserMenu);
+  };
+
+  const handleSettingsClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowSettingsMenu(!showSettingsMenu);
+  };
+
+  const handleSettingsMenuItemClick = (itemId: string) => {
+    if (itemId === 'account') {
+      if (onOpenUserSettings) {
+        onOpenUserSettings();
+      }
+      setShowSettingsMenu(false);
+    } else if (itemId === 'workspace') {
+      setActiveTab('settings');
+      setShowSettingsMenu(false);
+    }
   };
 
   return (
@@ -414,6 +475,42 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
                       <TrendingUp size={16} />
                       <span>Upgrade</span>
                     </button>
+                  </div>,
+                  document.body
+                )}
+              </div>
+            );
+          }
+          if (item.id === 'settings') {
+            return (
+              <div key={item.id} className="settings-nav-wrapper">
+                <button
+                  ref={settingsButtonRef}
+                  className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
+                  onClick={handleSettingsClick}
+                >
+                  <item.icon size={18} />
+                  <span>{item.label}</span>
+                </button>
+                {showSettingsMenu && ReactDOM.createPortal(
+                  <div
+                    ref={settingsMenuRef}
+                    className="settings-menu glass-panel"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {settingsMenuItems.map((menuItem) => {
+                      const MenuIcon = menuItem.icon;
+                      return (
+                        <button
+                          key={menuItem.id}
+                          className="settings-menu-item"
+                          onClick={() => handleSettingsMenuItemClick(menuItem.id)}
+                        >
+                          <MenuIcon size={16} />
+                          <span>{menuItem.label}</span>
+                        </button>
+                      );
+                    })}
                   </div>,
                   document.body
                 )}

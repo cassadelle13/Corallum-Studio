@@ -26,6 +26,7 @@ import { LogsView } from './components/LogsView';
 import { AssetsView } from './components/AssetsView';
 import { AuditLogsView } from './components/AuditLogsView';
 import { CriticalAlertsView } from './components/CriticalAlertsView';
+import { UserSettingsModal } from './components/UserSettingsModal';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -40,6 +41,7 @@ function App() {
   const [isEditingFlow, setIsEditingFlow] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showCriticalAlerts, setShowCriticalAlerts] = useState(false);
+  const [showUserSettings, setShowUserSettings] = useState(false);
 
   const handleTest = async () => {
     clearExecutionLogs();
@@ -109,6 +111,7 @@ function App() {
         }} 
         onSearch={setSearchQuery}
         isCollapsed={isEditingFlow}
+        onOpenUserSettings={() => setShowUserSettings(true)}
       />
       
       <div className="main-content">
@@ -204,6 +207,11 @@ function App() {
             setActiveTab('home');
           }
         }}
+      />
+
+      <UserSettingsModal
+        isOpen={showUserSettings}
+        onClose={() => setShowUserSettings(false)}
       />
 
       {testResult && (
