@@ -19,12 +19,13 @@ import { VariablesView } from './components/VariablesView';
 import { TutorialsView } from './components/TutorialsView';
 import { RunsView } from './components/RunsView';
 import { SchedulesView } from './components/SchedulesView';
-import { UserView } from './components/UserView';
 import { SettingsView } from './components/SettingsView';
 import { WorkersView } from './components/WorkersView';
 import { FoldersView } from './components/FoldersView';
 import { LogsView } from './components/LogsView';
 import { AssetsView } from './components/AssetsView';
+import { AuditLogsView } from './components/AuditLogsView';
+import { CriticalAlertsView } from './components/CriticalAlertsView';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -38,6 +39,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [isEditingFlow, setIsEditingFlow] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showCriticalAlerts, setShowCriticalAlerts] = useState(false);
 
   const handleTest = async () => {
     clearExecutionLogs();
@@ -173,10 +175,6 @@ function App() {
           <AssetsView searchQuery={searchQuery} />
         )}
 
-        {activeTab === 'user' && (
-          <UserView searchQuery={searchQuery} />
-        )}
-
         {activeTab === 'settings' && (
           <SettingsView searchQuery={searchQuery} />
         )}
@@ -192,7 +190,21 @@ function App() {
         {activeTab === 'logs' && (
           <LogsView searchQuery={searchQuery} />
         )}
+
+        {activeTab === 'audit-logs' && (
+          <AuditLogsView searchQuery={searchQuery} />
+        )}
       </div>
+
+      <CriticalAlertsView
+        isOpen={showCriticalAlerts || activeTab === 'critical-alerts'}
+        onClose={() => {
+          setShowCriticalAlerts(false);
+          if (activeTab === 'critical-alerts') {
+            setActiveTab('home');
+          }
+        }}
+      />
 
       {testResult && (
         <div className="test-panel glass-panel">

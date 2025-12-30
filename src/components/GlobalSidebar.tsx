@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { 
   Home, 
   PlayCircle, 
@@ -14,7 +15,21 @@ import {
   List,
   Search,
   MessageSquare,
-  Plus
+  Plus,
+  Eye,
+  AlertCircle,
+  Link2,
+  Plug,
+  Database,
+  Network,
+  Cloud,
+  Wifi,
+  Mail,
+  Crown,
+  Moon,
+  Sun,
+  LogOut,
+  TrendingUp
 } from 'lucide-react';
 
 interface GlobalSidebarProps {
@@ -25,6 +40,19 @@ interface GlobalSidebarProps {
 }
 
 export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActiveTab, onSearch, isCollapsed }) => {
+  const [showLogsMenu, setShowLogsMenu] = useState(false);
+  const logsButtonRef = useRef<HTMLButtonElement>(null);
+  const logsMenuRef = useRef<HTMLDivElement>(null);
+  
+  const [showTriggerMenu, setShowTriggerMenu] = useState(false);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerMenuRef = useRef<HTMLDivElement>(null);
+  
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const userButtonRef = useRef<HTMLButtonElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+
   const mainNav = [
     { id: 'home', icon: Home, label: 'Home' },
     { id: 'runs', icon: PlayCircle, label: 'Runs' },
@@ -45,6 +73,106 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
     { id: 'folders', icon: Folder, label: 'Folders & Group...' },
     { id: 'logs', icon: List, label: 'Logs' },
   ];
+
+  const logsMenuItems = [
+    { id: 'audit-logs', icon: Eye, label: 'Audit logs' },
+    { id: 'critical-alerts', icon: AlertCircle, label: 'Critical alerts' },
+  ];
+
+  const triggerMenuItems = [
+    { id: 'http', icon: Link2, label: 'HTTP' },
+    { id: 'websockets', icon: Plug, label: 'WebSockets' },
+    { id: 'postgres', icon: Database, label: 'Postgres' },
+    { id: 'kafka', icon: Network, label: 'Kafka' },
+    { id: 'nats', icon: Network, label: 'NATS' },
+    { id: 'sqs', icon: Cloud, label: 'SQS' },
+    { id: 'gcp-pubsub', icon: Cloud, label: 'GCP Pub/Sub' },
+    { id: 'mqtt', icon: Wifi, label: 'MQTT' },
+    { id: 'email', icon: Mail, label: 'Email' },
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        logsMenuRef.current &&
+        !logsMenuRef.current.contains(event.target as Node) &&
+        logsButtonRef.current &&
+        !logsButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowLogsMenu(false);
+      }
+      if (
+        triggerMenuRef.current &&
+        !triggerMenuRef.current.contains(event.target as Node) &&
+        triggerButtonRef.current &&
+        !triggerButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowTriggerMenu(false);
+      }
+      if (
+        userMenuRef.current &&
+        !userMenuRef.current.contains(event.target as Node) &&
+        userButtonRef.current &&
+        !userButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowUserMenu(false);
+      }
+    };
+
+    if (showLogsMenu || showTriggerMenu || showUserMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showLogsMenu, showTriggerMenu, showUserMenu]);
+
+  useEffect(() => {
+    if (showLogsMenu && logsButtonRef.current && logsMenuRef.current) {
+      const buttonRect = logsButtonRef.current.getBoundingClientRect();
+      logsMenuRef.current.style.top = `${buttonRect.bottom + 4}px`;
+      logsMenuRef.current.style.left = `${buttonRect.left}px`;
+    }
+  }, [showLogsMenu]);
+
+  useEffect(() => {
+    if (showTriggerMenu && triggerButtonRef.current && triggerMenuRef.current) {
+      const buttonRect = triggerButtonRef.current.getBoundingClientRect();
+      triggerMenuRef.current.style.top = `${buttonRect.bottom + 4}px`;
+      triggerMenuRef.current.style.left = `${buttonRect.left}px`;
+    }
+  }, [showTriggerMenu]);
+
+  useEffect(() => {
+    if (showUserMenu && userButtonRef.current && userMenuRef.current) {
+      const buttonRect = userButtonRef.current.getBoundingClientRect();
+      userMenuRef.current.style.top = `${buttonRect.bottom + 4}px`;
+      userMenuRef.current.style.left = `${buttonRect.left}px`;
+    }
+  }, [showUserMenu]);
+
+  const handleLogsClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowLogsMenu(!showLogsMenu);
+  };
+
+  const handleLogsMenuItemClick = (itemId: string) => {
+    setActiveTab(itemId);
+    setShowLogsMenu(false);
+  };
+
+  const handleTriggerClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowTriggerMenu(!showTriggerMenu);
+  };
+
+  const handleTriggerMenuItemClick = (itemId: string) => {
+    alert(`Create ${triggerMenuItems.find(item => item.id === itemId)?.label} trigger`);
+    setShowTriggerMenu(false);
+  };
+
+  const handleUserClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowUserMenu(!showUserMenu);
+  };
 
   return (
     <div className={`global-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
@@ -97,23 +225,161 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
               <span>{item.label}</span>
             </button>
           ))}
-          <button className="nav-item add-trigger">
-            <Plus size={18} />
-          </button>
+          <div className="add-trigger-wrapper">
+            <button
+              ref={triggerButtonRef}
+              className="nav-item add-trigger"
+              onClick={handleTriggerClick}
+            >
+              <Plus size={18} />
+            </button>
+            {showTriggerMenu && ReactDOM.createPortal(
+              <div
+                ref={triggerMenuRef}
+                className="trigger-menu glass-panel"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {triggerMenuItems.map((menuItem) => {
+                  const MenuIcon = menuItem.icon;
+                  return (
+                    <button
+                      key={menuItem.id}
+                      className="trigger-menu-item"
+                      onClick={() => handleTriggerMenuItemClick(menuItem.id)}
+                    >
+                      <MenuIcon size={16} />
+                      <span>{menuItem.label}</span>
+                    </button>
+                  );
+                })}
+              </div>,
+              document.body
+            )}
+          </div>
         </div>
       </nav>
 
       <div className="sidebar-footer-nav">
-        {bottomNav.map((item) => (
-          <button
-            key={item.id}
-            className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
-            onClick={() => setActiveTab(item.id)}
-          >
-            <item.icon size={18} />
-            <span>{item.label}</span>
-          </button>
-        ))}
+        {bottomNav.map((item) => {
+          if (item.id === 'logs') {
+            return (
+              <div key={item.id} className="logs-nav-wrapper">
+                <button
+                  ref={logsButtonRef}
+                  className={`nav-item ${activeTab === 'audit-logs' || activeTab === 'critical-alerts' ? 'active' : ''}`}
+                  onClick={handleLogsClick}
+                >
+                  <item.icon size={18} />
+                  <span>{item.label}</span>
+                </button>
+                {showLogsMenu && ReactDOM.createPortal(
+                  <div
+                    ref={logsMenuRef}
+                    className="logs-menu glass-panel"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {logsMenuItems.map((menuItem) => {
+                      const MenuIcon = menuItem.icon;
+                      return (
+                        <button
+                          key={menuItem.id}
+                          className={`logs-menu-item ${activeTab === menuItem.id ? 'active' : ''}`}
+                          onClick={() => handleLogsMenuItemClick(menuItem.id)}
+                        >
+                          <MenuIcon size={16} />
+                          <span>{menuItem.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>,
+                  document.body
+                )}
+              </div>
+            );
+          }
+          if (item.id === 'user') {
+            return (
+              <div key={item.id} className="user-nav-wrapper">
+                <button
+                  ref={userButtonRef}
+                  className="nav-item"
+                  onClick={handleUserClick}
+                >
+                  <item.icon size={18} />
+                  <span>{item.label}</span>
+                </button>
+                {showUserMenu && ReactDOM.createPortal(
+                  <div
+                    ref={userMenuRef}
+                    className="user-menu glass-panel"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="user-menu-header">
+                      <div className="user-menu-email">rusik13022000s@gmail.com</div>
+                      <div className="user-menu-role">
+                        <Crown size={14} />
+                        <span>Admin of this workspace</span>
+                      </div>
+                    </div>
+                    
+                    <div className="user-menu-divider"></div>
+                    
+                    <button className="user-menu-item">
+                      <Settings size={16} />
+                      <span>Account settings</span>
+                    </button>
+                    <button 
+                      className="user-menu-item"
+                      onClick={() => setIsDarkTheme(!isDarkTheme)}
+                    >
+                      {isDarkTheme ? <Moon size={16} /> : <Sun size={16} />}
+                      <span>Switch theme</span>
+                    </button>
+                    <button className="user-menu-item danger">
+                      <LogOut size={16} />
+                      <span>Sign out</span>
+                    </button>
+                    
+                    <div className="user-menu-divider"></div>
+                    
+                    <div className="user-menu-usage">
+                      <div className="usage-item">
+                        <span className="usage-label">0/1000 user execs</span>
+                        <div className="usage-progress">
+                          <div className="usage-progress-bar" style={{ width: '0%' }}></div>
+                        </div>
+                      </div>
+                      <div className="usage-item">
+                        <span className="usage-label">0/1000 free workspace execs</span>
+                        <div className="usage-progress">
+                          <div className="usage-progress-bar" style={{ width: '0%' }}></div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="user-menu-divider"></div>
+                    
+                    <button className="user-menu-upgrade">
+                      <TrendingUp size={16} />
+                      <span>Upgrade</span>
+                    </button>
+                  </div>,
+                  document.body
+                )}
+              </div>
+            );
+          }
+          return (
+            <button
+              key={item.id}
+              className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
+              onClick={() => setActiveTab(item.id)}
+            >
+              <item.icon size={18} />
+              <span>{item.label}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

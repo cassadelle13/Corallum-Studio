@@ -63,7 +63,7 @@ export const SettingsView: React.FC<SettingsViewProps> = () => {
 
             <div className="settings-section">
               <div className="section-header">
-                <h3>Members (0)</h3>
+                <h3>Members (1)</h3>
                 <Info size={14} />
               </div>
 
@@ -96,13 +96,13 @@ export const SettingsView: React.FC<SettingsViewProps> = () => {
                   </thead>
                   <tbody>
                     <tr>
-                      <td colSpan={5} className="empty-table">
-                        <div className="empty-state">
-                          <Users size={32} />
-                          <p><strong>No members found</strong></p>
-                          <p>Add members to your workspace to get started</p>
-                        </div>
+                      <td>rusik13022000s@gmail.com</td>
+                      <td>ruru</td>
+                      <td>0</td>
+                      <td>
+                        <span className="status-badge active">Active</span>
                       </td>
+                      <td>Admin</td>
                     </tr>
                   </tbody>
                 </table>
