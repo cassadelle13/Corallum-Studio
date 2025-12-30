@@ -1128,6 +1128,10 @@ body {
   margin-top: 8px;
 }
 
+.add-trigger-wrapper {
+  position: relative;
+}
+
 .sidebar-footer-nav {
   padding: 12px;
   border-top: 1px solid #2d3343;
@@ -2585,6 +2589,206 @@ body {
 
 .footer-pagination {
   color: var(--text-dim);
+}
+
+/* ============= SCHEDULES VIEW ============= */
+.schedules-view {
+  flex: 1;
+  padding: 24px 48px;
+  overflow-y: auto;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.schedules-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.schedules-title-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.schedules-title-section h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.schedules-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.schedules-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 8px 16px;
+  backdrop-filter: blur(12px);
+}
+
+.schedules-search-bar input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  outline: none;
+  font-size: 13px;
+}
+
+.schedules-search-bar input::placeholder {
+  color: var(--text-dim);
+}
+
+.schedules-filter-section {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.path-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.path-filter-group .filter-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.path-filter-buttons {
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.path-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.path-filter-btn.active {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.status-filter-group {
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.status-filter-btn {
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.status-filter-btn.active {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.schedules-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.empty-schedules-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-schedules-state .empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+/* ============= TRIGGER MENU IN SIDEBAR ============= */
+.add-trigger-wrapper {
+  position: relative;
+}
+
+.trigger-menu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin-left: 8px;
+  min-width: 200px;
+  background: rgba(15, 18, 25, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.trigger-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+}
+
+.trigger-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.trigger-menu-item svg {
+  flex-shrink: 0;
+  color: var(--accent-primary);
 }
 
 /* ============= REACT FLOW TRANSPARENCY FIX ============= */

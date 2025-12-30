@@ -17,6 +17,7 @@ import { ResourcesView } from './components/ResourcesView';
 import { VariablesView } from './components/VariablesView';
 import { TutorialsView } from './components/TutorialsView';
 import { RunsView } from './components/RunsView';
+import { SchedulesView } from './components/SchedulesView';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -151,7 +152,11 @@ function App() {
           <TutorialsView searchQuery={searchQuery} />
         )}
 
-        {activeTab !== 'home' && activeTab !== 'runs' && activeTab !== 'variables' && activeTab !== 'resources' && activeTab !== 'tutorials' && (
+        {activeTab === 'schedules' && (
+          <SchedulesView searchQuery={searchQuery} />
+        )}
+
+        {activeTab !== 'home' && activeTab !== 'runs' && activeTab !== 'variables' && activeTab !== 'resources' && activeTab !== 'tutorials' && activeTab !== 'schedules' && (
           <div className="placeholder-view">
             <Settings size={48} className="text-text-dim mb-4" />
             <h2>{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} View</h2>
