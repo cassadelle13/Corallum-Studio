@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   ReactFlow,
   Background,
@@ -10,6 +10,7 @@ import {
 import '@xyflow/react/dist/style.css';
 import { useFlowStore } from '../store/flowStore';
 import { CustomNode } from './CustomNode';
+import { Map } from 'lucide-react';
 
 const nodeTypes = {
   default: CustomNode,
@@ -20,6 +21,7 @@ interface FlowCanvasProps {
 }
 
 export const FlowCanvas: React.FC<FlowCanvasProps> = ({ onNodeClick }) => {
+  const [showMinimap, setShowMinimap] = useState(false);
   const { 
     nodes, 
     edges, 
@@ -67,20 +69,23 @@ export const FlowCanvas: React.FC<FlowCanvasProps> = ({ onNodeClick }) => {
       >
         <Background variant={BackgroundVariant.Dots} gap={20} size={1.5} color="rgba(255, 255, 255, 0.05)" />
         <Controls />
-        <MiniMap 
-          nodeColor={(node) => {
-            switch (node.type) {
-              case 'input':
-                return '#10b981';
-              case 'output':
-                return '#ef4444';
-              default:
-                return '#3b82f6';
-            }
-          }}
-          pannable
-          zoomable
-        />
+        {showMinimap && (
+          <MiniMap 
+            nodeColor={(node) => {
+              switch (node.type) {
+                case 'input':
+                  return '#10b981';
+                case 'output':
+                  return '#ef4444';
+                default:
+                  return '#3b82f6';
+              }
+            }}
+            pannable
+            zoomable
+            className="custom-minimap"
+          />
+        )}
         <Panel position="top-left" className="flow-panel">
           <div className="flow-info">
             <span className="flow-info-label">Режим:</span>
@@ -88,6 +93,13 @@ export const FlowCanvas: React.FC<FlowCanvasProps> = ({ onNodeClick }) => {
           </div>
         </Panel>
       </ReactFlow>
+      <button 
+        className="minimap-toggle-button glass-panel"
+        onClick={() => setShowMinimap(!showMinimap)}
+        title={showMinimap ? "Hide Minimap" : "Show Minimap"}
+      >
+        <Map size={18} />
+      </button>
     </div>
   );
 };

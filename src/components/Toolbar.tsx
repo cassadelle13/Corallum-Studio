@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { 
-  Menu, 
   Play, 
   Save, 
   Download,
@@ -58,13 +57,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   return (
     <div className="toolbar">
       <div className="toolbar-section">
-        <button className="toolbar-btn menu-toggle" onClick={onToggleSidebar}>
-          <Menu size={20} />
-        </button>
-        <div className="toolbar-title">
-          <img src="/assets/logo.png" alt="Corallum Logo" className="toolbar-logo-img" />
-          Corallum Studio
-        </div>
       </div>
 
       <div className="toolbar-section">

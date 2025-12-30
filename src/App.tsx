@@ -4,7 +4,8 @@ import {
   DollarSign, 
   // @ts-ignore
   Layers, 
-  Settings 
+  Settings,
+  Menu
 } from 'lucide-react';
 import { FlowCanvas } from './components/FlowCanvas';
 import { Sidebar } from './components/Sidebar';
@@ -133,6 +134,13 @@ function App() {
               )}
             </div>
             <ExecutionLogs isOpen={isLogsOpen} onToggle={() => setIsLogsOpen(!isLogsOpen)} />
+            <button 
+              className="hamburger-toggle-button glass-panel"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              title={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
+            >
+              <Menu size={18} />
+            </button>
           </div>
         )}
 
