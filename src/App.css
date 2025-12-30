@@ -1643,6 +1643,135 @@ body {
   margin: 0;
 }
 
+/* ============= VARIABLES VIEW ============= */
+.variables-view {
+  flex: 1;
+  padding: 24px 48px;
+  overflow-y: auto;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.variables-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.variables-title-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.variables-title-section h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.variables-tabs {
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 24px;
+  padding-bottom: 0;
+}
+
+.variable-tab {
+  position: relative;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.variable-tab:hover {
+  color: var(--text-main);
+}
+
+.variable-tab.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-color: var(--accent-primary);
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 6px 6px 0 0;
+}
+
+.variables-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.variables-search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 8px 16px;
+  backdrop-filter: blur(12px);
+}
+
+.variables-search-bar input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  outline: none;
+  font-size: 13px;
+}
+
+.variables-search-bar input::placeholder {
+  color: var(--text-dim);
+}
+
+.variables-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.empty-variables-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-variables-state .empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.empty-variables-state .empty-title strong {
+  font-weight: 700;
+}
+
+.empty-variables-state .empty-description {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin: 0;
+}
+
 /* ============= REACT FLOW TRANSPARENCY FIX ============= */
 .react-flow,
 .react-flow__viewport,

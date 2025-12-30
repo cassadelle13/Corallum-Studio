@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { 
   PlayCircle, 
   DollarSign, 
+  // @ts-ignore
   Layers, 
   Settings 
 } from 'lucide-react';
@@ -13,6 +14,7 @@ import { ExecutionLogs } from './components/ExecutionLogs';
 import { GlobalSidebar } from './components/GlobalSidebar';
 import { HomeView } from './components/HomeView';
 import { ResourcesView } from './components/ResourcesView';
+import { VariablesView } from './components/VariablesView';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -141,12 +143,7 @@ function App() {
         )}
 
         {activeTab === 'variables' && (
-          <div className="placeholder-view">
-            <DollarSign size={48} className="text-accent-secondary mb-4" />
-            <h2>Environment Variables</h2>
-            <p>Manage secrets and global configuration for your flows.</p>
-            <button className="btn-action mt-4">Add Variable</button>
-          </div>
+          <VariablesView searchQuery={searchQuery} />
         )}
 
         {activeTab === 'resources' && (
@@ -179,4 +176,3 @@ function App() {
 }
 
 export default App;
-
