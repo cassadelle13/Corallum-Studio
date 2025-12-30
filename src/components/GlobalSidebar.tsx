@@ -126,26 +126,62 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
   }, [showLogsMenu, showTriggerMenu, showUserMenu]);
 
   useEffect(() => {
-    if (showLogsMenu && logsButtonRef.current && logsMenuRef.current) {
-      const buttonRect = logsButtonRef.current.getBoundingClientRect();
-      logsMenuRef.current.style.top = `${buttonRect.bottom + 4}px`;
-      logsMenuRef.current.style.left = `${buttonRect.left}px`;
+    const updateLogsMenuPosition = () => {
+      if (showLogsMenu && logsButtonRef.current && logsMenuRef.current) {
+        const buttonRect = logsButtonRef.current.getBoundingClientRect();
+        logsMenuRef.current.style.top = `${buttonRect.top}px`;
+        logsMenuRef.current.style.left = `${buttonRect.right + 4}px`;
+      }
+    };
+
+    if (showLogsMenu) {
+      updateLogsMenuPosition();
+      window.addEventListener('scroll', updateLogsMenuPosition, true);
+      window.addEventListener('resize', updateLogsMenuPosition);
+      return () => {
+        window.removeEventListener('scroll', updateLogsMenuPosition, true);
+        window.removeEventListener('resize', updateLogsMenuPosition);
+      };
     }
   }, [showLogsMenu]);
 
   useEffect(() => {
-    if (showTriggerMenu && triggerButtonRef.current && triggerMenuRef.current) {
-      const buttonRect = triggerButtonRef.current.getBoundingClientRect();
-      triggerMenuRef.current.style.top = `${buttonRect.bottom + 4}px`;
-      triggerMenuRef.current.style.left = `${buttonRect.left}px`;
+    const updateTriggerMenuPosition = () => {
+      if (showTriggerMenu && triggerButtonRef.current && triggerMenuRef.current) {
+        const buttonRect = triggerButtonRef.current.getBoundingClientRect();
+        triggerMenuRef.current.style.top = `${buttonRect.top}px`;
+        triggerMenuRef.current.style.left = `${buttonRect.right + 4}px`;
+      }
+    };
+
+    if (showTriggerMenu) {
+      updateTriggerMenuPosition();
+      window.addEventListener('scroll', updateTriggerMenuPosition, true);
+      window.addEventListener('resize', updateTriggerMenuPosition);
+      return () => {
+        window.removeEventListener('scroll', updateTriggerMenuPosition, true);
+        window.removeEventListener('resize', updateTriggerMenuPosition);
+      };
     }
   }, [showTriggerMenu]);
 
   useEffect(() => {
-    if (showUserMenu && userButtonRef.current && userMenuRef.current) {
-      const buttonRect = userButtonRef.current.getBoundingClientRect();
-      userMenuRef.current.style.top = `${buttonRect.bottom + 4}px`;
-      userMenuRef.current.style.left = `${buttonRect.left}px`;
+    const updateUserMenuPosition = () => {
+      if (showUserMenu && userButtonRef.current && userMenuRef.current) {
+        const buttonRect = userButtonRef.current.getBoundingClientRect();
+        userMenuRef.current.style.top = `${buttonRect.top}px`;
+        userMenuRef.current.style.left = `${buttonRect.right + 4}px`;
+      }
+    };
+
+    if (showUserMenu) {
+      updateUserMenuPosition();
+      window.addEventListener('scroll', updateUserMenuPosition, true);
+      window.addEventListener('resize', updateUserMenuPosition);
+      return () => {
+        window.removeEventListener('scroll', updateUserMenuPosition, true);
+        window.removeEventListener('resize', updateUserMenuPosition);
+      };
     }
   }, [showUserMenu]);
 
