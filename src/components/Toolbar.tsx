@@ -10,7 +10,6 @@ interface ToolbarProps {
   onTest: () => void;
   onSave: () => void;
   onExport: () => void;
-  onToggleSidebar: () => void;
   onDeploy?: () => void;
   onSaveDraft?: () => void;
 }
@@ -19,7 +18,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onTest, 
   onSave, 
   onExport,
-  onToggleSidebar,
   onDeploy,
   onSaveDraft
 }) => {

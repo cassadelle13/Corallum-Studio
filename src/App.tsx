@@ -119,7 +119,6 @@ function App() {
               onSaveDraft={() => alert('Draft Saved!')}
               onExport={handleExport}
               onDeploy={() => alert('Workflow Deployed to Production!')}
-              onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
             />
             <div className="app-content">
               <Sidebar isOpen={isSidebarOpen} />
