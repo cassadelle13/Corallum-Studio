@@ -1388,6 +1388,261 @@ body {
   margin-bottom: 16px;
 }
 
+/* ============= RESOURCES VIEW ============= */
+.resources-view {
+  flex: 1;
+  padding: 24px 48px;
+  overflow-y: auto;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.resources-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.resources-title-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resources-title-section h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.info-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.info-icon-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.resources-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-action.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+}
+
+.btn-action.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-primary);
+}
+
+.resources-tabs {
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 24px;
+  padding-bottom: 0;
+}
+
+.resource-tab {
+  position: relative;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.resource-tab:hover {
+  color: var(--text-main);
+}
+
+.resource-tab.active {
+  color: white;
+  border-bottom-color: var(--accent-primary);
+}
+
+.tab-info-icon {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.tab-info-icon:hover {
+  color: var(--text-main);
+}
+
+.resources-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.resources-search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 8px 16px;
+  backdrop-filter: blur(12px);
+}
+
+.resources-search-bar input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  outline: none;
+  font-size: 13px;
+}
+
+.resources-search-bar input::placeholder {
+  color: var(--text-dim);
+}
+
+.refresh-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.refresh-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.toggle-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+.toggle-label {
+  font-size: 13px;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.resources-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.empty-resources-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.empty-title strong {
+  font-weight: 700;
+}
+
+.empty-description {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin: 0;
+}
+
 /* ============= REACT FLOW TRANSPARENCY FIX ============= */
 .react-flow,
 .react-flow__viewport,

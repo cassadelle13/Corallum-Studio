@@ -12,6 +12,7 @@ import { Toolbar } from './components/Toolbar';
 import { ExecutionLogs } from './components/ExecutionLogs';
 import { GlobalSidebar } from './components/GlobalSidebar';
 import { HomeView } from './components/HomeView';
+import { ResourcesView } from './components/ResourcesView';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -149,12 +150,7 @@ function App() {
         )}
 
         {activeTab === 'resources' && (
-          <div className="placeholder-view">
-            <Layers size={48} className="text-neon-blue mb-4" />
-            <h2>Resources</h2>
-            <p>Configure database connections and external services.</p>
-            <button className="btn-action mt-4">Create Resource</button>
-          </div>
+          <ResourcesView searchQuery={searchQuery} />
         )}
 
         {activeTab !== 'home' && activeTab !== 'runs' && activeTab !== 'variables' && activeTab !== 'resources' && (
