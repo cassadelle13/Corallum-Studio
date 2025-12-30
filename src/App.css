@@ -711,35 +711,75 @@ body {
 }
 
 /* ============= EXECUTION LOGS PANEL ============= */
-.execution-logs-panel {
+.execution-logs-overlay {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  background: var(--bg-sidebar);
-  border-top: 1px solid var(--border-color);
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
   z-index: 900;
+  animation: fadeIn 0.2s ease;
+}
+
+.execution-logs-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  max-width: 90vw;
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  z-index: 901;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  animation: slideIn 0.3s ease;
 }
 
-.execution-logs-panel.closed {
-  height: 48px;
+.execution-logs-panel.collapsed {
+  height: auto;
+  min-height: 60px;
 }
 
-.execution-logs-panel.open {
-  height: 300px;
+.execution-logs-panel.expanded {
+  height: 600px;
+  max-height: 85vh;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .logs-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  cursor: pointer;
+  padding: 16px 20px;
   flex-shrink: 0;
   user-select: none;
+  border-bottom: 1px solid var(--divider-color);
 }
 
 .logs-title {
@@ -811,14 +851,10 @@ body {
   color: var(--text-primary);
 }
 
-.logs-toggle {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 4px;
+.logs-close-btn:hover {
+  background: var(--accent-danger);
+  border-color: var(--accent-danger);
+  color: white;
 }
 
 .logs-filters {
@@ -984,10 +1020,6 @@ body {
 @media (min-width: 1200px) {
   .right-panel {
     width: 450px;
-  }
-
-  .execution-logs-panel {
-    right: 450px;
   }
 }
 
