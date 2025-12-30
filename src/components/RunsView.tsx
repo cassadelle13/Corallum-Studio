@@ -25,7 +25,7 @@ export const RunsView: React.FC<RunsViewProps> = () => {
 
   const [activeWorkspace, setActiveWorkspace] = useState<'admins' | 'all'>('admins');
   const [filterBy, setFilterBy] = useState<'path' | 'user' | 'folder'>('path');
-  const [kindFilter, setKindFilter] = useState<'all' | 'runs' | 'deps'>('runs');
+  const [kindFilter, setKindFilter] = useState<'all' | 'run' | 'dep'>('run');
   const [statusFilter, setStatusFilter] = useState<'all' | Run['status']>('all');
   const [timelineView, setTimelineView] = useState<'duration' | 'concurrency'>('duration');
   const [viewMode, setViewMode] = useState<'compact' | 'detailed' | 'gantt'>('compact');
@@ -175,15 +175,15 @@ export const RunsView: React.FC<RunsViewProps> = () => {
               All
             </button>
             <button
-              className={`kind-btn ${kindFilter === 'runs' ? 'active' : ''}`}
-              onClick={() => setKindFilter('runs')}
+              className={`kind-btn ${kindFilter === 'run' ? 'active' : ''}`}
+              onClick={() => setKindFilter('run')}
             >
               Runs
               <Info size={12} />
             </button>
             <button
-              className={`kind-btn ${kindFilter === 'deps' ? 'active' : ''}`}
-              onClick={() => setKindFilter('deps')}
+              className={`kind-btn ${kindFilter === 'dep' ? 'active' : ''}`}
+              onClick={() => setKindFilter('dep')}
             >
               Deps
               <Info size={12} />
@@ -358,4 +358,5 @@ export const RunsView: React.FC<RunsViewProps> = () => {
     </div>
   );
 };
+
 

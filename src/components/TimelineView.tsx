@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
-import { Run } from '../store/flowStore';
+import { useMemo } from 'react';
+import * as React from 'react';
+import type { Run } from '../store/flowStore';
 
 interface TimelineViewProps {
   runs: Run[];
@@ -226,4 +227,6 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
     </div>
   );
 };
+
+
 
