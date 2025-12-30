@@ -2963,6 +2963,61 @@ body {
   background: transparent !important;
   border: none !important;
   padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: auto !important;
+  min-height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* Убеждаемся, что наши стили узлов применяются */
+.react-flow__node .futuristic-node {
+  width: 200px !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
+}
+
+.react-flow__node .futuristic-node.node-square {
+  width: 200px !important;
+  height: 200px !important;
+  min-width: 200px !important;
+  min-height: 200px !important;
+  max-width: 200px !important;
+  max-height: 200px !important;
+}
+
+.react-flow__node .futuristic-node.node-rectangle {
+  width: 200px !important;
+  height: auto !important;
+  min-width: 200px !important;
+  min-height: 150px !important;
+  max-width: 200px !important;
+}
+
+.react-flow__node .futuristic-node.node-diamond {
+  width: 100px !important;
+  height: 100px !important;
+  min-width: 100px !important;
+  min-height: 100px !important;
+  max-width: 100px !important;
+  max-height: 100px !important;
+  transform: rotate(45deg) !important;
+  border-radius: 0 !important;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) !important;
+}
+
+.react-flow__node .futuristic-node.node-circle {
+  width: 80px !important;
+  height: 80px !important;
+  min-width: 80px !important;
+  min-height: 80px !important;
+  max-width: 80px !important;
+  max-height: 80px !important;
+  border-radius: 50% !important;
 }
 
 .react-flow__edge-path {

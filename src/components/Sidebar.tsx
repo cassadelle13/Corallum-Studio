@@ -18,7 +18,12 @@ import {
   Calendar,
   ChevronDown,
   ChevronRight,
-  Search
+  Search,
+  Menu,
+  RotateCw,
+  Bot,
+  ArrowRight,
+  ArrowDownRight
 } from 'lucide-react';
 import { useFlowStore } from '../store/flowStore';
 
@@ -43,7 +48,7 @@ interface NodeCategory {
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const { addNode } = useFlowStore();
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
-    new Set(['Triggers', 'Operators', 'Integrations'])
+    new Set(['Triggers', 'Operators', 'Integrations', 'AI Agents'])
   );
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -62,6 +67,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       name: 'Triggers',
       icon: Zap,
       nodes: [
+        { 
+          type: 'trigger', 
+          icon: Zap, 
+          label: 'Trigger', 
+          description: 'Event trigger',
+          boilerplate: 'def trigger_handler():\n    # Handle trigger event\n    return {"triggered": True}'
+        },
         { 
           type: 'webhook', 
           icon: Webhook, 
@@ -91,10 +103,52 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       nodes: [
         { 
           type: 'action', 
-          icon: Play, 
+          icon: Code, 
           label: 'Action', 
           description: 'Run script',
           boilerplate: 'def action(input_data):\n    # Process data\n    return input_data'
+        },
+        { 
+          type: 'flow', 
+          icon: Menu, 
+          label: 'Flow', 
+          description: 'Workflow step',
+          boilerplate: 'def flow_step(input_data):\n    # Execute flow step\n    return input_data'
+        },
+        { 
+          type: 'approval', 
+          icon: CheckCircle, 
+          label: 'Approval/Prompt', 
+          description: 'Manual gate',
+          boilerplate: 'def approval_gate():\n    # Wait for approval\n    return {"approved": False}'
+        },
+        { 
+          type: 'forloop', 
+          icon: RotateCw, 
+          label: 'For loop', 
+          description: 'Iterate over items',
+          boilerplate: 'def for_loop_handler(items):\n    results = []\n    for item in items:\n        results.append(process(item))\n    return results'
+        },
+        { 
+          type: 'whileloop', 
+          icon: RotateCw, 
+          label: 'While loop', 
+          description: 'Loop while condition',
+          boilerplate: 'def while_loop_handler():\n    while condition:\n        # Process\n        pass\n    return {"completed": True}'
+        },
+        { 
+          type: 'branchtoone', 
+          icon: ArrowRight, 
+          label: 'Branch to one', 
+          description: 'Conditional branch',
+          boilerplate: 'def branch_to_one(input_data):\n    if condition:\n        return "path1"\n    return "path2"'
+        },
+        { 
+          type: 'branchtoall', 
+          icon: ArrowDownRight, 
+          label: 'Branch to all', 
+          description: 'Split to all paths',
+          boilerplate: 'def branch_to_all(input_data):\n    # Split to all paths\n    return [input_data, input_data]'
         },
         { 
           type: 'branch', 
@@ -104,25 +158,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           boilerplate: 'def branch_condition(input_data):\n    if input_data.get("value") > 0:\n        return "positive"\n    return "negative"'
         },
         { 
-          type: 'loop', 
-          icon: Repeat, 
-          label: 'Loop', 
-          description: 'Iterate',
-          boilerplate: 'def loop_handler(items):\n    results = []\n    for item in items:\n        results.append(process(item))\n    return results'
-        },
-        { 
           type: 'script', 
           icon: Code, 
           label: 'Script', 
           description: 'Code block',
           boilerplate: 'def script():\n    # Your custom logic\n    return {}'
-        },
-        { 
-          type: 'approval', 
-          icon: CheckCircle, 
-          label: 'Approval', 
-          description: 'Manual gate',
-          boilerplate: 'def approval_gate():\n    # Wait for approval\n    return {"approved": False}'
         },
         { 
           type: 'delay', 
@@ -185,6 +225,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           label: 'REST API', 
           description: 'External API',
           boilerplate: 'import requests\ndef call_api(endpoint, data):\n    response = requests.post(endpoint, json=data)\n    return response.json()'
+        },
+      ]
+    },
+    {
+      name: 'AI Agents',
+      icon: Bot,
+      nodes: [
+        { 
+          type: 'aiagent', 
+          icon: Bot, 
+          label: 'AI Agent', 
+          description: 'AI agent workflow',
+          boilerplate: 'def ai_agent(input_data):\n    # AI agent processing\n    return {"result": "processed"}'
         },
       ]
     }

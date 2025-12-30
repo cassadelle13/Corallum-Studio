@@ -3,20 +3,22 @@ import { Handle, Position } from '@xyflow/react';
 import { 
   Zap, Code, Database, Globe, MessageSquare, Play, GitBranch, Clock, 
   CheckCircle, Calendar, Repeat, CheckCircle2, AlertCircle, Mail, FileText, Server,
-  Webhook
+  Webhook, Menu, RotateCw, Bot, ArrowRight, ArrowDownRight
 } from 'lucide-react';
 
 // Определение категорий и их цветов
 const getCategoryFromType = (type: string): string => {
-  const triggers = ['webhook', 'schedule', 'manual'];
-  const operators = ['action', 'branch', 'loop', 'script', 'approval', 'delay', 'error'];
+  const triggers = ['webhook', 'schedule', 'manual', 'trigger'];
+  const operators = ['action', 'branch', 'loop', 'script', 'approval', 'delay', 'error', 'flow', 'forloop', 'whileloop', 'branchtoone', 'branchtoall'];
   const integrations = ['http', 'database', 'slack', 'email', 'file', 'api'];
   const resources = ['model', 'memory', 'embedding'];
+  const aiagents = ['aiagent'];
   
   if (triggers.includes(type)) return 'trigger';
   if (operators.includes(type)) return 'operator';
   if (integrations.includes(type)) return 'integration';
   if (resources.includes(type)) return 'resource';
+  if (aiagents.includes(type)) return 'aiagent';
   return 'default';
 };
 
@@ -46,6 +48,12 @@ const categoryColors: Record<string, { border: string; glow: string; bg: string;
     bg: 'rgba(100, 116, 139, 0.05)',
     gradient: 'linear-gradient(135deg, rgba(100, 116, 139, 0.2) 0%, rgba(148, 163, 184, 0.15) 100%)'
   },
+  aiagent: {
+    border: '#8b5cf6', // фиолетовый
+    glow: 'rgba(139, 92, 246, 0.15)',
+    bg: 'rgba(139, 92, 246, 0.05)',
+    gradient: 'linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(168, 85, 247, 0.2) 100%)'
+  },
   default: {
     border: '#6366f1',
     glow: 'rgba(99, 102, 241, 0.15)',
@@ -55,32 +63,44 @@ const categoryColors: Record<string, { border: string; glow: string; bg: string;
 };
 
 // Определение формы узла
-const getNodeShape = (type: string): 'rectangle' | 'diamond' | 'circle' => {
-  const normalizedType = type.toLowerCase();
+const getNodeShape = (type: string): 'square' | 'rectangle' | 'diamond' | 'circle' => {
+  if (!type) return 'square';
+  const normalizedType = type.toLowerCase().trim();
+  // Прямоугольные узлы (только для AI Agent)
+  if (normalizedType === 'aiagent' || normalizedType.includes('ai agent')) return 'rectangle';
+  // Ромбовидные узлы (Branch/IF)
   if (normalizedType === 'branch' || normalizedType.includes('branch')) return 'diamond';
-  if (['model', 'memory', 'embedding', 'chatmodel', 'chat model'].includes(normalizedType)) return 'circle';
-  return 'rectangle';
+  // Круглые узлы (Resources: модели, память, embeddings)
+  if (['model', 'memory', 'embedding', 'chatmodel', 'chat model', 'openai', 'postgres', 'pinecone'].includes(normalizedType)) return 'circle';
+  // Квадратные узлы (по умолчанию для всех остальных)
+  return 'square';
 };
 
 const getIcon = (type: string, label: string) => {
   const l = label.toLowerCase();
   const t = type.toLowerCase();
   
+  if (t === 'aiagent' || l.includes('ai agent')) return <Bot size={16} />;
   if (t === 'webhook' || l.includes('webhook')) return <Webhook size={16} />;
   if (t === 'schedule' || l.includes('schedule')) return <Calendar size={16} />;
   if (t === 'script' || l.includes('script')) return <Code size={16} />;
   if (t === 'database' || l.includes('database')) return <Database size={16} />;
   if (t === 'http' || l.includes('http')) return <Globe size={16} />;
   if (t === 'slack' || l.includes('slack')) return <MessageSquare size={16} />;
+  if (t === 'branchtoone' || l.includes('branch to one')) return <ArrowRight size={16} />;
+  if (t === 'branchtoall' || l.includes('branch to all')) return <ArrowDownRight size={16} />;
   if (t === 'branch' || l.includes('branch')) return <GitBranch size={16} />;
+  if (t === 'forloop' || l.includes('for loop')) return <RotateCw size={16} />;
+  if (t === 'whileloop' || l.includes('while loop')) return <RotateCw size={16} />;
   if (t === 'loop' || l.includes('loop')) return <Repeat size={16} />;
+  if (t === 'flow' || l.includes('flow')) return <Menu size={16} />;
   if (t === 'delay' || l.includes('delay')) return <Clock size={16} />;
-  if (t === 'approval' || l.includes('approval')) return <CheckCircle2 size={16} />;
+  if (t === 'approval' || l.includes('approval') || l.includes('prompt')) return <CheckCircle2 size={16} />;
   if (t === 'error' || l.includes('error')) return <AlertCircle size={16} />;
   if (t === 'email' || l.includes('email')) return <Mail size={16} />;
   if (t === 'file' || l.includes('file')) return <FileText size={16} />;
   if (t === 'api' || l.includes('api')) return <Server size={16} />;
-  if (l.includes('trigger') || t === 'manual') return <Zap size={16} />;
+  if (l.includes('trigger') || t === 'trigger' || t === 'manual') return <Zap size={16} />;
   return <Play size={16} />;
 };
 
@@ -108,6 +128,10 @@ export const CustomNode = memo(({ data, selected }: any) => {
     '--node-glow-color': colors.glow,
     '--node-bg-color': colors.bg,
     '--node-gradient': colors.gradient,
+    ...(shape === 'diamond' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
+    ...(shape === 'circle' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
+    ...(shape === 'square' ? { width: '200px', height: '200px', minWidth: '200px', minHeight: '200px', maxWidth: '200px', maxHeight: '200px' } : {}),
+    ...(shape === 'rectangle' ? { width: '200px', height: 'auto', minWidth: '200px', minHeight: '150px' } : {}),
   } as React.CSSProperties;
 
   // Для ромбовидных узлов (branch) используем специальную разметку
@@ -153,7 +177,37 @@ export const CustomNode = memo(({ data, selected }: any) => {
     );
   }
 
-  // Прямоугольные узлы (по умолчанию)
+  // Прямоугольные узлы (AI Agent)
+  if (shape === 'rectangle') {
+    return (
+      <div className={nodeClasses} style={nodeStyle}>
+        <Handle type="target" position={Position.Top} className="handle-neon" />
+        
+        <div className="node-header">
+          <div className="node-icon-wrapper">
+            {getIcon(nodeType, data.label || '')}
+          </div>
+          <span className="node-label">{data.label || 'AI Agent'}</span>
+        </div>
+        
+        <div className="node-body">
+          <div className="node-code-preview">
+            {data.language === 'sql' ? 'SELECT * FROM...' : 'def ai_agent():...'}
+          </div>
+        </div>
+
+        {hasConnectedOutput && (
+          <div className="node-success-check">
+            <CheckCircle size={16} />
+          </div>
+        )}
+
+        <Handle type="source" position={Position.Bottom} className="handle-neon" />
+      </div>
+    );
+  }
+
+  // Квадратные узлы (по умолчанию)
   return (
     <div className={nodeClasses} style={nodeStyle}>
       <Handle type="target" position={Position.Top} className="handle-neon" />

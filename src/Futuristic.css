@@ -75,9 +75,14 @@ body {
               0 2px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  width: 200px;
-  min-width: 200px;
+  width: 200px !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
   position: relative;
+  box-sizing: border-box !important;
 }
 
 /* Градиентная обводка через псевдоэлемент */
@@ -131,6 +136,13 @@ body {
   --node-glow-color: rgba(100, 116, 139, 0.12);
   --node-bg-color: rgba(100, 116, 139, 0.05);
   --node-gradient: linear-gradient(135deg, rgba(100, 116, 139, 0.2) 0%, rgba(148, 163, 184, 0.15) 100%);
+}
+
+.node-category-aiagent {
+  --node-border-color: #8b5cf6;
+  --node-glow-color: rgba(139, 92, 246, 0.15);
+  --node-bg-color: rgba(139, 92, 246, 0.05);
+  --node-gradient: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(168, 85, 247, 0.2) 100%);
 }
 
 /* Подключенные узлы - усиленная неоновая обводка */
@@ -203,7 +215,9 @@ body {
 }
 
 /* Круглые узлы (Resources) */
-.futuristic-node.node-circle {
+.futuristic-node.node-circle,
+.react-flow__node .futuristic-node.node-circle,
+.react-flow__node-default .futuristic-node.node-circle {
   width: 80px !important;
   height: 80px !important;
   min-width: 80px !important;
@@ -220,10 +234,38 @@ body {
   border: 1.5px solid var(--node-border-color, rgba(100, 116, 139, 0.4)) !important;
   overflow: visible !important;
   padding: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .futuristic-node.node-circle::before {
   border-radius: 50% !important;
+}
+
+/* Квадратные узлы (по умолчанию) */
+.futuristic-node.node-square,
+.react-flow__node .futuristic-node.node-square,
+.react-flow__node-default .futuristic-node.node-square {
+  width: 200px !important;
+  height: 200px !important;
+  min-width: 200px !important;
+  min-height: 200px !important;
+  max-width: 200px !important;
+  max-height: 200px !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+}
+
+/* Прямоугольные узлы (AI Agent) */
+.futuristic-node.node-rectangle,
+.react-flow__node .futuristic-node.node-rectangle,
+.react-flow__node-default .futuristic-node.node-rectangle {
+  width: 200px !important;
+  height: auto !important;
+  min-width: 200px !important;
+  min-height: 150px !important;
+  max-width: 200px !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
 }
 
 .node-circle-content {
