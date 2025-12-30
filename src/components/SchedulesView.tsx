@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   Plus, 
   Search, 
@@ -47,9 +48,47 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
   // Position menu relative to button
   useEffect(() => {
     if (showNewScheduleMenu && buttonRef.current && menuRef.current) {
-      const buttonRect = buttonRef.current.getBoundingClientRect();
-      menuRef.current.style.top = `${buttonRect.bottom + 8}px`;
-      menuRef.current.style.right = `${window.innerWidth - buttonRect.right}px`;
+      const updatePosition = () => {
+        if (buttonRef.current && menuRef.current) {
+          const buttonRect = buttonRef.current.getBoundingClientRect();
+          menuRef.current.style.top = `${buttonRect.bottom + 8}px`;
+          menuRef.current.style.right = `${window.innerWidth - buttonRect.right}px`;
+        }
+      };
+      
+      // Update position immediately
+      updatePosition();
+      
+      // Update position on scroll/resize
+      window.addEventListener('scroll', updatePosition, true);
+      window.addEventListener('resize', updatePosition);
+      
+      return () => {
+        window.removeEventListener('scroll', updatePosition, true);
+        window.removeEventListener('resize', updatePosition);
+      };
+    }
+  }, [showNewScheduleMenu]);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        showNewScheduleMenu &&
+        menuRef.current &&
+        buttonRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setShowNewScheduleMenu(false);
+      }
+    };
+
+    if (showNewScheduleMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
     }
   }, [showNewScheduleMenu]);
 
@@ -66,19 +105,22 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
         <div 
           ref={buttonRef}
           className="new-schedule-wrapper"
-          onMouseEnter={() => setShowNewScheduleMenu(true)}
-          onMouseLeave={() => setShowNewScheduleMenu(false)}
         >
-          <button className="btn-action primary">
+          <button 
+            className="btn-action primary"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowNewScheduleMenu(!showNewScheduleMenu);
+            }}
+          >
             <Plus size={16} />
             <span>New schedule</span>
           </button>
-          {showNewScheduleMenu && (
+          {showNewScheduleMenu && createPortal(
             <div 
               ref={menuRef}
               className="new-schedule-menu glass-panel"
-              onMouseEnter={() => setShowNewScheduleMenu(true)}
-              onMouseLeave={() => setShowNewScheduleMenu(false)}
+              onClick={(e) => e.stopPropagation()}
             >
               {triggerMenuItems.map((item) => {
                 const ItemIcon = item.icon;
@@ -96,7 +138,8 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
                   </button>
                 );
               })}
-            </div>
+            </div>,
+            document.body
           )}
         </div>
       </div>
