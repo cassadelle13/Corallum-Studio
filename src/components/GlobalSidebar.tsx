@@ -31,7 +31,8 @@ import {
   LogOut,
   TrendingUp,
   UserCircle,
-  Building
+  Building,
+  Users
 } from 'lucide-react';
 
 interface GlobalSidebarProps {
@@ -59,6 +60,10 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
   const settingsButtonRef = useRef<HTMLButtonElement>(null);
   const settingsMenuRef = useRef<HTMLDivElement>(null);
+  
+  const [showFoldersMenu, setShowFoldersMenu] = useState(false);
+  const foldersButtonRef = useRef<HTMLButtonElement>(null);
+  const foldersMenuRef = useRef<HTMLDivElement>(null);
 
   const mainNav = [
     { id: 'home', icon: Home, label: 'Home' },
@@ -103,6 +108,11 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
     { id: 'workspace', icon: Building, label: 'Workspace' },
   ];
 
+  const foldersMenuItems = [
+    { id: 'folders', icon: Folder, label: 'Folders' },
+    { id: 'groups', icon: Users, label: 'Groups' },
+  ];
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -137,13 +147,21 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
       ) {
         setShowSettingsMenu(false);
       }
+      if (
+        foldersMenuRef.current &&
+        !foldersMenuRef.current.contains(event.target as Node) &&
+        foldersButtonRef.current &&
+        !foldersButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowFoldersMenu(false);
+      }
     };
 
-    if (showLogsMenu || showTriggerMenu || showUserMenu || showSettingsMenu) {
+    if (showLogsMenu || showTriggerMenu || showUserMenu || showSettingsMenu || showFoldersMenu) {
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
-  }, [showLogsMenu, showTriggerMenu, showUserMenu, showSettingsMenu]);
+  }, [showLogsMenu, showTriggerMenu, showUserMenu, showSettingsMenu, showFoldersMenu]);
 
   useEffect(() => {
     const updateLogsMenuPosition = () => {
@@ -244,6 +262,30 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
     }
   }, [showSettingsMenu]);
 
+  useEffect(() => {
+    const updateFoldersMenuPosition = () => {
+      if (showFoldersMenu && foldersButtonRef.current && foldersMenuRef.current) {
+        const buttonRect = foldersButtonRef.current.getBoundingClientRect();
+        const menuRect = foldersMenuRef.current.getBoundingClientRect();
+        const menuHeight = menuRect.height;
+        foldersMenuRef.current.style.top = `${buttonRect.bottom - menuHeight}px`;
+        foldersMenuRef.current.style.left = `${buttonRect.right + 4}px`;
+      }
+    };
+
+    if (showFoldersMenu) {
+      requestAnimationFrame(() => {
+        updateFoldersMenuPosition();
+      });
+      window.addEventListener('scroll', updateFoldersMenuPosition, true);
+      window.addEventListener('resize', updateFoldersMenuPosition);
+      return () => {
+        window.removeEventListener('scroll', updateFoldersMenuPosition, true);
+        window.removeEventListener('resize', updateFoldersMenuPosition);
+      };
+    }
+  }, [showFoldersMenu]);
+
   const handleLogsClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setShowLogsMenu(!showLogsMenu);
@@ -284,6 +326,16 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
       setActiveTab('settings');
       setShowSettingsMenu(false);
     }
+  };
+
+  const handleFoldersClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowFoldersMenu(!showFoldersMenu);
+  };
+
+  const handleFoldersMenuItemClick = (itemId: string) => {
+    setActiveTab(itemId);
+    setShowFoldersMenu(false);
   };
 
   return (
@@ -505,6 +557,42 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
                           key={menuItem.id}
                           className="settings-menu-item"
                           onClick={() => handleSettingsMenuItemClick(menuItem.id)}
+                        >
+                          <MenuIcon size={16} />
+                          <span>{menuItem.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>,
+                  document.body
+                )}
+              </div>
+            );
+          }
+          if (item.id === 'folders') {
+            return (
+              <div key={item.id} className="folders-nav-wrapper">
+                <button
+                  ref={foldersButtonRef}
+                  className={`nav-item ${activeTab === 'folders' || activeTab === 'groups' ? 'active' : ''}`}
+                  onClick={handleFoldersClick}
+                >
+                  <item.icon size={18} />
+                  <span>{item.label}</span>
+                </button>
+                {showFoldersMenu && ReactDOM.createPortal(
+                  <div
+                    ref={foldersMenuRef}
+                    className="folders-menu glass-panel"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {foldersMenuItems.map((menuItem) => {
+                      const MenuIcon = menuItem.icon;
+                      return (
+                        <button
+                          key={menuItem.id}
+                          className={`folders-menu-item ${activeTab === menuItem.id ? 'active' : ''}`}
+                          onClick={() => handleFoldersMenuItemClick(menuItem.id)}
                         >
                           <MenuIcon size={16} />
                           <span>{menuItem.label}</span>

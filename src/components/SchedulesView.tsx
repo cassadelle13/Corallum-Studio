@@ -14,6 +14,7 @@ import {
   Mail,
   Cloud
 } from 'lucide-react';
+import { NewScheduleModal } from './NewScheduleModal';
 
 interface SchedulesViewProps {
   searchQuery?: string;
@@ -25,6 +26,7 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
   const [statusFilter, setStatusFilter] = useState<'all' | 'enabled' | 'disabled'>('all');
   const [onlyF, setOnlyF] = useState(false);
   const [showNewScheduleMenu, setShowNewScheduleMenu] = useState(false);
+  const [showNewScheduleModal, setShowNewScheduleModal] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const query = externalSearch || localSearch;
@@ -129,7 +131,7 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
                     key={item.id}
                     className="new-schedule-menu-item"
                     onClick={() => {
-                      alert(`Create ${item.label} schedule`);
+                      setShowNewScheduleModal(true);
                       setShowNewScheduleMenu(false);
                     }}
                   >
@@ -216,6 +218,11 @@ export const SchedulesView: React.FC<SchedulesViewProps> = ({ searchQuery: exter
           <p className="empty-title">No schedules</p>
         </div>
       </div>
+
+      <NewScheduleModal
+        isOpen={showNewScheduleModal}
+        onClose={() => setShowNewScheduleModal(false)}
+      />
     </div>
   );
 };

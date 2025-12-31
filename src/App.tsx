@@ -27,6 +27,7 @@ import { AssetsView } from './components/AssetsView';
 import { AuditLogsView } from './components/AuditLogsView';
 import { CriticalAlertsView } from './components/CriticalAlertsView';
 import { UserSettingsModal } from './components/UserSettingsModal';
+import { GroupsView } from './components/GroupsView';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -188,6 +189,10 @@ function App() {
 
         {activeTab === 'folders' && (
           <FoldersView searchQuery={searchQuery} />
+        )}
+
+        {activeTab === 'groups' && (
+          <GroupsView searchQuery={searchQuery} />
         )}
 
         {activeTab === 'logs' && (
