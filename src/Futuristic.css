@@ -613,9 +613,9 @@ body::after {
 
 /* ============= TOOLBAR & LOGS ============= */
 .toolbar {
-  background: rgba(10, 11, 16, 0.6) !important;
-  backdrop-filter: blur(15px) !important;
-  border-bottom: 1px solid var(--glass-border) !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border: none !important;
 }
 
 .execution-logs {

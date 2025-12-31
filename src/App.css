@@ -45,13 +45,16 @@ body {
 
 /* ============= TOOLBAR ============= */
 .toolbar {
-  height: 56px;
-  background-color: var(--bg-toolbar);
-  border-bottom: 1px solid var(--border-color);
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  height: auto;
+  background: transparent;
+  border: none;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
+  justify-content: flex-end;
+  padding: 0;
   z-index: 1000;
   flex-shrink: 0;
 }
@@ -59,7 +62,7 @@ body {
 .toolbar-section { 
   display: flex; 
   align-items: center; 
-  gap: 8px; 
+  gap: 12px; 
 }
 
 .toolbar-title {
@@ -72,40 +75,59 @@ body {
 }
 
 .toolbar-btn {
-  padding: 8px 12px;
-  background: transparent;
-  border: 1px solid var(--border-color);
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
   color: var(--text-primary);
-  border-radius: 6px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 13px;
   font-weight: 500;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .toolbar-btn:hover {
-  background: var(--bg-node);
-  border-color: var(--accent-primary);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .toolbar-btn.primary { 
-  background: var(--accent-primary); 
-  border-color: var(--accent-primary);
+  background: rgba(99, 102, 241, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(99, 102, 241, 0.4);
   color: white;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
 }
 
 .toolbar-btn.primary:hover {
-  background: var(--accent-secondary);
+  background: rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
 
 .toolbar-btn.success {
-  background: var(--accent-success);
-  border-color: var(--accent-success);
+  background: rgba(16, 185, 129, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(16, 185, 129, 0.4);
   color: white;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+.toolbar-btn.success:hover {
+  background: rgba(16, 185, 129, 0.3);
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
 .toolbar-btn span { 
