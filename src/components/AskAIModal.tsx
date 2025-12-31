@@ -28,45 +28,47 @@ export const AskAIModal: React.FC<AskAIModalProps> = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
+  const [messages, setMessages] = useState<Array<{ id: string; text: string; isUser: boolean }>>([]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      alert(`AI Query: ${query}`);
+      const userMessage = { id: Date.now().toString(), text: query, isUser: true };
+      setMessages(prev => [...prev, userMessage]);
       setQuery('');
-      onClose();
+      
+      // Simulate AI response
+      setTimeout(() => {
+        const aiMessage = { 
+          id: (Date.now() + 1).toString(), 
+          text: `I received your question: "${userMessage.text}". This is a placeholder response.`, 
+          isUser: false 
+        };
+        setMessages(prev => [...prev, aiMessage]);
+      }, 500);
     }
   };
 
   if (!isOpen) return null;
 
-  const showSuggestions = query.length === 0;
+  const showSuggestions = query.length === 0 && messages.length === 0;
 
   return (
     <>
       <div className="ask-ai-overlay" onClick={onClose}></div>
       <div className={`ask-ai-container ${isOpen ? 'open' : ''}`}>
-        <div className="ask-ai-search-bar">
-          <Sparkles size={20} className="ask-ai-search-icon" />
-          <input
-            ref={inputRef}
-            type="text"
-            className="ask-ai-input"
-            placeholder="Ask AI anything..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <button 
-            type="button" 
-            className="ask-ai-send-btn" 
-            onClick={handleSubmit}
-            disabled={!query.trim()}
-          >
-            <Send size={18} />
+        <div className="ask-ai-header">
+          <div className="ask-ai-title">
+            <Sparkles size={20} className="ask-ai-icon" />
+            <h3>Ask AI</h3>
+          </div>
+          <button className="ask-ai-close-btn" onClick={onClose} title="Close">
+            <X size={18} />
           </button>
         </div>
 
-        {showSuggestions && (
-          <div className="ask-ai-results">
+        <div className="ask-ai-messages">
+          {messages.length === 0 && showSuggestions && (
             <div className="ask-ai-suggestions">
               <p className="suggestions-title">Suggestions:</p>
               <div className="suggestions-list">
@@ -81,8 +83,36 @@ export const AskAIModal: React.FC<AskAIModalProps> = ({ isOpen, onClose }) => {
                 </button>
               </div>
             </div>
+          )}
+          
+          {messages.map((message) => (
+            <div key={message.id} className={`ask-ai-message ${message.isUser ? 'user' : 'ai'}`}>
+              <div className="message-content">
+                {message.text}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <form onSubmit={handleSubmit} className="ask-ai-input-form">
+          <div className="ask-ai-input-wrapper">
+            <input
+              ref={inputRef}
+              type="text"
+              className="ask-ai-input"
+              placeholder="Ask AI anything..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <button 
+              type="submit" 
+              className="ask-ai-send-btn" 
+              disabled={!query.trim()}
+            >
+              <Send size={18} />
+            </button>
           </div>
-        )}
+        </form>
       </div>
     </>
   );
