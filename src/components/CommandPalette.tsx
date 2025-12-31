@@ -105,13 +105,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
 
       if (e.key === 'Escape') {
         onClose();
-      } else if (e.key === 'ArrowDown') {
+      } else if (e.key === 'ArrowDown' && filteredCommands.length > 0) {
         e.preventDefault();
         setSelectedIndex((prev) => (prev + 1) % filteredCommands.length);
-      } else if (e.key === 'ArrowUp') {
+      } else if (e.key === 'ArrowUp' && filteredCommands.length > 0) {
         e.preventDefault();
         setSelectedIndex((prev) => (prev - 1 + filteredCommands.length) % filteredCommands.length);
-      } else if (e.key === 'Enter') {
+      } else if (e.key === 'Enter' && filteredCommands.length > 0) {
         e.preventDefault();
         if (filteredCommands[selectedIndex]) {
           filteredCommands[selectedIndex].action();
@@ -125,11 +125,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
 
   if (!isOpen) return null;
 
+  const showResults = filteredCommands.length > 0;
+
   return (
-    <div className="command-palette-overlay" onClick={onClose}>
-      <div className="command-palette" onClick={(e) => e.stopPropagation()}>
-        <div className="command-palette-search">
-          <Search size={18} className="search-icon" />
+    <>
+      <div className="command-palette-overlay" onClick={onClose}></div>
+      <div className={`command-palette-container ${isOpen ? 'open' : ''}`}>
+        <div className="command-palette-search-bar">
+          <Search size={20} className="search-icon" />
           <input
             ref={inputRef}
             type="text"
@@ -143,29 +146,32 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
           />
         </div>
 
-        <div className="command-palette-list">
-          {filteredCommands.map((command, index) => {
-            const Icon = command.icon;
-            return (
-              <button
-                key={command.id}
-                className={`command-palette-item ${index === selectedIndex ? 'selected' : ''}`}
-                onClick={command.action}
-                onMouseEnter={() => setSelectedIndex(index)}
-              >
-                <Icon size={16} />
-                <span>{command.label}</span>
-                {command.hasSubmenu && <ArrowRight size={14} className="submenu-icon" />}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="command-palette-footer">
-          <Hash size={12} />
-        </div>
+        {showResults && (
+          <div className="command-palette-results">
+            <div className="command-palette-list">
+              {filteredCommands.map((command, index) => {
+                const Icon = command.icon;
+                return (
+                  <button
+                    key={command.id}
+                    className={`command-palette-item ${index === selectedIndex ? 'selected' : ''}`}
+                    onClick={command.action}
+                    onMouseEnter={() => setSelectedIndex(index)}
+                  >
+                    <Icon size={16} />
+                    <span>{command.label}</span>
+                    {command.hasSubmenu && <ArrowRight size={14} className="submenu-icon" />}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="command-palette-footer">
+              <Hash size={12} />
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
