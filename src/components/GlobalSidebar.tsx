@@ -38,12 +38,11 @@ import {
 interface GlobalSidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  onSearch: (query: string) => void;
   isCollapsed?: boolean;
   onOpenUserSettings?: () => void;
 }
 
-export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActiveTab, onSearch, isCollapsed, onOpenUserSettings }) => {
+export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActiveTab, isCollapsed, onOpenUserSettings }) => {
   const [showLogsMenu, setShowLogsMenu] = useState(false);
   const logsButtonRef = useRef<HTMLButtonElement>(null);
   const logsMenuRef = useRef<HTMLDivElement>(null);
@@ -346,21 +345,29 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
       </div>
 
       <div className="sidebar-search-trigger">
-        <div className="search-item">
-          <Search size={16} />
-          <input 
-            type="text" 
-            placeholder="Search" 
-            className="sidebar-search-input"
-            onChange={(e) => onSearch(e.target.value)}
-          />
-          <span className="shortcut">Ctrl+k</span>
-        </div>
-        <div className="search-item">
-          <MessageSquare size={16} />
-          <span>Ask AI</span>
-          <span className="shortcut">Ctrl+L</span>
-        </div>
+        <button 
+          className="search-button"
+          onClick={() => {
+            // Command palette will be opened via App.tsx
+            const event = new CustomEvent('openCommandPalette');
+            window.dispatchEvent(event);
+          }}
+          title="Search (Ctrl+k)"
+        >
+          <Search size={18} className="search-button-icon" />
+          <span>Search Ctrl+k</span>
+        </button>
+        <button 
+          className="ask-ai-button"
+          onClick={() => {
+            const event = new CustomEvent('openAskAI');
+            window.dispatchEvent(event);
+          }}
+          title="Ask AI (Ctrl+L)"
+        >
+          <MessageSquare size={18} className="ask-ai-button-icon" />
+          <span>Ask AI Ctrl+L</span>
+        </button>
       </div>
 
       <nav className="sidebar-nav">

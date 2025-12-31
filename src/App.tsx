@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   PlayCircle, 
   DollarSign, 
@@ -28,6 +28,8 @@ import { AuditLogsView } from './components/AuditLogsView';
 import { CriticalAlertsView } from './components/CriticalAlertsView';
 import { UserSettingsModal } from './components/UserSettingsModal';
 import { GroupsView } from './components/GroupsView';
+import { CommandPalette } from './components/CommandPalette';
+import { AskAIModal } from './components/AskAIModal';
 import { useFlowStore } from './store/flowStore';
 import axios from 'axios';
 import './App.css';
@@ -43,6 +45,47 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showCriticalAlerts, setShowCriticalAlerts] = useState(false);
   const [showUserSettings, setShowUserSettings] = useState(false);
+  const [showCommandPalette, setShowCommandPalette] = useState(false);
+  const [showAskAI, setShowAskAI] = useState(false);
+
+  useEffect(() => {
+    const handleOpenCommandPalette = () => {
+      setShowCommandPalette(true);
+    };
+
+    const handleOpenAskAI = () => {
+      setShowAskAI(true);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setShowCommandPalette(true);
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
+        e.preventDefault();
+        setShowAskAI(true);
+      }
+      if (e.key === 'Escape') {
+        if (showCommandPalette) {
+          setShowCommandPalette(false);
+        }
+        if (showAskAI) {
+          setShowAskAI(false);
+        }
+      }
+    };
+
+    window.addEventListener('openCommandPalette', handleOpenCommandPalette);
+    window.addEventListener('openAskAI', handleOpenAskAI);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('openCommandPalette', handleOpenCommandPalette);
+      window.removeEventListener('openAskAI', handleOpenAskAI);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showCommandPalette, showAskAI]);
 
   const handleTest = async () => {
     clearExecutionLogs();
@@ -110,7 +153,6 @@ function App() {
           setActiveTab(tab);
           if (tab !== 'home') setIsEditingFlow(false);
         }} 
-        onSearch={setSearchQuery}
         isCollapsed={isEditingFlow}
         onOpenUserSettings={() => setShowUserSettings(true)}
       />
@@ -217,6 +259,20 @@ function App() {
       <UserSettingsModal
         isOpen={showUserSettings}
         onClose={() => setShowUserSettings(false)}
+      />
+
+      <CommandPalette
+        isOpen={showCommandPalette}
+        onClose={() => setShowCommandPalette(false)}
+        onNavigate={(tab) => {
+          setActiveTab(tab);
+          setShowCommandPalette(false);
+        }}
+      />
+
+      <AskAIModal
+        isOpen={showAskAI}
+        onClose={() => setShowAskAI(false)}
       />
 
       {testResult && (
