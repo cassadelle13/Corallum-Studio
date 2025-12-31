@@ -34,6 +34,7 @@ import {
   Building,
   Users
 } from 'lucide-react';
+import { VTLogo } from './VTLogo';
 
 interface GlobalSidebarProps {
   activeTab: string;
@@ -340,7 +341,7 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
   return (
     <div className={`global-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-brand">
-        <img src="/assets/logo.png" alt="Corallum Logo" className="brand-logo-img" />
+        <VTLogo size={32} className="brand-logo-img" />
         <span>Corallum</span>
       </div>
 
