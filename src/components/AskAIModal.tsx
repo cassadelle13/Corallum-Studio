@@ -48,7 +48,6 @@ export const AskAIModal: React.FC<AskAIModalProps> = ({ isOpen, onClose }) => {
         {showSuggestions && (
           <div className="ask-ai-results">
             <div className="ask-ai-suggestions">
-              <p className="suggestions-title">Suggestions:</p>
               <div className="suggestions-list">
                 <button className="suggestion-item" onClick={() => setQuery('How do I create a new workflow?')}>
                   How do I create a new workflow?
