@@ -93,6 +93,38 @@ body::after {
   }
 }
 
+/* Dot grid texture overlay - like Manus.ai */
+.app-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle, rgba(99, 102, 241, 0.5) 1px, transparent 1px),
+    radial-gradient(circle, rgba(139, 92, 246, 0.4) 1px, transparent 1px),
+    radial-gradient(circle, rgba(236, 72, 153, 0.3) 1px, transparent 1px);
+  background-size: 24px 24px, 28px 28px, 32px 32px;
+  background-position: 0 0, 12px 12px, 6px 6px;
+  animation: dotPulse 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.01);
+  }
+}
+
 .app-container {
   height: 100vh;
   width: 100vw;
