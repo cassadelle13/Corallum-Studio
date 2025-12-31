@@ -67,7 +67,7 @@ export const FlowCanvas: React.FC<FlowCanvasProps> = ({ onNodeClick }) => {
         fitView
         attributionPosition="bottom-left"
       >
-        <Background variant={BackgroundVariant.Dots} gap={20} size={1.5} color="rgba(255, 255, 255, 0.05)" />
+        <Background variant={BackgroundVariant.Dots} gap={16} size={2.2} color="rgba(255, 255, 255, 0.18)" />
         <Controls />
         {showMinimap && (
           <MiniMap 
