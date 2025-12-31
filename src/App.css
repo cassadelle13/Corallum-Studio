@@ -1403,7 +1403,7 @@ body {
   flex: 1;
   padding: 24px 48px;
   overflow-y: auto;
-  background-color: #1a1d27;
+  background-color: transparent;
 }
 
 .home-header {
