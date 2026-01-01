@@ -82,20 +82,18 @@ export const ExecutionLogs: React.FC<ExecutionLogsProps> = ({ isOpen, onToggle }
     return executionLogs.filter(log => log.status === status).length;
   };
 
-  if (!isOpen) {
-    return (
-      <button 
-        className="execution-logs-button-collapsed glass-panel"
-        onClick={onToggle}
-        title="Execution Logs"
-      >
-        <span className="logs-button-text">&gt;_</span>
-      </button>
-    );
-  }
-
   return (
-    <div className={`execution-logs-panel glass-panel ${isOpen ? 'open' : 'closed'}`}>
+    <>
+      {!isOpen && (
+        <button 
+          className="execution-logs-button-collapsed glass-panel"
+          onClick={onToggle}
+          title="Execution Logs"
+        >
+          <span className="logs-button-text">&gt;_</span>
+        </button>
+      )}
+      <div className={`execution-logs-panel glass-panel ${isOpen ? 'open' : 'closed'}`}>
       <div className="logs-header" onClick={onToggle}>
         <div className="logs-title">
           <Terminal size={18} />
@@ -208,6 +206,6 @@ export const ExecutionLogs: React.FC<ExecutionLogsProps> = ({ isOpen, onToggle }
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };

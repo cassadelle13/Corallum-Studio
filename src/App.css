@@ -901,28 +901,31 @@ body {
 
 .execution-logs-panel {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 500px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  width: 600px;
   max-height: 400px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
+  background: rgba(15, 18, 25, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  transition: all 0.3s ease;
+  border-bottom: none;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 2500;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 .execution-logs-panel.closed {
-  display: none;
+  transform: translateX(-50%) translateY(100%);
 }
 
 .execution-logs-panel.open {
-  display: flex;
+  transform: translateX(-50%) translateY(0);
 }
 
 .logs-header {

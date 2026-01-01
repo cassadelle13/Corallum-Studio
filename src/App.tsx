@@ -5,7 +5,7 @@ import {
   // @ts-ignore
   Layers, 
   Settings,
-  Menu
+  Plus
 } from 'lucide-react';
 import { FlowCanvas } from './components/FlowCanvas';
 import { Sidebar } from './components/Sidebar';
@@ -199,9 +199,9 @@ function App() {
             <button 
               className="hamburger-toggle-button glass-panel"
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              title={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
+              title={isSidebarOpen ? "Hide Component Library" : "Show Component Library"}
             >
-              <Menu size={18} />
+              <Plus size={18} style={{ transform: isSidebarOpen ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }} />
             </button>
           </div>
         )}
