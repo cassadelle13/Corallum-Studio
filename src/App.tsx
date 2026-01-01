@@ -188,6 +188,7 @@ function App() {
             <div className="app-content">
               <Sidebar 
                 isOpen={isSidebarOpen} 
+                onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
                 onCollapse={() => setIsGlobalSidebarCollapsed(!isGlobalSidebarCollapsed)} 
               />
               <div className="main-area">
