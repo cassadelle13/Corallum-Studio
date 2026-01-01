@@ -1433,10 +1433,11 @@ body {
 }
 
 .workspace-info {
-  background: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 8px;
-  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 20px;
   display: flex;
   gap: 16px;
   margin-bottom: 32px;
@@ -1490,12 +1491,20 @@ body {
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: #242936;
-  border: 1px solid #334155;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
 }
 
 .btn-action.primary {
@@ -1504,7 +1513,7 @@ body {
 }
 
 .home-content {
-  background: #1a1d27;
+  background: transparent;
 }
 
 .content-tabs {
@@ -1539,9 +1548,11 @@ body {
 
 .filter-group {
   display: flex;
-  background: #242936;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
   padding: 4px;
   border-radius: 6px;
+  border: 1px solid var(--glass-border);
 }
 
 .filter-btn {
@@ -1555,8 +1566,9 @@ body {
 }
 
 .filter-btn.active {
-  background: #1a1d27;
+  background: var(--accent-primary);
   color: white;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
 }
 
 .search-bar {
@@ -1564,10 +1576,18 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #242936;
-  border: 1px solid #334155;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
   border-radius: 6px;
   padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.search-bar:focus-within {
+  border-color: var(--accent-primary);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
 }
 
 .search-bar input {
@@ -1580,11 +1600,18 @@ body {
 
 .content-btn {
   padding: 8px 16px;
-  background: #242936;
-  border: 1px solid #334155;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
   color: white;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.content-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .item-list {
