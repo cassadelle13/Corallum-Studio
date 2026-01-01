@@ -1541,18 +1541,22 @@ body {
 
 .content-filters {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 16px;
   margin-bottom: 24px;
+  width: 100%;
 }
 
 .filter-group {
   display: flex;
+  flex-direction: row;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
   padding: 4px;
   border-radius: 6px;
   border: 1px solid var(--glass-border);
+  flex-wrap: nowrap;
 }
 
 .filter-btn {
