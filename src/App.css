@@ -162,7 +162,7 @@ body {
 }
 
 .sidebar {
-  width: 280px;
+  width: 320px;
   background: rgba(36, 41, 54, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -171,11 +171,10 @@ body {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 20px; 
-  left: 20px; 
+  top: 76px; 
+  right: 20px; 
   bottom: 20px;
-  z-index: 100;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1200;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }

@@ -31,7 +31,6 @@ import { useFlowStore } from '../store/flowStore';
 interface SidebarProps {
   isOpen: boolean;
   onToggle: () => void;
-  onCollapse: () => void;
 }
 
 interface NodeType {
@@ -47,7 +46,7 @@ interface NodeCategory {
   nodes: NodeType[];
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapse }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
   const { addNode } = useFlowStore();
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
     new Set(['Triggers', 'Operators', 'Integrations', 'AI Agents'])
@@ -118,10 +117,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapse }
       {isOpen && (
         <motion.div 
           className="sidebar"
-          initial={{ x: '-100%' }}
-          animate={{ x: 0 }}
-          exit={{ x: '-100%' }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          initial={{ x: '100%', opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: '100%', opacity: 0 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         >
           <div className="sidebar-header">
         <div className="sidebar-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -195,12 +194,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapse }
           Import from Hub
         </button>
       </div>
-      <div className="sidebar-toggle-footer">
-        <button onClick={onCollapse} className="sidebar-toggle-btn">
-          <Menu size={20} />
-          <span>Collapse Sidebar</span>
-        </button>
-      </div>
+
         </motion.div>
       )}
     </AnimatePresence>

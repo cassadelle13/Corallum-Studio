@@ -189,7 +189,6 @@ function App() {
               <Sidebar 
                 isOpen={isSidebarOpen} 
                 onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
-                onCollapse={() => setIsGlobalSidebarCollapsed(!isGlobalSidebarCollapsed)} 
               />
               <div className="main-area">
                 <FlowCanvas onNodeClick={setSelectedNode} />
