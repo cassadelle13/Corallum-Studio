@@ -49,6 +49,15 @@ function App() {
   const [showAskAI, setShowAskAI] = useState(false);
 
   useEffect(() => {
+    if (testResult) {
+      const timer = setTimeout(() => {
+        setTestResult(null);
+      }, 15000);
+      return () => clearTimeout(timer);
+    }
+  }, [testResult]);
+
+  useEffect(() => {
     const handleOpenCommandPalette = () => {
       setShowCommandPalette(true);
     };

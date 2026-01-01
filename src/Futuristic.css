@@ -635,10 +635,11 @@ body::after {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: rgba(15, 18, 25, 0.8) !important;
-  backdrop-filter: blur(20px) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   border: 1px solid var(--glass-border) !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
   animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
