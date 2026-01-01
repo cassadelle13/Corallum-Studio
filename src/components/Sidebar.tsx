@@ -117,9 +117,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       {isOpen && (
         <motion.div 
           className="sidebar"
-          initial={{ x: '100%', opacity: 0 }}
+          initial={{ x: '-100%', opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          exit={{ x: '100%', opacity: 0 }}
+          exit={{ x: '-100%', opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         >
           <div className="sidebar-header">

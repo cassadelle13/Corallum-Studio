@@ -172,7 +172,7 @@ body {
   flex-direction: column;
   position: absolute;
   top: 76px; 
-  right: 20px; 
+  left: 20px; 
   bottom: 20px;
   z-index: 1200;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
