@@ -6149,3 +6149,50 @@ body {
   background: rgba(16, 185, 129, 0.2);
   color: #10b981;
 }
+
+/* ============= SIDEBAR TOGGLE FOOTER ============= */
+.sidebar-toggle-footer {
+  padding: 16px;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sidebar-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sidebar-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+.sidebar-toggle-btn svg {
+  color: var(--accent-primary);
+}
+
+/* ============= GLOBAL SIDEBAR COLLAPSE ============= */
+.collapse-btn {
+  margin-top: auto !important;
+  border-top: 1px solid var(--glass-border) !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  color: var(--accent-primary) !important;
+}
+
+.collapse-btn:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: white !important;
+}

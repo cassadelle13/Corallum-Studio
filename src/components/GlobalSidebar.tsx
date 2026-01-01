@@ -32,7 +32,8 @@ import {
   TrendingUp,
   UserCircle,
   Building,
-  Users
+  Users,
+  Menu
 } from 'lucide-react';
 import { VTLogo } from './VTLogo';
 
@@ -41,9 +42,10 @@ interface GlobalSidebarProps {
   setActiveTab: (tab: string) => void;
   isCollapsed?: boolean;
   onOpenUserSettings?: () => void;
+  onToggleCollapse?: () => void;
 }
 
-export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActiveTab, isCollapsed, onOpenUserSettings }) => {
+export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActiveTab, isCollapsed, onOpenUserSettings, onToggleCollapse }) => {
   const [showLogsMenu, setShowLogsMenu] = useState(false);
   const logsButtonRef = useRef<HTMLButtonElement>(null);
   const logsMenuRef = useRef<HTMLDivElement>(null);
@@ -624,6 +626,14 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
             </button>
           );
         })}
+        <button
+          className="nav-item collapse-btn"
+          onClick={onToggleCollapse}
+          title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+        >
+          <Menu size={18} />
+          {!isCollapsed && <span>Collapse</span>}
+        </button>
       </div>
     </div>
   );

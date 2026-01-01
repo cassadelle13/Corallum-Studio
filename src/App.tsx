@@ -39,6 +39,7 @@ function App() {
   const { nodes, edges, selectedNode, setSelectedNode, addExecutionLog, clearExecutionLogs } = useFlowStore();
   const [testResult, setTestResult] = useState<any>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isGlobalSidebarCollapsed, setIsGlobalSidebarCollapsed] = useState(false);
   const [isLogsOpen, setIsLogsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
   const [isEditingFlow, setIsEditingFlow] = useState(false);
@@ -162,8 +163,9 @@ function App() {
           setActiveTab(tab);
           if (tab !== 'home') setIsEditingFlow(false);
         }} 
-        isCollapsed={isEditingFlow}
+        isCollapsed={isGlobalSidebarCollapsed || isEditingFlow}
         onOpenUserSettings={() => setShowUserSettings(true)}
+        onToggleCollapse={() => setIsGlobalSidebarCollapsed(!isGlobalSidebarCollapsed)}
       />
       
       <div className="main-content">
@@ -184,7 +186,10 @@ function App() {
               onDeploy={() => alert('Workflow Deployed to Production!')}
             />
             <div className="app-content">
-              <Sidebar isOpen={isSidebarOpen} />
+              <Sidebar 
+                isOpen={isSidebarOpen} 
+                onCollapse={() => setIsGlobalSidebarCollapsed(!isGlobalSidebarCollapsed)} 
+              />
               <div className="main-area">
                 <FlowCanvas onNodeClick={setSelectedNode} />
               </div>

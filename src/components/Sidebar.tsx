@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Play, 
   GitBranch, 
@@ -29,6 +30,7 @@ import { useFlowStore } from '../store/flowStore';
 
 interface SidebarProps {
   isOpen: boolean;
+  onCollapse: () => void;
 }
 
 interface NodeType {
@@ -45,7 +47,7 @@ interface NodeCategory {
   nodes: NodeType[];
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onCollapse }) => {
   const { addNode } = useFlowStore();
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
     new Set(['Triggers', 'Operators', 'Integrations', 'AI Agents'])
@@ -256,8 +258,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   })).filter(category => category.nodes.length > 0);
 
   return (
-    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-      <div className="sidebar-header">
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div 
+          className="sidebar"
+          initial={{ x: '-100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '-100%' }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        >
+          <div className="sidebar-header">
         <div className="sidebar-title">
           <h3>Component Library</h3>
         </div>
@@ -335,6 +345,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           Import from Hub
         </button>
       </div>
-    </div>
+      <div className="sidebar-toggle-footer">
+        <button onClick={onCollapse} className="sidebar-toggle-btn">
+          <Menu size={20} />
+          <span>Collapse Sidebar</span>
+        </button>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
   );
 };
