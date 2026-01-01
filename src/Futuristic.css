@@ -626,15 +626,79 @@ body::after {
 
 .test-panel {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 400px;
-  max-height: 500px;
-  z-index: 1000;
+  bottom: 24px;
+  right: 24px;
+  width: 380px;
+  max-height: 400px;
+  z-index: 2000;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background: rgba(15, 18, 25, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%) opacity(0); }
+  to { transform: translateX(0) opacity(1); }
+}
+
+.test-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.test-panel-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.test-panel-header button {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.test-panel-header button:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.test-panel-content {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.test-panel-content pre {
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 /* ============= MINIMAP STYLING ============= */
