@@ -286,6 +286,11 @@ body::after {
   transform: rotate(-45deg);
 }
 
+/* Центрирование иконок в узлах-триггерах с учетом асимметричной формы */
+.futuristic-node.node-category-trigger .node-icon-only {
+  padding-right: 12px;
+}
+
 /* Круглые узлы (Resources) */
 .futuristic-node.node-circle,
 .react-flow__node .futuristic-node.node-circle,
