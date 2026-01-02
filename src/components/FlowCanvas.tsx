@@ -64,6 +64,8 @@ export const FlowCanvas: React.FC<FlowCanvasProps> = ({ onNodeClick }) => {
         onDragOver={onDragOver}
         onDrop={onDrop}
         nodeTypes={nodeTypes}
+        snapToGrid={true}
+        snapGrid={[16, 16]}
         fitView
         attributionPosition="bottom-left"
       >
