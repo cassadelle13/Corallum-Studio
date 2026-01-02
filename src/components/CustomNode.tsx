@@ -63,9 +63,11 @@ const categoryColors: Record<string, { border: string; glow: string; bg: string;
 };
 
 // Определение формы узла
-const getNodeShape = (type: string): 'square' | 'rectangle' | 'diamond' | 'circle' => {
+const getNodeShape = (type: string): 'square' | 'rectangle' | 'diamond' | 'circle' | 'placeholder' => {
   if (!type) return 'square';
   const normalizedType = type.toLowerCase().trim();
+  // Плейсхолдер
+  if (normalizedType === 'placeholder') return 'placeholder';
   // Прямоугольные узлы (только для AI Agent)
   if (normalizedType === 'aiagent' || normalizedType.includes('ai agent')) return 'rectangle';
   // Ромбовидные узлы (Branch/IF)
@@ -132,6 +134,36 @@ export const CustomNode = memo(({ data, selected }: any) => {
     ...(shape === 'square' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
     ...(shape === 'rectangle' ? { width: '200px', height: '80px', minWidth: '200px', minHeight: '80px', maxWidth: '200px', maxHeight: '80px', boxSizing: 'border-box' } : {}),
   } as React.CSSProperties;
+
+  // Для плейсхолдера (+)
+  if (shape === 'placeholder') {
+    return (
+      <div 
+        className={`${nodeClasses}`} 
+        style={{
+          ...nodeStyle,
+          width: '80px',
+          height: '80px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer'
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          // Открываем Sidebar через data-атрибут
+          const sidebarToggle = document.querySelector('[data-sidebar-toggle="true"]') as HTMLElement;
+          if (sidebarToggle) {
+            // Проверяем, не открыт ли он уже (по классу или состоянию в App, но проще просто кликнуть если нужно)
+            // В нашем случае клик просто переключает, так что это сработает
+            sidebarToggle.click();
+          }
+        }}
+      >
+        <div className="placeholder-plus">+</div>
+      </div>
+    );
+  }
 
   // Для ромбовидных узлов (branch) используем специальную разметку
   if (shape === 'diamond') {

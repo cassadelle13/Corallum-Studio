@@ -44,10 +44,13 @@ export interface Run {
 
 const initialNodes: Node[] = [
   {
-    id: 'start',
+    id: 'placeholder',
     type: 'default',
-    data: { label: 'Start' },
-    position: { x: 250, y: 250 },
+    data: { 
+      type: 'placeholder',
+      label: 'Add Module' 
+    },
+    position: { x: 400, y: 250 },
   },
 ];
 

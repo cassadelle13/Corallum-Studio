@@ -203,6 +203,7 @@ function App() {
             <ExecutionLogs isOpen={isLogsOpen} onToggle={() => setIsLogsOpen(!isLogsOpen)} />
             <button 
               className="hamburger-toggle-button glass-panel"
+              data-sidebar-toggle="true"
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               title={isSidebarOpen ? "Hide Component Library" : "Show Component Library"}
             >
