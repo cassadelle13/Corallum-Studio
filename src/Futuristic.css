@@ -308,14 +308,14 @@ body::after {
   justify-content: center;
   width: 100%;
   height: 100%;
-  font-size: 18px;
+  font-size: 24px;
   color: var(--node-border-color);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .node-icon-only svg {
-  width: 18px !important;
-  height: 18px !important;
+  width: 24px !important;
+  height: 24px !important;
 }
 
 .node-diamond .node-icon-only {
@@ -464,8 +464,8 @@ div[data-type="aiagent"] {
 }
 
 .node-circle-icon svg {
-  width: 20px !important;
-  height: 20px !important;
+  width: 24px !important;
+  height: 24px !important;
 }
 
 .node-circle-label {

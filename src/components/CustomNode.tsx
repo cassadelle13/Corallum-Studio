@@ -80,29 +80,30 @@ const getIcon = (type: string, label: string) => {
   const l = label.toLowerCase();
   const t = type.toLowerCase();
   
-  if (t === 'aiagent' || l.includes('ai agent')) return <Bot size={16} />;
-  if (t === 'webhook' || l.includes('webhook')) return <Webhook size={16} />;
-  if (t === 'schedule' || l.includes('schedule')) return <Calendar size={16} />;
-  if (t === 'script' || l.includes('script')) return <Code size={16} />;
-  if (t === 'database' || l.includes('database')) return <Database size={16} />;
-  if (t === 'http' || l.includes('http')) return <Globe size={16} />;
-  if (t === 'slack' || l.includes('slack')) return <MessageSquare size={16} />;
-  if (t === 'branchtoone' || l.includes('branch to one')) return <ArrowRight size={16} />;
-  if (t === 'branchtoall' || l.includes('branch to all')) return <ArrowDownRight size={16} />;
-  if (t === 'branch' || l.includes('branch')) return <GitBranch size={16} />;
-  if (t === 'forloop' || l.includes('for loop')) return <RotateCw size={16} />;
-  if (t === 'whileloop' || l.includes('while loop')) return <RotateCw size={16} />;
-  if (t === 'loop' || l.includes('loop')) return <Repeat size={16} />;
-  if (t === 'flow' || l.includes('flow')) return <Menu size={16} />;
-  if (t === 'delay' || l.includes('delay')) return <Clock size={16} />;
-  if (t === 'approval' || l.includes('approval') || l.includes('prompt')) return <CheckCircle2 size={16} />;
-  if (t === 'error' || l.includes('error')) return <AlertCircle size={16} />;
-  if (t === 'email' || l.includes('email')) return <Mail size={16} />;
-  if (t === 'file' || l.includes('file')) return <FileText size={16} />;
-  if (t === 'api' || l.includes('api')) return <Server size={16} />;
-  if (l.includes('trigger') || t === 'trigger' || t === 'manual') return <Zap size={16} />;
-  if (t === 'start' || l.includes('start')) return <Play size={16} />;
-  return <Play size={16} />;
+  const iconSize = 24;
+  if (t === 'aiagent' || l.includes('ai agent')) return <Bot size={iconSize} />;
+  if (t === 'webhook' || l.includes('webhook')) return <Webhook size={iconSize} />;
+  if (t === 'schedule' || l.includes('schedule')) return <Calendar size={iconSize} />;
+  if (t === 'script' || l.includes('script')) return <Code size={iconSize} />;
+  if (t === 'database' || l.includes('database')) return <Database size={iconSize} />;
+  if (t === 'http' || l.includes('http')) return <Globe size={iconSize} />;
+  if (t === 'slack' || l.includes('slack')) return <MessageSquare size={iconSize} />;
+  if (t === 'branchtoone' || l.includes('branch to one')) return <ArrowRight size={iconSize} />;
+  if (t === 'branchtoall' || l.includes('branch to all')) return <ArrowDownRight size={iconSize} />;
+  if (t === 'branch' || l.includes('branch')) return <GitBranch size={iconSize} />;
+  if (t === 'forloop' || l.includes('for loop')) return <RotateCw size={iconSize} />;
+  if (t === 'whileloop' || l.includes('while loop')) return <RotateCw size={iconSize} />;
+  if (t === 'loop' || l.includes('loop')) return <Repeat size={iconSize} />;
+  if (t === 'flow' || l.includes('flow')) return <Menu size={iconSize} />;
+  if (t === 'delay' || l.includes('delay')) return <Clock size={iconSize} />;
+  if (t === 'approval' || l.includes('approval') || l.includes('prompt')) return <CheckCircle2 size={iconSize} />;
+  if (t === 'error' || l.includes('error')) return <AlertCircle size={iconSize} />;
+  if (t === 'email' || l.includes('email')) return <Mail size={iconSize} />;
+  if (t === 'file' || l.includes('file')) return <FileText size={iconSize} />;
+  if (t === 'api' || l.includes('api')) return <Server size={iconSize} />;
+  if (l.includes('trigger') || t === 'trigger' || t === 'manual') return <Zap size={iconSize} />;
+  if (t === 'start' || l.includes('start')) return <Play size={iconSize} />;
+  return <Play size={iconSize} />;
 };
 
 export const CustomNode = memo(({ data, selected }: any) => {
@@ -209,7 +210,8 @@ export const CustomNode = memo(({ data, selected }: any) => {
         }}>
           {/* Icon */}
           <div style={{
-            fontSize: '20px',
+            width: '24px',
+            height: '24px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -363,16 +365,16 @@ export const CustomNode = memo(({ data, selected }: any) => {
         <div className="node-trigger-icon" style={{
           position: 'absolute',
           top: '50%',
-          left: '-22px',
-          width: '18px',
-          height: '18px',
+          left: '-28px',
+          width: '24px',
+          height: '24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 5,
           transform: 'translateY(-50%)'
         }}>
-          <Zap size={18} style={{ color: '#f97316', strokeWidth: 2.5 }} />
+          <Zap size={24} style={{ color: '#f97316', strokeWidth: 2 }} />
         </div>
       )}
       
