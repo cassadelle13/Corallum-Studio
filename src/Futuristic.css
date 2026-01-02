@@ -402,11 +402,6 @@ body::after {
 .futuristic-node.node-rectangle,
 .react-flow__node .futuristic-node.node-rectangle,
 .react-flow__node-default .futuristic-node.node-rectangle {
-  width: 150px !important;
-  height: auto !important;
-  min-width: 150px !important;
-  min-height: 100px !important;
-  max-width: 150px !important;
   border-radius: 8px;
   box-sizing: border-box !important;
 }
