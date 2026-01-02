@@ -88,6 +88,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       name: 'AI Agents',
       icon: Bot,
       nodes: [
+        { type: 'aiagent', icon: Bot, label: 'AI Agent', description: 'AI agent with chat model, memory, and tools' },
         { type: 'llm', icon: Bot, label: 'LLM Prompt', description: 'Generate text with AI' },
         { type: 'vision', icon: Bot, label: 'Vision', description: 'Analyze images' },
         { type: 'agent', icon: Bot, label: 'Autonomous Agent', description: 'Complex task solver' },

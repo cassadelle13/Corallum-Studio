@@ -129,7 +129,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
     ...(shape === 'diamond' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
     ...(shape === 'circle' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
     ...(shape === 'square' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
-    ...(shape === 'rectangle' ? { width: '150px', height: 'auto', minWidth: '150px', minHeight: '100px' } : {}),
+    ...(shape === 'rectangle' ? { width: '100px', height: '200px', minWidth: '100px', minHeight: '200px', maxWidth: '100px', maxHeight: '200px' } : {}),
   } as React.CSSProperties;
 
   // Для ромбовидных узлов (branch) используем специальную разметку
@@ -179,18 +179,80 @@ export const CustomNode = memo(({ data, selected }: any) => {
       <div className={`${nodeClasses} node-with-label`} style={nodeStyle}>
         <Handle type="target" position={Position.Left} className="handle-neon" />
         
-        <div className="node-icon-only">
-          {getIcon(nodeType, data.label || '')}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          height: '100%',
+          padding: '12px 8px',
+          gap: '8px'
+        }}>
+          <div className="node-icon-only" style={{ marginBottom: '4px' }}>
+            {getIcon(nodeType, data.label || '')}
+          </div>
+          
+          {data.label && (
+            <div style={{
+              fontSize: '11px',
+              color: 'var(--text-main)',
+              textAlign: 'center',
+              fontWeight: 500,
+              lineHeight: '1.2',
+              wordBreak: 'break-word',
+              width: '100%'
+            }}>
+              {data.label}
+            </div>
+          )}
+          
+          {/* Connection points section */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '6px',
+            width: '100%',
+            marginTop: 'auto',
+            fontSize: '10px',
+            color: 'var(--text-dim)'
+          }}>
+            {data.chatModel && (
+              <div style={{
+                padding: '4px 6px',
+                background: 'rgba(99, 102, 241, 0.1)',
+                borderRadius: '4px',
+                border: '1px solid rgba(99, 102, 241, 0.3)',
+                textAlign: 'center'
+              }}>
+                Chat Model
+              </div>
+            )}
+            {data.memory && (
+              <div style={{
+                padding: '4px 6px',
+                background: 'rgba(139, 92, 246, 0.1)',
+                borderRadius: '4px',
+                border: '1px solid rgba(139, 92, 246, 0.3)',
+                textAlign: 'center'
+              }}>
+                Memory
+              </div>
+            )}
+            {data.tool && (
+              <div style={{
+                padding: '4px 6px',
+                background: 'rgba(168, 85, 247, 0.1)',
+                borderRadius: '4px',
+                border: '1px solid rgba(168, 85, 247, 0.3)',
+                textAlign: 'center'
+              }}>
+                Tool
+              </div>
+            )}
+          </div>
         </div>
 
         <Handle type="source" position={Position.Right} className="handle-neon" />
-        
-        {/* Текстовая подпись под узлом */}
-        {data.label && (
-          <div className="node-label">
-            {data.label}
-          </div>
-        )}
       </div>
     );
   }

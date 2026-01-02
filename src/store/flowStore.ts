@@ -156,13 +156,17 @@ export const useFlowStore = create<FlowState>((set, get) => ({
       type: 'default',
       data: { 
         type: type, // Сохраняем тип узла
-        label: `New ${type}`, 
+        label: type === 'aiagent' ? 'AI Agent' : `New ${type}`, 
         code: boilerplate || '', 
         language: type === 'database' ? 'sql' : 'python',
         inputs: [],
         outputs: [{ id: 'output', label: 'Output', type: 'any' }],
         isConnected: false,
-        hasOutput: false
+        hasOutput: false,
+        // AI Agent specific fields
+        chatModel: type === 'aiagent' ? false : undefined,
+        memory: type === 'aiagent' ? false : undefined,
+        tool: type === 'aiagent' ? false : undefined
       },
       position: { x: Math.random() * 400, y: Math.random() * 400 },
     };

@@ -15,19 +15,32 @@ export const NodeEditor: React.FC<NodeEditorProps> = ({ node, onClose }) => {
   const [code, setCode] = useState('');
   const [language, setLanguage] = useState('python');
   const [activeTab, setActiveTab] = useState<'code' | 'inputs' | 'settings'>('code');
+  const [chatModel, setChatModel] = useState(false);
+  const [memory, setMemory] = useState(false);
+  const [tool, setTool] = useState(false);
 
   useEffect(() => {
     if (node && node.data) {
       setLabel(String(node.data.label || ''));
       setCode(String(node.data.code || ''));
       setLanguage(String(node.data.language || 'python'));
+      setChatModel(Boolean(node.data.chatModel));
+      setMemory(Boolean(node.data.memory));
+      setTool(Boolean(node.data.tool));
     }
   }, [node]);
 
   if (!node) return null;
 
   const handleSave = () => {
-    updateNode(node.id, { label, code, language });
+    const nodeType = node.data.type;
+    const updateData: any = { label, code, language };
+    if (nodeType === 'aiagent') {
+      updateData.chatModel = chatModel;
+      updateData.memory = memory;
+      updateData.tool = tool;
+    }
+    updateNode(node.id, updateData);
     onClose();
   };
 
@@ -276,6 +289,41 @@ LIMIT 100;`
                 <span>Retry on failure</span>
               </label>
             </div>
+
+            {node.data.type === 'aiagent' && (
+              <>
+                <div className="form-group" style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid var(--glass-border)' }}>
+                  <label style={{ fontSize: '14px', fontWeight: 600, marginBottom: '12px', display: 'block' }}>AI Agent Connections</label>
+                  
+                  <label className="checkbox-label" style={{ marginBottom: '8px' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={chatModel}
+                      onChange={(e) => setChatModel(e.target.checked)}
+                    />
+                    <span>Chat Model</span>
+                  </label>
+                  
+                  <label className="checkbox-label" style={{ marginBottom: '8px' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={memory}
+                      onChange={(e) => setMemory(e.target.checked)}
+                    />
+                    <span>Memory</span>
+                  </label>
+                  
+                  <label className="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      checked={tool}
+                      onChange={(e) => setTool(e.target.checked)}
+                    />
+                    <span>Tool</span>
+                  </label>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>
