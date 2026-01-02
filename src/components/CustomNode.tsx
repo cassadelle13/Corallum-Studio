@@ -109,18 +109,14 @@ export const CustomNode = memo(({ data, selected }: any) => {
   const category = getCategoryFromType(nodeType);
   const shape = getNodeShape(nodeType);
   const colors = categoryColors[category];
-  const isConnected = data.isConnected || false; // Флаг успешного подключения
-  const hasOutput = data.hasOutput || false; // Флаг наличия выхода
-  
-  // Определяем, есть ли подключенные выходы
-  const hasConnectedOutput = isConnected || hasOutput;
+  const isTested = data.isTested || false; // Флаг успешного тестирования (Run Test)
 
   const nodeClasses = [
     'futuristic-node',
     `node-${shape}`,
     `node-category-${category}`,
     selected ? 'node-selected' : '',
-    hasConnectedOutput ? 'node-connected' : ''
+    isTested ? 'node-tested' : ''
   ].filter(Boolean).join(' ');
 
   const nodeStyle = {
@@ -144,11 +140,6 @@ export const CustomNode = memo(({ data, selected }: any) => {
             {getIcon(nodeType, data.label || '')}
           </div>
           <div className="node-diamond-label">{data.label || 'Branch'}</div>
-          {hasConnectedOutput && (
-            <div className="node-success-check">
-              <CheckCircle size={14} />
-            </div>
-          )}
         </div>
         <Handle type="source" position={Position.Right} id="true" className="handle-neon" />
         <Handle type="source" position={Position.Bottom} id="false" className="handle-neon" />
@@ -166,11 +157,6 @@ export const CustomNode = memo(({ data, selected }: any) => {
             {getIcon(nodeType, data.label || '')}
           </div>
           <div className="node-circle-label">{data.label || 'Resource'}</div>
-          {hasConnectedOutput && (
-            <div className="node-success-check">
-              <CheckCircle size={14} />
-            </div>
-          )}
         </div>
         <Handle type="source" position={Position.Right} className="handle-neon" />
       </div>
@@ -195,12 +181,6 @@ export const CustomNode = memo(({ data, selected }: any) => {
             {data.language === 'sql' ? 'SELECT * FROM...' : 'def ai_agent():...'}
           </div>
         </div>
-
-        {hasConnectedOutput && (
-          <div className="node-success-check">
-            <CheckCircle size={16} />
-          </div>
-        )}
 
         <Handle type="source" position={Position.Right} className="handle-neon" />
       </div>
@@ -234,13 +214,6 @@ export const CustomNode = memo(({ data, selected }: any) => {
           {data.language === 'sql' ? 'SELECT * FROM...' : 'def main():...'}
         </div>
       </div>
-
-      {/* Галочка успешного подключения */}
-      {hasConnectedOutput && (
-        <div className="node-success-check">
-          <CheckCircle size={16} />
-        </div>
-      )}
 
       {/* Выход справа для всех */}
       <Handle type="source" position={Position.Right} className="handle-neon" />
