@@ -396,7 +396,8 @@ body::after {
 /* Прямоугольные узлы (AI Agent) */
 .futuristic-node.node-rectangle,
 .react-flow__node .futuristic-node.node-rectangle,
-.react-flow__node-default .futuristic-node.node-rectangle {
+.react-flow__node-default .futuristic-node.node-rectangle,
+div[data-type="aiagent"] {
   width: 300px !important;
   height: 80px !important;
   min-width: 300px !important;

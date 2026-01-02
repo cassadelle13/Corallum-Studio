@@ -175,8 +175,24 @@ export const CustomNode = memo(({ data, selected }: any) => {
 
   // Прямоугольные узлы (AI Agent)
   if (shape === 'rectangle') {
+    // Используем объект стилей, который React преобразует в инлайновые стили.
+    // Для гарантии перекрытия !important в React используется специальный синтаксис или прямое манипулирование.
+    const forcedStyle = {
+      ...nodeStyle,
+      width: '300px',
+      height: '80px',
+      minWidth: '300px',
+      minHeight: '80px',
+      maxWidth: '300px',
+      maxHeight: '80px',
+    };
+    
     return (
-      <div className={`${nodeClasses}`} style={nodeStyle}>
+      <div 
+        className={`${nodeClasses}`} 
+        style={forcedStyle}
+        data-type="aiagent"
+      >
         {/* Main input/output handles */}
         <Handle type="target" position={Position.Left} className="handle-neon" />
         <Handle type="source" position={Position.Right} className="handle-neon" />
