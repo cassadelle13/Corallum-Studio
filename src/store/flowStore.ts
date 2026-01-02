@@ -158,7 +158,7 @@ export const useFlowStore = create<FlowState>((set, get) => ({
       id: `${type}-${Date.now()}`,
       type: 'default',
       data: { 
-        type: type, // Сохраняем тип узла
+        type: type, 
         label: type === 'aiagent' ? 'AI Agent' : `New ${type}`, 
         code: boilerplate || '', 
         language: type === 'database' ? 'sql' : 'python',
@@ -166,15 +166,17 @@ export const useFlowStore = create<FlowState>((set, get) => ({
         outputs: [{ id: 'output', label: 'Output', type: 'any' }],
         isConnected: false,
         hasOutput: false,
-        // AI Agent specific fields
         subtitle: type === 'aiagent' ? 'Tools Agent' : undefined,
         chatModel: type === 'aiagent' ? false : undefined,
         memory: type === 'aiagent' ? false : undefined,
         tool: type === 'aiagent' ? false : undefined
       },
-      position: { x: Math.random() * 400, y: Math.random() * 400 },
+      position: { x: 400, y: 250 }, // Помещаем новый узел на место плейсхолдера
     };
-    set({ nodes: [...get().nodes, newNode] });
+    
+    // Удаляем плейсхолдер при добавлении первого реального узла
+    const filteredNodes = get().nodes.filter(node => node.id !== 'placeholder');
+    set({ nodes: [...filteredNodes, newNode] });
   },
 
   updateNode: (id, data) => {
