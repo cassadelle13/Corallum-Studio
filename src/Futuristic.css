@@ -412,36 +412,36 @@ div[data-type="aiagent"] {
 .futuristic-node.node-square,
 .react-flow__node .futuristic-node.node-square,
 .react-flow__node-default .futuristic-node.node-square {
-  width: 100px !important;
-  height: 100px !important;
-  min-width: 100px !important;
-  min-height: 100px !important;
-  max-width: 100px !important;
-  max-height: 100px !important;
-}
-
-/* Ромбовидные узлы (Branch) */
-.futuristic-node.node-diamond,
-.react-flow__node .futuristic-node.node-diamond,
-.react-flow__node-default .futuristic-node.node-diamond {
-  width: 100px !important;
-  height: 100px !important;
-  min-width: 100px !important;
-  min-height: 100px !important;
-  max-width: 100px !important;
-  max-height: 100px !important;
-}
-
-/* Круглые узлы (Resources) */
-.futuristic-node.node-circle,
-.react-flow__node .futuristic-node.node-circle,
-.react-flow__node-default .futuristic-node.node-circle {
   width: 80px !important;
   height: 80px !important;
   min-width: 80px !important;
   min-height: 80px !important;
   max-width: 80px !important;
   max-height: 80px !important;
+}
+
+/* Ромбовидные узлы (Branch) */
+.futuristic-node.node-diamond,
+.react-flow__node .futuristic-node.node-diamond,
+.react-flow__node-default .futuristic-node.node-diamond {
+  width: 80px !important;
+  height: 80px !important;
+  min-width: 80px !important;
+  min-height: 80px !important;
+  max-width: 80px !important;
+  max-height: 80px !important;
+}
+
+/* Круглые узлы (Resources) */
+.futuristic-node.node-circle,
+.react-flow__node .futuristic-node.node-circle,
+.react-flow__node-default .futuristic-node.node-circle {
+  width: 60px !important;
+  height: 60px !important;
+  min-width: 60px !important;
+  min-height: 60px !important;
+  max-width: 60px !important;
+  max-height: 60px !important;
 }
 
 .node-circle-content {

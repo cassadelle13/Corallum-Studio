@@ -126,9 +126,9 @@ export const CustomNode = memo(({ data, selected }: any) => {
     '--node-bg-color': colors.bg,
     '--node-gradient': colors.gradient,
     overflow: 'visible' as const,
-    ...(shape === 'diamond' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
-    ...(shape === 'circle' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
-    ...(shape === 'square' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
+    ...(shape === 'diamond' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
+    ...(shape === 'circle' ? { width: '60px', height: '60px', minWidth: '60px', minHeight: '60px', maxWidth: '60px', maxHeight: '60px' } : {}),
+    ...(shape === 'square' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
     ...(shape === 'rectangle' ? { width: '300px', height: '80px', minWidth: '300px', minHeight: '80px', maxWidth: '300px', maxHeight: '80px', boxSizing: 'border-box' } : {}),
   } as React.CSSProperties;
 

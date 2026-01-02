@@ -65,12 +65,12 @@ export const FlowCanvas: React.FC<FlowCanvasProps> = ({ onNodeClick }) => {
         onDrop={onDrop}
         nodeTypes={nodeTypes}
         snapToGrid={true}
-        snapGrid={[16, 16]}
+        snapGrid={[10, 10]}
         fitView
         attributionPosition="bottom-left"
         selectionOnDrag={false}
       >
-        <Background variant={BackgroundVariant.Dots} gap={16} size={2.2} color="rgba(255, 255, 255, 0.18)" />
+        <Background variant={BackgroundVariant.Dots} gap={10} size={1.5} color="rgba(255, 255, 255, 0.15)" />
         <Controls />
         {showMinimap && (
           <MiniMap 
