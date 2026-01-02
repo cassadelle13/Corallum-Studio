@@ -58,6 +58,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       name: 'Triggers',
       icon: Zap,
       nodes: [
+        { type: 'start', icon: Play, label: 'Start', description: 'Initial workflow entry point' },
         { type: 'trigger', icon: Zap, label: 'Trigger', description: 'Start workflow on event' },
         { type: 'webhook', icon: Webhook, label: 'Webhook', description: 'Receive HTTP requests' },
         { type: 'schedule', icon: Calendar, label: 'Schedule', description: 'Run at specific times' },

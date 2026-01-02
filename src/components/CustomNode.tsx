@@ -8,7 +8,7 @@ import {
 
 // Определение категорий и их цветов
 const getCategoryFromType = (type: string): string => {
-  const triggers = ['webhook', 'schedule', 'manual', 'trigger'];
+  const triggers = ['webhook', 'schedule', 'manual', 'trigger', 'start'];
   const operators = ['action', 'branch', 'loop', 'script', 'approval', 'delay', 'error', 'flow', 'forloop', 'whileloop', 'branchtoone', 'branchtoall'];
   const integrations = ['http', 'database', 'slack', 'email', 'file', 'api'];
   const resources = ['model', 'memory', 'embedding'];
@@ -101,6 +101,7 @@ const getIcon = (type: string, label: string) => {
   if (t === 'file' || l.includes('file')) return <FileText size={16} />;
   if (t === 'api' || l.includes('api')) return <Server size={16} />;
   if (l.includes('trigger') || t === 'trigger' || t === 'manual') return <Zap size={16} />;
+  if (t === 'start' || l.includes('start')) return <Play size={16} />;
   return <Play size={16} />;
 };
 
