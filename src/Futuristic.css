@@ -193,25 +193,25 @@ body::after {
   opacity: 0.8;
 }
 
-/* Отключение стандартного outline ри выборе узла */
+/* Отключение стандартного outline и border при выборе узла */
 .futuristic-node.node-selected {
   outline: none !important;
-  box-shadow: 0 0 16px var(--node-glow-color, rgba(99, 102, 241, 0.3)),
-              0 0 32px var(--node-glow-color, rgba(99, 102, 241, 0.15)),
-              0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .futuristic-node.node-selected::before {
-  opacity: 1 !important;
+  opacity: 0 !important;
 }
 
 /* Отключение outline для React Flow селектед нодов */
 .react-flow__node.selected .futuristic-node {
   outline: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .react-flow__node-default.selected .futuristic-node {
   outline: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Категории узлов - неоновые обводки с градиентами */
