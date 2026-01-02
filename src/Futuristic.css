@@ -327,19 +327,28 @@ body::after {
   box-sizing: border-box !important;
 }
 
+/* Усиленный селектор для узлов-триггеров */
+.react-flow__node .futuristic-node.node-category-trigger,
+.react-flow__node-default .futuristic-node.node-category-trigger {
+  border-top-left-radius: 50px !important;
+  border-bottom-left-radius: 50px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+}
+
 /* Стиль n8n для триггеров: сильно закругленные левые углы */
 .futuristic-node.node-category-trigger {
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-top-left-radius: 50px !important;
+  border-bottom-left-radius: 50px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
 }
 
 .futuristic-node.node-category-trigger::before {
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-top-left-radius: 50px !important;
+  border-bottom-left-radius: 50px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
 }
 
 /* Прямоугольные узлы (AI Agent) */
