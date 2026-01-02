@@ -130,7 +130,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
     ...(shape === 'diamond' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
     ...(shape === 'circle' ? { width: '60px', height: '60px', minWidth: '60px', minHeight: '60px', maxWidth: '60px', maxHeight: '60px' } : {}),
     ...(shape === 'square' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
-    ...(shape === 'rectangle' ? { width: '300px', height: '80px', minWidth: '300px', minHeight: '80px', maxWidth: '300px', maxHeight: '80px', boxSizing: 'border-box' } : {}),
+    ...(shape === 'rectangle' ? { width: '200px', height: '80px', minWidth: '200px', minHeight: '80px', maxWidth: '200px', maxHeight: '80px', boxSizing: 'border-box' } : {}),
   } as React.CSSProperties;
 
   // Для ромбовидных узлов (branch) используем специальную разметку
@@ -180,11 +180,11 @@ export const CustomNode = memo(({ data, selected }: any) => {
     // Для гарантии перекрытия !important в React используется специальный синтаксис или прямое манипулирование.
     const forcedStyle = {
       ...nodeStyle,
-      width: '300px',
+      width: '200px',
       height: '80px',
-      minWidth: '300px',
+      minWidth: '200px',
       minHeight: '80px',
-      maxWidth: '300px',
+      maxWidth: '200px',
       maxHeight: '80px',
     };
     
