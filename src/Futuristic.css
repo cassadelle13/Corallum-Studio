@@ -538,7 +538,14 @@ body::after {
   height: 8px !important;
   background: var(--accent-primary) !important;
   border: 2px solid var(--bg-dark) !important;
-  box-shadow: 0 0 8px var(--accent-primary);
+  z-index: 10 !important;
+}
+
+.handle-diamond {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 0 !important;
+  transform: rotate(45deg) !important;
 }
 
 /* ============= CUSTOM SCROLLBARS ============= */

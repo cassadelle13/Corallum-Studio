@@ -129,7 +129,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
     ...(shape === 'diamond' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
     ...(shape === 'circle' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
     ...(shape === 'square' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
-    ...(shape === 'rectangle' ? { width: '200px', height: '80px', minWidth: '200px', minHeight: '80px', maxWidth: '200px', maxHeight: '80px' } : {}),
+    ...(shape === 'rectangle' ? { width: '300px', height: '80px', minWidth: '300px', minHeight: '80px', maxWidth: '300px', maxHeight: '80px' } : {}),
   } as React.CSSProperties;
 
   // Для ромбовидных узлов (branch) используем специальную разметку
@@ -230,35 +230,39 @@ export const CustomNode = memo(({ data, selected }: any) => {
         {/* Bottom connection points */}
         <div style={{
           position: 'absolute',
-          bottom: '-30px',
+          bottom: '0',
           left: '0',
           right: '0',
           display: 'flex',
           justifyContent: 'space-around',
           alignItems: 'center',
-          zIndex: 10
+          zIndex: 10,
+          transform: 'translateY(50%)'
         }}>
           {/* Chat Model connection */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px'
+            position: 'relative'
           }}>
             <Handle 
               type="source" 
               position={Position.Bottom} 
               id="chatmodel"
-              className="handle-neon"
+              className="handle-neon handle-diamond"
               style={{
                 position: 'relative',
                 left: 'auto',
                 right: 'auto',
                 bottom: 'auto',
-                transform: 'none'
+                transform: 'rotate(45deg)',
+                borderRadius: '0'
               }}
             />
             <div style={{
+              position: 'absolute',
+              top: '12px',
               fontSize: '9px',
               color: 'var(--text-dim)',
               whiteSpace: 'nowrap'
@@ -272,22 +276,25 @@ export const CustomNode = memo(({ data, selected }: any) => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px'
+            position: 'relative'
           }}>
             <Handle 
               type="source" 
               position={Position.Bottom} 
               id="memory"
-              className="handle-neon"
+              className="handle-neon handle-diamond"
               style={{
                 position: 'relative',
                 left: 'auto',
                 right: 'auto',
                 bottom: 'auto',
-                transform: 'none'
+                transform: 'rotate(45deg)',
+                borderRadius: '0'
               }}
             />
             <div style={{
+              position: 'absolute',
+              top: '12px',
               fontSize: '9px',
               color: 'var(--text-dim)',
               whiteSpace: 'nowrap'
@@ -301,22 +308,25 @@ export const CustomNode = memo(({ data, selected }: any) => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px'
+            position: 'relative'
           }}>
             <Handle 
               type="source" 
               position={Position.Bottom} 
               id="tool"
-              className="handle-neon"
+              className="handle-neon handle-diamond"
               style={{
                 position: 'relative',
                 left: 'auto',
                 right: 'auto',
                 bottom: 'auto',
-                transform: 'none'
+                transform: 'rotate(45deg)',
+                borderRadius: '0'
               }}
             />
             <div style={{
+              position: 'absolute',
+              top: '12px',
               fontSize: '9px',
               color: 'var(--text-dim)',
               whiteSpace: 'nowrap'
