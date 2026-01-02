@@ -726,11 +726,23 @@ body::after {
 }
 
 .global-sidebar.collapsed .sidebar-brand span,
-.global-sidebar.collapsed .sidebar-search-trigger,
+.global-sidebar.collapsed .sidebar-search-trigger span,
 .global-sidebar.collapsed .nav-item span,
 .global-sidebar.collapsed .section-label,
 .global-sidebar.collapsed .sidebar-footer-nav span {
   display: none !important;
+}
+
+.global-sidebar.collapsed .sidebar-search-trigger {
+  padding: 0 8px 20px;
+  align-items: center;
+}
+
+.global-sidebar.collapsed .search-button,
+.global-sidebar.collapsed .ask-ai-button {
+  justify-content: center;
+  padding: 8px;
+  width: 40px;
 }
 
 .global-sidebar.collapsed .nav-item {

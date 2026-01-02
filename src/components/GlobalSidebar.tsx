@@ -344,7 +344,7 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
     <div className={`global-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-brand">
         <VTLogo size={32} className="brand-logo-img" />
-        <span>Corallum</span>
+        {!isCollapsed && <span>Corallum</span>}
       </div>
 
       <div className="sidebar-search-trigger">
@@ -358,7 +358,7 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
           title="Search (Ctrl+k)"
         >
           <Search size={18} className="search-button-icon" />
-          <span>Search Ctrl+k</span>
+          {!isCollapsed && <span>Search Ctrl+k</span>}
         </button>
         <button 
           className="ask-ai-button"
@@ -369,7 +369,7 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
           title="Ask AI (Ctrl+L)"
         >
           <MessageSquare size={18} className="ask-ai-button-icon" />
-          <span>Ask AI Ctrl+L</span>
+          {!isCollapsed && <span>Ask AI Ctrl+L</span>}
         </button>
       </div>
 
@@ -380,23 +380,25 @@ export const GlobalSidebar: React.FC<GlobalSidebarProps> = ({ activeTab, setActi
               key={item.id}
               className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
               onClick={() => setActiveTab(item.id)}
+              title={isCollapsed ? item.label : ""}
             >
               <item.icon size={18} />
-              <span>{item.label}</span>
+              {!isCollapsed && <span>{item.label}</span>}
             </button>
           ))}
         </div>
 
         <div className="nav-section">
-          <div className="section-label">TRIGGERS</div>
+          {!isCollapsed && <div className="section-label">TRIGGERS</div>}
           {triggersNav.map((item) => (
             <button
               key={item.id}
               className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
               onClick={() => setActiveTab(item.id)}
+              title={isCollapsed ? item.label : ""}
             >
               <item.icon size={18} />
-              <span>{item.label}</span>
+              {!isCollapsed && <span>{item.label}</span>}
             </button>
           ))}
           <div className="add-trigger-wrapper">
