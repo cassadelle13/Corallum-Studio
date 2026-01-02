@@ -68,6 +68,7 @@ export const FlowCanvas: React.FC<FlowCanvasProps> = ({ onNodeClick }) => {
         snapGrid={[16, 16]}
         fitView
         attributionPosition="bottom-left"
+        selectionOnDrag={false}
       >
         <Background variant={BackgroundVariant.Dots} gap={16} size={2.2} color="rgba(255, 255, 255, 0.18)" />
         <Controls />

@@ -15,6 +15,27 @@
 }
 
 /* ============= GLOBAL STYLES ============= */
+
+/* Подавление всех outline и focus эффектов в проекте */
+* {
+  outline: none !important;
+}
+
+*:focus,
+*:focus-visible,
+*:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Подавление React Flow стандартных стилей выделения */
+.react-flow__node,
+.react-flow__node-default,
+.react-flow__node.selected {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 body {
   background-color: var(--bg-dark) !important;
   background: radial-gradient(circle at 50% 50%, #1a1d27 0%, #0a0b10 100%) !important;
