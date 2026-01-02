@@ -139,7 +139,7 @@ body::after {
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 8px !important;
+  border-radius: 8px;
   padding: 0 !important;
   color: white !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -323,23 +323,23 @@ body::after {
   min-height: 100px !important;
   max-width: 100px !important;
   max-height: 100px !important;
-  border-radius: 8px !important;
+  border-radius: 8px;
   box-sizing: border-box !important;
 }
 
 /* Стиль n8n для триггеров: сильно закругленные левые углы */
 .futuristic-node.node-category-trigger {
-  border-top-left-radius: 50px !important;
-  border-bottom-left-radius: 50px !important;
-  border-top-right-radius: 8px !important;
-  border-bottom-right-radius: 8px !important;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .futuristic-node.node-category-trigger::before {
-  border-top-left-radius: 50px !important;
-  border-bottom-left-radius: 50px !important;
-  border-top-right-radius: 8px !important;
-  border-bottom-right-radius: 8px !important;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 /* Прямоугольные узлы (AI Agent) */
@@ -351,7 +351,7 @@ body::after {
   min-width: 150px !important;
   min-height: 100px !important;
   max-width: 150px !important;
-  border-radius: 8px !important;
+  border-radius: 8px;
   box-sizing: border-box !important;
 }
 
