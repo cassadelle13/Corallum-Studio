@@ -436,24 +436,38 @@ body::after {
 /* Иконка триггера (молния) */
 .node-trigger-icon {
   position: absolute;
-  top: -10px;
-  left: -10px;
+  top: 50%;
+  left: -28px;
   width: 24px;
   height: 24px;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 20;
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.8), 0 0 24px rgba(239, 68, 68, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
+  z-index: 5;
+  transform: translateY(-50%);
 }
 
 .node-trigger-icon svg {
-  color: white;
-  stroke-width: 3;
+  color: #f97316;
+  stroke-width: 2;
+  width: 24px;
+  height: 24px;
+}
+
+/* Текстовая подпись под узлом */
+.node-label {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  color: var(--text-main);
+  text-align: center;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 5;
 }
 
 /* Стили .node-header, .node-body и .node-code-preview удалены для минималистичного дизайна */

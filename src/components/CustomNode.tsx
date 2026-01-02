@@ -134,13 +134,20 @@ export const CustomNode = memo(({ data, selected }: any) => {
   // Для ромбовидных узлов (branch) используем специальную разметку
   if (shape === 'diamond') {
     return (
-      <div className={nodeClasses} style={nodeStyle}>
+      <div className={`${nodeClasses} node-with-label`} style={nodeStyle}>
         <Handle type="target" position={Position.Left} className="handle-neon" />
         <div className="node-icon-only">
           {getIcon(nodeType, data.label || '')}
         </div>
         <Handle type="source" position={Position.Right} id="true" className="handle-neon" />
         <Handle type="source" position={Position.Bottom} id="false" className="handle-neon" />
+        
+        {/* Текстовая подпись под узлом */}
+        {data.label && (
+          <div className="node-label">
+            {data.label}
+          </div>
+        )}
       </div>
     );
   }
@@ -148,12 +155,19 @@ export const CustomNode = memo(({ data, selected }: any) => {
   // Для круглых узлов (ресурсы)
   if (shape === 'circle') {
     return (
-      <div className={nodeClasses} style={nodeStyle}>
+      <div className={`${nodeClasses} node-with-label`} style={nodeStyle}>
         <Handle type="target" position={Position.Left} className="handle-neon" />
         <div className="node-icon-only">
           {getIcon(nodeType, data.label || '')}
         </div>
         <Handle type="source" position={Position.Right} className="handle-neon" />
+        
+        {/* Текстовая подпись под узлом */}
+        {data.label && (
+          <div className="node-label">
+            {data.label}
+          </div>
+        )}
       </div>
     );
   }
@@ -161,7 +175,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
   // Прямоугольные узлы (AI Agent)
   if (shape === 'rectangle') {
     return (
-      <div className={nodeClasses} style={nodeStyle}>
+      <div className={`${nodeClasses} node-with-label`} style={nodeStyle}>
         <Handle type="target" position={Position.Left} className="handle-neon" />
         
         <div className="node-icon-only">
@@ -169,13 +183,20 @@ export const CustomNode = memo(({ data, selected }: any) => {
         </div>
 
         <Handle type="source" position={Position.Right} className="handle-neon" />
+        
+        {/* Текстовая подпись под узлом */}
+        {data.label && (
+          <div className="node-label">
+            {data.label}
+          </div>
+        )}
       </div>
     );
   }
 
   // Квадратные узлы (по умолчанию)
   return (
-    <div className={nodeClasses} style={nodeStyle}>
+    <div className={`${nodeClasses} node-with-label`} style={nodeStyle}>
       {/* Вход слева только для не-триггеров */}
       {category !== 'trigger' && (
         <Handle type="target" position={Position.Left} className="handle-neon" />
@@ -184,7 +205,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
       {/* Иконка триггера (молния) для триггеров */}
       {category === 'trigger' && (
         <div className="node-trigger-icon">
-          <Zap size={12} />
+          <Zap size={16} />
         </div>
       )}
       
@@ -194,6 +215,13 @@ export const CustomNode = memo(({ data, selected }: any) => {
 
       {/* Выход справа для всех */}
       <Handle type="source" position={Position.Right} className="handle-neon" />
+      
+      {/* Текстовая подпись под узлом */}
+      {data.label && (
+        <div className="node-label">
+          {data.label}
+        </div>
+      )}
     </div>
   );
 });
