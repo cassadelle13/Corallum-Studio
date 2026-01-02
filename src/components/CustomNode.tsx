@@ -135,11 +135,8 @@ export const CustomNode = memo(({ data, selected }: any) => {
     return (
       <div className={nodeClasses} style={nodeStyle}>
         <Handle type="target" position={Position.Left} className="handle-neon" />
-        <div className="node-diamond-content">
-          <div className="node-diamond-icon">
-            {getIcon(nodeType, data.label || '')}
-          </div>
-          <div className="node-diamond-label">{data.label || 'Branch'}</div>
+        <div className="node-icon-only">
+          {getIcon(nodeType, data.label || '')}
         </div>
         <Handle type="source" position={Position.Right} id="true" className="handle-neon" />
         <Handle type="source" position={Position.Bottom} id="false" className="handle-neon" />
@@ -152,11 +149,8 @@ export const CustomNode = memo(({ data, selected }: any) => {
     return (
       <div className={nodeClasses} style={nodeStyle}>
         <Handle type="target" position={Position.Left} className="handle-neon" />
-        <div className="node-circle-content">
-          <div className="node-circle-icon">
-            {getIcon(nodeType, data.label || '')}
-          </div>
-          <div className="node-circle-label">{data.label || 'Resource'}</div>
+        <div className="node-icon-only">
+          {getIcon(nodeType, data.label || '')}
         </div>
         <Handle type="source" position={Position.Right} className="handle-neon" />
       </div>
@@ -169,17 +163,8 @@ export const CustomNode = memo(({ data, selected }: any) => {
       <div className={nodeClasses} style={nodeStyle}>
         <Handle type="target" position={Position.Left} className="handle-neon" />
         
-        <div className="node-header">
-          <div className="node-icon-wrapper">
-            {getIcon(nodeType, data.label || '')}
-          </div>
-          <span className="node-label">{data.label || 'AI Agent'}</span>
-        </div>
-        
-        <div className="node-body">
-          <div className="node-code-preview">
-            {data.language === 'sql' ? 'SELECT * FROM...' : 'def ai_agent():...'}
-          </div>
+        <div className="node-icon-only">
+          {getIcon(nodeType, data.label || '')}
         </div>
 
         <Handle type="source" position={Position.Right} className="handle-neon" />
@@ -202,17 +187,8 @@ export const CustomNode = memo(({ data, selected }: any) => {
         </div>
       )}
       
-      <div className="node-header">
-        <div className="node-icon-wrapper">
-          {getIcon(nodeType, data.label || '')}
-        </div>
-        <span className="node-label">{data.label || 'Node'}</span>
-      </div>
-      
-      <div className="node-body">
-        <div className="node-code-preview">
-          {data.language === 'sql' ? 'SELECT * FROM...' : 'def main():...'}
-        </div>
+      <div className="node-icon-only">
+        {getIcon(nodeType, data.label || '')}
       </div>
 
       {/* Выход справа для всех */}

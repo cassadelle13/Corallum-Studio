@@ -267,35 +267,23 @@ body::after {
   display: none !important;
 }
 
-.node-diamond-content {
-  transform: rotate(-45deg);
+.node-icon-only {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  position: relative;
   width: 100%;
   height: 100%;
-}
-
-.node-diamond-icon {
   color: var(--node-border-color, var(--accent-primary));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-.node-diamond-label {
-  font-size: 10px;
-  font-weight: 600;
-  color: white;
-  text-align: center;
-  max-width: 70px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.node-icon-only svg {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.node-diamond .node-icon-only {
+  transform: rotate(-45deg);
 }
 
 /* Круглые узлы (Resources) */
@@ -437,55 +425,7 @@ body::after {
   stroke-width: 3;
 }
 
-.node-header {
-  padding: 6px 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  font-size: 10px;
-  position: relative;
-  color: white;
-}
-
-.node-icon-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--node-border-color, var(--accent-primary));
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-}
-
-.node-label {
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.node-body {
-  padding: 6px 8px;
-  font-size: 9px;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.node-code-preview {
-  font-family: 'Fira Code', monospace;
-  font-size: 8px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 4px 6px;
-  border-radius: 4px;
-  color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
+/* Стили .node-header, .node-body и .node-code-preview удалены для минималистичного дизайна */
 
 /* ============= NEON EDGES ============= */
 .react-flow__edge-path {
