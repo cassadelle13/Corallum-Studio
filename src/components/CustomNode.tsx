@@ -125,6 +125,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
     '--node-glow-color': colors.glow,
     '--node-bg-color': colors.bg,
     '--node-gradient': colors.gradient,
+    overflow: 'visible' as const,
     ...(shape === 'diamond' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
     ...(shape === 'circle' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
     ...(shape === 'square' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
@@ -204,8 +205,19 @@ export const CustomNode = memo(({ data, selected }: any) => {
       
       {/* Иконка триггера (молния) для триггеров */}
       {category === 'trigger' && (
-        <div className="node-trigger-icon">
-          <Zap size={16} />
+        <div className="node-trigger-icon" style={{
+          position: 'absolute',
+          top: '50%',
+          left: '-28px',
+          width: '24px',
+          height: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 5,
+          transform: 'translateY(-50%)'
+        }}>
+          <Zap size={16} style={{ color: '#f97316', strokeWidth: 2 }} />
         </div>
       )}
       
@@ -218,7 +230,20 @@ export const CustomNode = memo(({ data, selected }: any) => {
       
       {/* Текстовая подпись под узлом */}
       {data.label && (
-        <div className="node-label">
+        <div className="node-label" style={{
+          position: 'absolute',
+          bottom: '-24px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          whiteSpace: 'nowrap',
+          fontSize: '12px',
+          color: 'var(--text-main)',
+          textAlign: 'center',
+          maxWidth: '120px',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          zIndex: 5
+        }}>
           {data.label}
         </div>
       )}
