@@ -38,7 +38,7 @@ import './Futuristic.css';
 function App() {
   const { nodes, edges, selectedNode, setSelectedNode, addExecutionLog, clearExecutionLogs } = useFlowStore();
   const [testResult, setTestResult] = useState<any>(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isGlobalSidebarCollapsed, setIsGlobalSidebarCollapsed] = useState(false);
   const [isLogsOpen, setIsLogsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
