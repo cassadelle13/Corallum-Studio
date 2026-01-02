@@ -147,12 +147,12 @@ body::after {
               0 2px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  width: 200px !important;
-  min-width: 200px !important;
-  max-width: 200px !important;
-  height: 200px !important;
-  min-height: 200px !important;
-  max-height: 200px !important;
+  width: 100px !important;
+  min-width: 100px !important;
+  max-width: 100px !important;
+  height: 100px !important;
+  min-height: 100px !important;
+  max-height: 100px !important;
   position: relative;
   box-sizing: border-box !important;
 }
@@ -317,12 +317,12 @@ body::after {
 .futuristic-node.node-square,
 .react-flow__node .futuristic-node.node-square,
 .react-flow__node-default .futuristic-node.node-square {
-  width: 200px !important;
-  height: 200px !important;
-  min-width: 200px !important;
-  min-height: 200px !important;
-  max-width: 200px !important;
-  max-height: 200px !important;
+  width: 100px !important;
+  height: 100px !important;
+  min-width: 100px !important;
+  min-height: 100px !important;
+  max-width: 100px !important;
+  max-height: 100px !important;
   border-radius: 8px !important;
   box-sizing: border-box !important;
 }
@@ -331,11 +331,11 @@ body::after {
 .futuristic-node.node-rectangle,
 .react-flow__node .futuristic-node.node-rectangle,
 .react-flow__node-default .futuristic-node.node-rectangle {
-  width: 200px !important;
+  width: 150px !important;
   height: auto !important;
-  min-width: 200px !important;
-  min-height: 150px !important;
-  max-width: 200px !important;
+  min-width: 150px !important;
+  min-height: 100px !important;
+  max-width: 150px !important;
   border-radius: 8px !important;
   box-sizing: border-box !important;
 }
@@ -426,14 +426,14 @@ body::after {
 }
 
 .node-header {
-  padding: 8px 12px;
+  padding: 6px 8px;
   background: rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 10px;
   position: relative;
   color: white;
 }
@@ -454,20 +454,25 @@ body::after {
 }
 
 .node-body {
-  padding: 10px 12px;
-  font-size: 11px;
+  padding: 6px 8px;
+  font-size: 9px;
   color: rgba(255, 255, 255, 0.7);
   background: rgba(0, 0, 0, 0.1);
 }
 
 .node-code-preview {
   font-family: 'Fira Code', monospace;
-  font-size: 10px;
+  font-size: 8px;
   background: rgba(0, 0, 0, 0.3);
-  padding: 6px 8px;
+  padding: 4px 6px;
   border-radius: 4px;
   color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 /* ============= NEON EDGES ============= */

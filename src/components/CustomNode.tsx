@@ -130,8 +130,8 @@ export const CustomNode = memo(({ data, selected }: any) => {
     '--node-gradient': colors.gradient,
     ...(shape === 'diamond' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
     ...(shape === 'circle' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
-    ...(shape === 'square' ? { width: '200px', height: '200px', minWidth: '200px', minHeight: '200px', maxWidth: '200px', maxHeight: '200px' } : {}),
-    ...(shape === 'rectangle' ? { width: '200px', height: 'auto', minWidth: '200px', minHeight: '150px' } : {}),
+    ...(shape === 'square' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
+    ...(shape === 'rectangle' ? { width: '150px', height: 'auto', minWidth: '150px', minHeight: '100px' } : {}),
   } as React.CSSProperties;
 
   // Для ромбовидных узлов (branch) используем специальную разметку
