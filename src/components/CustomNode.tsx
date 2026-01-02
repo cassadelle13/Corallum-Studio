@@ -129,7 +129,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
     ...(shape === 'diamond' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
     ...(shape === 'circle' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
     ...(shape === 'square' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
-    ...(shape === 'rectangle' ? { width: '100px', height: '200px', minWidth: '100px', minHeight: '200px', maxWidth: '100px', maxHeight: '200px' } : {}),
+    ...(shape === 'rectangle' ? { width: '200px', height: '80px', minWidth: '200px', minHeight: '80px', maxWidth: '200px', maxHeight: '80px' } : {}),
   } as React.CSSProperties;
 
   // Для ромбовидных узлов (branch) используем специальную разметку
@@ -176,83 +176,155 @@ export const CustomNode = memo(({ data, selected }: any) => {
   // Прямоугольные узлы (AI Agent)
   if (shape === 'rectangle') {
     return (
-      <div className={`${nodeClasses} node-with-label`} style={nodeStyle}>
+      <div className={`${nodeClasses}`} style={nodeStyle}>
+        {/* Main input/output handles */}
         <Handle type="target" position={Position.Left} className="handle-neon" />
+        <Handle type="source" position={Position.Right} className="handle-neon" />
         
+        {/* Node content */}
         <div style={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'flex-start',
           height: '100%',
-          padding: '12px 8px',
-          gap: '8px'
+          padding: '12px',
+          gap: '12px'
         }}>
-          <div className="node-icon-only" style={{ marginBottom: '4px' }}>
+          {/* Icon */}
+          <div style={{
+            fontSize: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0
+          }}>
             {getIcon(nodeType, data.label || '')}
           </div>
           
-          {data.label && (
-            <div style={{
-              fontSize: '11px',
-              color: 'var(--text-main)',
-              textAlign: 'center',
-              fontWeight: 500,
-              lineHeight: '1.2',
-              wordBreak: 'break-word',
-              width: '100%'
-            }}>
-              {data.label}
-            </div>
-          )}
-          
-          {/* Connection points section */}
+          {/* Labels */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '6px',
-            width: '100%',
-            marginTop: 'auto',
-            fontSize: '10px',
-            color: 'var(--text-dim)'
+            gap: '2px',
+            flex: 1
           }}>
-            {data.chatModel && (
-              <div style={{
-                padding: '4px 6px',
-                background: 'rgba(99, 102, 241, 0.1)',
-                borderRadius: '4px',
-                border: '1px solid rgba(99, 102, 241, 0.3)',
-                textAlign: 'center'
-              }}>
-                Chat Model
-              </div>
-            )}
-            {data.memory && (
-              <div style={{
-                padding: '4px 6px',
-                background: 'rgba(139, 92, 246, 0.1)',
-                borderRadius: '4px',
-                border: '1px solid rgba(139, 92, 246, 0.3)',
-                textAlign: 'center'
-              }}>
-                Memory
-              </div>
-            )}
-            {data.tool && (
-              <div style={{
-                padding: '4px 6px',
-                background: 'rgba(168, 85, 247, 0.1)',
-                borderRadius: '4px',
-                border: '1px solid rgba(168, 85, 247, 0.3)',
-                textAlign: 'center'
-              }}>
-                Tool
-              </div>
-            )}
+            <div style={{
+              fontSize: '13px',
+              color: 'var(--text-main)',
+              fontWeight: 600,
+              lineHeight: '1.2'
+            }}>
+              {data.label || 'AI Agent'}
+            </div>
+            <div style={{
+              fontSize: '11px',
+              color: 'var(--text-dim)',
+              lineHeight: '1.2'
+            }}>
+              {data.subtitle || 'Tools Agent'}
+            </div>
           </div>
         </div>
 
-        <Handle type="source" position={Position.Right} className="handle-neon" />
+        {/* Bottom connection points */}
+        <div style={{
+          position: 'absolute',
+          bottom: '-30px',
+          left: '0',
+          right: '0',
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          zIndex: 10
+        }}>
+          {/* Chat Model connection */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px'
+          }}>
+            <Handle 
+              type="source" 
+              position={Position.Bottom} 
+              id="chatmodel"
+              className="handle-neon"
+              style={{
+                position: 'relative',
+                left: 'auto',
+                right: 'auto',
+                bottom: 'auto',
+                transform: 'none'
+              }}
+            />
+            <div style={{
+              fontSize: '9px',
+              color: 'var(--text-dim)',
+              whiteSpace: 'nowrap'
+            }}>
+              Chat Model*
+            </div>
+          </div>
+
+          {/* Memory connection */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px'
+          }}>
+            <Handle 
+              type="source" 
+              position={Position.Bottom} 
+              id="memory"
+              className="handle-neon"
+              style={{
+                position: 'relative',
+                left: 'auto',
+                right: 'auto',
+                bottom: 'auto',
+                transform: 'none'
+              }}
+            />
+            <div style={{
+              fontSize: '9px',
+              color: 'var(--text-dim)',
+              whiteSpace: 'nowrap'
+            }}>
+              Memory
+            </div>
+          </div>
+
+          {/* Tool connection */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px'
+          }}>
+            <Handle 
+              type="source" 
+              position={Position.Bottom} 
+              id="tool"
+              className="handle-neon"
+              style={{
+                position: 'relative',
+                left: 'auto',
+                right: 'auto',
+                bottom: 'auto',
+                transform: 'none'
+              }}
+            />
+            <div style={{
+              fontSize: '9px',
+              color: 'var(--text-dim)',
+              whiteSpace: 'nowrap'
+            }}>
+              Tool
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

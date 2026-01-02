@@ -164,6 +164,7 @@ export const useFlowStore = create<FlowState>((set, get) => ({
         isConnected: false,
         hasOutput: false,
         // AI Agent specific fields
+        subtitle: type === 'aiagent' ? 'Tools Agent' : undefined,
         chatModel: type === 'aiagent' ? false : undefined,
         memory: type === 'aiagent' ? false : undefined,
         tool: type === 'aiagent' ? false : undefined
