@@ -56,11 +56,29 @@ This document provides the exact file locations and line numbers for all buttons
 | **Search Input** | 215-222 | Search field to filter available nodes. |
 | **Category Headers** | 232-242 | Expandable headers (Triggers, Operators, etc.). |
 | **Node Items** | 249-269 | Individual nodes (Webhook, Script, etc.) - clickable & draggable. |
-| **Import from Hub** | 280-283 | Footer button to browse more components. |
+| **Import from Hub** | 194-197 | Footer button to browse more components. |
 
 ---
 
-## 5. Node Configuration (Right Panel)
+## 5. Custom Nodes & Visuals
+**File:** `src/components/CustomNode.tsx`
+
+| Element | Line(s) | Description |
+| :--- | :--- | :--- |
+| **Placeholder (+)** | 139-164 | Interactive "+" button to open Sidebar. |
+| **AI Agent Node** | 184-218 | 200x80px node with bottom diamond handles. |
+| **Node Icons** | 79-109 | Logic for rendering Lucide icons (size: 24px). |
+| **Trigger Zap** | 220-235 | Lightning icon for trigger nodes (size: 24px). |
+
+**File:** `src/components/FlowCanvas.tsx`
+
+| Element | Line(s) | Description |
+| :--- | :--- | :--- |
+| **Grid Settings** | 55-60 | Background grid with gap: 10 and size: 1.5. |
+
+---
+
+## 6. Node Configuration (Right Panel)
 **File:** `src/components/NodeEditor.tsx`
 
 | Element | Line(s) | Description |
