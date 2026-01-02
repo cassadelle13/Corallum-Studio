@@ -138,7 +138,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
   if (shape === 'diamond') {
     return (
       <div className={nodeClasses} style={nodeStyle}>
-        <Handle type="target" position={Position.Top} className="handle-neon" />
+        <Handle type="target" position={Position.Left} className="handle-neon" />
         <div className="node-diamond-content">
           <div className="node-diamond-icon">
             {getIcon(nodeType, data.label || '')}
@@ -160,7 +160,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
   if (shape === 'circle') {
     return (
       <div className={nodeClasses} style={nodeStyle}>
-        <Handle type="target" position={Position.Top} className="handle-neon" />
+        <Handle type="target" position={Position.Left} className="handle-neon" />
         <div className="node-circle-content">
           <div className="node-circle-icon">
             {getIcon(nodeType, data.label || '')}
@@ -172,7 +172,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
             </div>
           )}
         </div>
-        <Handle type="source" position={Position.Bottom} className="handle-neon" />
+        <Handle type="source" position={Position.Right} className="handle-neon" />
       </div>
     );
   }
@@ -181,7 +181,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
   if (shape === 'rectangle') {
     return (
       <div className={nodeClasses} style={nodeStyle}>
-        <Handle type="target" position={Position.Top} className="handle-neon" />
+        <Handle type="target" position={Position.Left} className="handle-neon" />
         
         <div className="node-header">
           <div className="node-icon-wrapper">
@@ -202,7 +202,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
           </div>
         )}
 
-        <Handle type="source" position={Position.Bottom} className="handle-neon" />
+        <Handle type="source" position={Position.Right} className="handle-neon" />
       </div>
     );
   }
@@ -210,7 +210,10 @@ export const CustomNode = memo(({ data, selected }: any) => {
   // Квадратные узлы (по умолчанию)
   return (
     <div className={nodeClasses} style={nodeStyle}>
-      <Handle type="target" position={Position.Top} className="handle-neon" />
+      {/* Вход слева только для не-триггеров */}
+      {category !== 'trigger' && (
+        <Handle type="target" position={Position.Left} className="handle-neon" />
+      )}
       
       {/* Иконка триггера (молния) для триггеров */}
       {category === 'trigger' && (
@@ -239,7 +242,8 @@ export const CustomNode = memo(({ data, selected }: any) => {
         </div>
       )}
 
-      <Handle type="source" position={Position.Bottom} className="handle-neon" />
+      {/* Выход справа для всех */}
+      <Handle type="source" position={Position.Right} className="handle-neon" />
     </div>
   );
 });
