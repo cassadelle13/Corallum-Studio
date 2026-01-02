@@ -328,6 +328,8 @@ body::after {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  /* Смещение влево для визуальной компенсации асимметричной формы (полукруга) */
+  margin-left: -6px !important;
 }
 
 /* Круглые узлы (Resources) */
