@@ -536,9 +536,15 @@ body::after {
 .handle-neon {
   width: 8px !important;
   height: 8px !important;
-  background: var(--accent-primary) !important;
-  border: 2px solid var(--bg-dark) !important;
+  background: #94a3b8 !important; /* Нейтральный серо-голубой цвет */
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
   z-index: 10 !important;
+  transition: all 0.2s ease;
+}
+
+.handle-neon:hover {
+  background: #cbd5e1 !important;
+  transform: scale(1.2);
 }
 
 .handle-diamond {
