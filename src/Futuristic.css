@@ -288,7 +288,7 @@ body::after {
 
 /* Центрирование иконок в узлах-триггерах с учетом асимметричной формы */
 .futuristic-node.node-category-trigger .node-icon-only {
-  padding-right: 12px;
+  padding-left: 12px;
 }
 
 /* Круглые узлы (Resources) */
