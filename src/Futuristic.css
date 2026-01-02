@@ -324,12 +324,12 @@ body::after {
 
 /* Центрирование иконок в узлах-триггерах */
 .futuristic-node.node-category-trigger .node-icon-only {
-  padding-left: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  /* Смещение влево для визуальной компенсации асимметричной формы (полукруга) */
-  margin-left: -6px !important;
+  /* Возвращаем отступ слева для визуального центрирования в асимметричной форме */
+  padding-left: 12px !important;
+  margin-left: 0 !important;
 }
 
 /* Круглые узлы (Resources) */
