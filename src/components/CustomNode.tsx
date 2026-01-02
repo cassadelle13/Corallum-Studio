@@ -363,16 +363,16 @@ export const CustomNode = memo(({ data, selected }: any) => {
         <div className="node-trigger-icon" style={{
           position: 'absolute',
           top: '50%',
-          left: '-28px',
-          width: '24px',
-          height: '24px',
+          left: '-22px',
+          width: '18px',
+          height: '18px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 5,
           transform: 'translateY(-50%)'
         }}>
-          <Zap size={16} style={{ color: '#f97316', strokeWidth: 2 }} />
+          <Zap size={18} style={{ color: '#f97316', strokeWidth: 2.5 }} />
         </div>
       )}
       
