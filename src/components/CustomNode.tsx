@@ -129,7 +129,7 @@ export const CustomNode = memo(({ data, selected }: any) => {
     ...(shape === 'diamond' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
     ...(shape === 'circle' ? { width: '80px', height: '80px', minWidth: '80px', minHeight: '80px', maxWidth: '80px', maxHeight: '80px' } : {}),
     ...(shape === 'square' ? { width: '100px', height: '100px', minWidth: '100px', minHeight: '100px', maxWidth: '100px', maxHeight: '100px' } : {}),
-    ...(shape === 'rectangle' ? { width: '400px', height: '80px', minWidth: '400px', minHeight: '80px', maxWidth: '400px', maxHeight: '80px', boxSizing: 'border-box' } : {}),
+    ...(shape === 'rectangle' ? { width: '300px', height: '60px', minWidth: '300px', minHeight: '60px', maxWidth: '300px', maxHeight: '60px', boxSizing: 'border-box' } : {}),
   } as React.CSSProperties;
 
   // Для ромбовидных узлов (branch) используем специальную разметку
@@ -188,16 +188,17 @@ export const CustomNode = memo(({ data, selected }: any) => {
           alignItems: 'center',
           justifyContent: 'flex-start',
           height: '100%',
-          padding: '12px',
+          padding: '0 16px',
           gap: '12px'
         }}>
           {/* Icon */}
           <div style={{
-            fontSize: '24px',
+            fontSize: '20px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexShrink: 0
+            flexShrink: 0,
+            color: 'var(--node-border-color)'
           }}>
             {getIcon(nodeType, data.label || '')}
           </div>
@@ -206,21 +207,21 @@ export const CustomNode = memo(({ data, selected }: any) => {
           <div style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '2px',
+            gap: '0px',
             flex: 1
           }}>
             <div style={{
               fontSize: '13px',
               color: 'var(--text-main)',
               fontWeight: 600,
-              lineHeight: '1.2'
+              lineHeight: '1.1'
             }}>
               {data.label || 'AI Agent'}
             </div>
             <div style={{
-              fontSize: '11px',
+              fontSize: '10px',
               color: 'var(--text-dim)',
-              lineHeight: '1.2'
+              lineHeight: '1.1'
             }}>
               {data.subtitle || 'Tools Agent'}
             </div>
