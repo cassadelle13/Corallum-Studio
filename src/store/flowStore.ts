@@ -158,29 +158,32 @@ export const useFlowStore = create<FlowState>((set, get) => ({
     const filteredNodes = nodes.filter(node => node.id !== 'placeholder');
     
     // Calculate position for the new node
-    // We want to place it to the right of the rightmost node
     let nextX = 400;
     let nextY = 250;
 
     if (filteredNodes.length > 0) {
-      // Find the rightmost node's position
-      const rightmostNode = filteredNodes.reduce((prev, current) => 
-        (prev.position.x > current.position.x) ? prev : current
-      );
+      // Find the rightmost point (x + width) among all nodes
+      let maxRight = 0;
       
-      // Determine width of the rightmost node
-      // AI Agent is 200px, others are 80px or 60px
-      let nodeWidth = 80;
-      const nodeType = rightmostNode.data?.type?.toLowerCase() || '';
-      if (nodeType === 'aiagent' || nodeType.includes('ai agent')) {
-        nodeWidth = 200;
-      } else if (['model', 'memory', 'embedding', 'chatmodel', 'chat model'].includes(nodeType)) {
-        nodeWidth = 60;
-      }
-
-      // Add fixed offset of 100 pixels to the right of the node's end
-      nextX = rightmostNode.position.x + nodeWidth + 100;
-      nextY = rightmostNode.position.y;
+      filteredNodes.forEach(node => {
+        let nodeWidth = 80;
+        const nodeType = node.data?.type?.toLowerCase() || '';
+        if (nodeType === 'aiagent' || nodeType.includes('ai agent')) {
+          nodeWidth = 200;
+        } else if (['model', 'memory', 'embedding', 'chatmodel', 'chat model'].includes(nodeType)) {
+          nodeWidth = 60;
+        }
+        
+        const rightPoint = node.position.x + nodeWidth;
+        if (rightPoint > maxRight) {
+          maxRight = rightPoint;
+        }
+      });
+      
+      // Add fixed offset of 100 pixels from the rightmost point
+      nextX = maxRight + 100;
+      // Keep Y consistent with the first node or use a default
+      nextY = filteredNodes[0].position.y;
     }
 
     const newNode: Node = {
