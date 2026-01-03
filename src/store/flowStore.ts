@@ -165,21 +165,12 @@ export const useFlowStore = create<FlowState>((set, get) => ({
       // Use the last added node for positioning
       const lastNode = filteredNodes[filteredNodes.length - 1];
       
-      // Determine width of the last node
-      let nodeWidth = (lastNode as any).measured?.width || 80;
-      if (!(lastNode as any).measured?.width) {
-        const nodeType = lastNode.data?.type?.toLowerCase() || '';
-        if (nodeType === 'aiagent' || nodeType.includes('ai agent')) {
-          nodeWidth = 200;
-        } else if (['model', 'memory', 'embedding', 'chatmodel', 'chat model'].includes(nodeType)) {
-          nodeWidth = 60;
-        }
-      }
+      // Determine height of the last node (default to 80 if not measured)
+      const nodeHeight = (lastNode as any).measured?.height || 80;
 
-      // Add fixed offset of 250 pixels from the last node's start to be absolutely sure
-      // Or 150 pixels from its end
-      nextX = lastNode.position.x + Math.max(nodeWidth, 150) + 100;
-      nextY = lastNode.position.y;
+      // Position below the last node with a 50px gap
+      nextX = lastNode.position.x;
+      nextY = lastNode.position.y + nodeHeight + 50;
     }
 
     const newNode: Node = {
