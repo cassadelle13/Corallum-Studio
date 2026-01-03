@@ -168,8 +168,8 @@ export const useFlowStore = create<FlowState>((set, get) => ({
         (prev.position.x > current.position.x) ? prev : current
       );
       
-      // Add offset (e.g., 300 pixels) to the right
-      nextX = rightmostNode.position.x + 300;
+      // Add offset (e.g., 150 pixels) to the right
+      nextX = rightmostNode.position.x + 150;
       nextY = rightmostNode.position.y;
     }
 
