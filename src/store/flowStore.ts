@@ -178,8 +178,8 @@ export const useFlowStore = create<FlowState>((set, get) => ({
         nodeWidth = 60;
       }
 
-      // Add offset (e.g., 50 pixels) to the right of the node's end
-      nextX = rightmostNode.position.x + nodeWidth + 50;
+      // Add fixed offset of 60 pixels to the right of the node's end
+      nextX = rightmostNode.position.x + nodeWidth + 60;
       nextY = rightmostNode.position.y;
     }
 
