@@ -1234,6 +1234,24 @@ body {
   color: white;
 }
 
+.brand-logo-img {
+  transition: transform 0.3s ease;
+}
+
+/* Rotation animation for collapsed sidebar */
+.global-sidebar.collapsed .brand-logo-img {
+  animation: rotateLogo 10s linear infinite;
+}
+
+@keyframes rotateLogo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .brand-logo {
   width: 32px;
   height: 32px;
