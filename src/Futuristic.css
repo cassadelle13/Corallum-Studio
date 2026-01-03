@@ -146,6 +146,19 @@ body::after {
   z-index: 10;
 }
 
+.brand-logo-img {
+  transition: transform 0.3s ease !important;
+}
+
+.global-sidebar.collapsed .brand-logo-img {
+  animation: rotateLogo 10s linear infinite !important;
+}
+
+@keyframes rotateLogo {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .main-content {
   background: transparent !important;
   flex: 1;
