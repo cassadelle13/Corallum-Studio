@@ -166,12 +166,17 @@ export const useFlowStore = create<FlowState>((set, get) => ({
       let maxRight = 0;
       
       filteredNodes.forEach(node => {
-        let nodeWidth = 80;
-        const nodeType = node.data?.type?.toLowerCase() || '';
-        if (nodeType === 'aiagent' || nodeType.includes('ai agent')) {
-          nodeWidth = 200;
-        } else if (['model', 'memory', 'embedding', 'chatmodel', 'chat model'].includes(nodeType)) {
-          nodeWidth = 60;
+        // Use measured width if available, otherwise fallback to defaults
+        let nodeWidth = (node as any).measured?.width || 80;
+        
+        // If not measured yet, use our known defaults
+        if (!(node as any).measured?.width) {
+          const nodeType = node.data?.type?.toLowerCase() || '';
+          if (nodeType === 'aiagent' || nodeType.includes('ai agent')) {
+            nodeWidth = 200;
+          } else if (['model', 'memory', 'embedding', 'chatmodel', 'chat model'].includes(nodeType)) {
+            nodeWidth = 60;
+          }
         }
         
         const rightPoint = node.position.x + nodeWidth;
@@ -180,9 +185,8 @@ export const useFlowStore = create<FlowState>((set, get) => ({
         }
       });
       
-      // Add fixed offset of 100 pixels from the rightmost point
-      nextX = maxRight + 100;
-      // Keep Y consistent with the first node or use a default
+      // Add fixed offset of 120 pixels from the rightmost point to be safe
+      nextX = maxRight + 120;
       nextY = filteredNodes[0].position.y;
     }
 
