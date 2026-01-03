@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Plus, Search, Edit2, MoreVertical, Code, GitBranch, Layout } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Plus, Search, Edit2, MoreVertical, Code, GitBranch, Layout, ChevronDown, FileJson, FileCode } from 'lucide-react';
 
 interface HomeViewProps {
   onCreateFlow: () => void;
@@ -8,7 +8,36 @@ interface HomeViewProps {
 
 export const HomeView: React.FC<HomeViewProps> = ({ onCreateFlow, searchQuery: externalSearch }) => {
   const [localSearch, setLocalSearch] = useState('');
+  const [showFlowDropdown, setShowFlowDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const query = externalSearch || localSearch;
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowFlowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleImportClick = (type: 'yaml' | 'json') => {
+    setShowFlowDropdown(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.accept = type === 'yaml' ? '.yaml,.yml' : '.json';
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      alert(`Importing ${file.name} from n8n...`);
+      // Logic for parsing and importing would go here
+    }
+  };
 
   const items = [
     { id: 1, type: 'script', name: 'Synchronize Hub Resource types with instance', user: 'u/admin/hub_sync', icon: Code },
@@ -41,11 +70,40 @@ export const HomeView: React.FC<HomeViewProps> = ({ onCreateFlow, searchQuery: e
               <span>Script</span>
               <Code size={14} />
             </button>
-            <button className="btn-action primary" onClick={onCreateFlow}>
-              <Plus size={16} />
-              <span>Flow</span>
-              <GitBranch size={14} />
-            </button>
+            <div className="dropdown-container" ref={dropdownRef}>
+              <div className="btn-group">
+                <button className="btn-action primary" onClick={onCreateFlow}>
+                  <Plus size={16} />
+                  <span>Flow</span>
+                  <GitBranch size={14} />
+                </button>
+                <button 
+                  className="btn-action primary dropdown-toggle" 
+                  onClick={() => setShowFlowDropdown(!showFlowDropdown)}
+                >
+                  <ChevronDown size={14} />
+                </button>
+              </div>
+              
+              {showFlowDropdown && (
+                <div className="dropdown-menu glass-panel">
+                  <button className="dropdown-item" onClick={() => handleImportClick('yaml')}>
+                    <FileCode size={14} />
+                    <span>Import from YAML</span>
+                  </button>
+                  <button className="dropdown-item" onClick={() => handleImportClick('json')}>
+                    <FileJson size={14} />
+                    <span>Import from JSON</span>
+                  </button>
+                </div>
+              )}
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                style={{ display: 'none' }} 
+                onChange={handleFileChange}
+              />
+            </div>
             <button className="btn-action" onClick={() => alert('App creation coming soon!')}>
               <Plus size={16} />
               <span>App</span>
