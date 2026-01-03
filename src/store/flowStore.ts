@@ -154,6 +154,25 @@ export const useFlowStore = create<FlowState>((set, get) => ({
   setEdges: (edges) => set({ edges }),
 
   addNode: (type: string, boilerplate?: string) => {
+    const nodes = get().nodes;
+    const filteredNodes = nodes.filter(node => node.id !== 'placeholder');
+    
+    // Calculate position for the new node
+    // We want to place it to the right of the rightmost node
+    let nextX = 400;
+    let nextY = 250;
+
+    if (filteredNodes.length > 0) {
+      // Find the rightmost node's position
+      const rightmostNode = filteredNodes.reduce((prev, current) => 
+        (prev.position.x > current.position.x) ? prev : current
+      );
+      
+      // Add offset (e.g., 300 pixels) to the right
+      nextX = rightmostNode.position.x + 300;
+      nextY = rightmostNode.position.y;
+    }
+
     const newNode: Node = {
       id: `${type}-${Date.now()}`,
       type: 'default',
@@ -171,11 +190,9 @@ export const useFlowStore = create<FlowState>((set, get) => ({
         memory: type === 'aiagent' ? false : undefined,
         tool: type === 'aiagent' ? false : undefined
       },
-      position: { x: 400, y: 250 }, // Помещаем новый узел на место плейсхолдера
+      position: { x: nextX, y: nextY },
     };
     
-    // Удаляем плейсхолдер при добавлении первого реального узла
-    const filteredNodes = get().nodes.filter(node => node.id !== 'placeholder');
     set({ nodes: [...filteredNodes, newNode] });
   },
 
