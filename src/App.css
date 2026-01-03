@@ -1485,7 +1485,8 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
+  padding: 0 16px;
+  height: 36px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
   border: 1px solid var(--glass-border);
@@ -5596,20 +5597,20 @@ body {
   color: var(--text-dim);
 }
 
-.pagination-btn {
+.pagi.btn-action {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
+  gap: 8px;
+  padding: 0 16px;
+  height: 36px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
   color: white;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
 }
-
 .pagination-btn:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent-primary);
@@ -6204,13 +6205,18 @@ body {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
+  height: 36px; /* Фиксированная высота для выравнивания */
 }
 
 .dropdown-toggle {
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
-  padding: 10px 8px !important;
-  min-width: auto !important;
+  padding: 0 8px !important;
+  min-width: 32px !important;
+  height: 36px !important; /* Совпадает с основной кнопкой */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .dropdown-menu {
