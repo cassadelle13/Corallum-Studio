@@ -168,8 +168,18 @@ export const useFlowStore = create<FlowState>((set, get) => ({
         (prev.position.x > current.position.x) ? prev : current
       );
       
-      // Add offset (e.g., 75 pixels) to the right
-      nextX = rightmostNode.position.x + 75;
+      // Determine width of the rightmost node
+      // AI Agent is 200px, others are 80px or 60px
+      let nodeWidth = 80;
+      const nodeType = rightmostNode.data?.type?.toLowerCase() || '';
+      if (nodeType === 'aiagent' || nodeType.includes('ai agent')) {
+        nodeWidth = 200;
+      } else if (['model', 'memory', 'embedding', 'chatmodel', 'chat model'].includes(nodeType)) {
+        nodeWidth = 60;
+      }
+
+      // Add offset (e.g., 50 pixels) to the right of the node's end
+      nextX = rightmostNode.position.x + nodeWidth + 50;
       nextY = rightmostNode.position.y;
     }
 
